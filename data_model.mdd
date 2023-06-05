@@ -19,10 +19,8 @@
         Trainee ||--o| PostTraining: has
         Trainee ||--o| Specialism: has
         Trainee ||--o| TrainingProgram: has
-        HEIRecord |o--|| TrainingRecord: has
-        HEIRecord |o--|| Outcome: has
-        HSSTRecord |o--|| TrainingRecord: has
-        HCPCRecord |o--|| TrainingRecord: has
+        Trainee ||--|| TraineeStatus: has
+        Trainee ||--|| EmailPreference: has
         EmploymentRecord }o--|| Trainee: has
         EmploymentRecord ||--|| Employer: has
         EmploymentRecord ||--|| EmployerLocation: has
@@ -30,8 +28,8 @@
         TrainingRecord ||--o{ ExitAssementRecord: has
         TrainingRecord ||--|| RecruitmentMethod: has
         TrainingRecord ||--|| ProgramCertification: has
-        HSSTRecord ||--|| HSSTPathway: has
-        HEIRecord ||--|| HEIAward: has
+        TrainingRecord ||--|| HSSTPathway: has
+        TrainingRecord ||--|| HEIAward: has
         SupportRecord }o--|| Trainee: has
         AnualReviewProgression ||--|{ Outcome: has
         PostTraining ||--|| JobSector: has
@@ -40,7 +38,15 @@
         PostTraining ||--|| ContractType: has
         PostTraining ||--|| JobType: has
         ExitAssementRecord ||--|| AssessmentType: has
-
+        ExitAssementRecord ||--|| Outcome: has
+        TraineeStatus {
+            int id PK
+            string(100) title "Static Entity"
+        }
+        EmailPreference {
+            int id PK
+            string(100) title "Static Entity"
+        }
         Trainee {
         int id PK
         int training_record FK "Null: True"
@@ -72,11 +78,11 @@
         string(100) funding_provider_comments "Null: True"
         int training_program FK "Null: True"
         int cohort_number "HSST Cohort Number, Null: True"
-        int status "Trainee Status (on the program), Null: True"
-        decimal whole_time_equivilent "Whole-time equivalent (if part-time), Null: True"
+        int status FK "Trainee Status (on programe), Null: True"
+        decimal whole_time_equivilent "Whole-time equivalent (if part time), Null: True"
         int onefile_id "OneFile ID (if used OneFile), Null: True"
         string(100) ecc_reference "Null: True"
-        bool deferred "Trainee on a program deferral (Y/N), Null: True"
+        bool deferred "Trainee on a programme deferral (Y/N), Null: True"
         string(MAX) deferral_comments "Null: True"
         int post_training FK "Null: True"
     }
@@ -88,12 +94,12 @@
         int id PK
         int job_sector FK "First Job Sector after training"
         string(255) description "First Job description (title)"
-        int job FK "First Job after Training NHS Trust (if NHS)"
+        int job_ FK "First Job after Training NHS Trust (if NHS)"
         string(100) non_nhs_employer "First Job after training Employer name (if not NHS)"
         int nhs_band FK "First Job after training NHS Band, Null: True"
         int salary "First Job after training Salary, Null: True"
         int contract_type FK "First Job after training contract type, Null: True"
-        date start_date "First Job after the training start date, Null: True"
+        date start_date "First Job after training start date, Null: True"
         string(MAX) comments "Null: True"
     }
     JobSector {
@@ -129,7 +135,7 @@
         string(100) title "Static entity" 
     }
     DisabillityCategory {
-        int id PK "Disability ID"
+        int id PK "Disabillity ID"
         String category "Static entity"
     }
     Religion {
@@ -152,73 +158,62 @@
         int id PK "Funding Provider ID"
         string title "Static Entity"
     }
-    HSSTRecord {
-        int id PK
-        int training_record FK
-        int pathway FK "HSST Pathway, Null: True"
-        bool portfolio_completed "HSST Portfolio Complete (Y/N), Null: True"
-        date portfolio_completion_date "HSST Portfolio Completion Date, Null: True"
-        bool arp_completed "HSST ARP Complete (Y/N), Null: True"
-        date arp_completion_date "HSST ARP Completion Date, Null: True"
-        bool d_clin_part_a_completed "HSST DClinSci Part A Complete (Y/N), Null: True"
-        date d_clin_part_a_completion_date "HSST DClinSci Part A Completion Date, Null: True"
-        bool d_clin_part_b_completed "HSST DclinSci part B Complete (Y/N), Null: True"
-        date d_clin_part_b_completion_date "HSST DclinSci part B Completion Date, Null: True"
-        bool d_clin_part_c1_completed "HSST DClinSci Part C1 Complete (Y/N), Null: True"
-        date d_clin_part_c1_completion_date "HSST DClinSci Part C1 Completion Date, Null: True"
-        bool d_clin_part_c2_completed "HSST DClinSci Part C2 Complete (Y/N), Null: True"
-        date d_clin_part_c2_completion_date "HSST DClinSci Part C2 Completion Date, Null: True"
-        bool fcrpath_completed "HSST FRCPath Complete (Y/N), Null: True"
-        date fcrpath_completion_date "HSST FRCPath Completion Date, Null: True"
-        bool iaps_completed "HSST IAPS Complete (Y/N), Null: True"
-        date iaps_completion_date "HSST IAPS Completion Date, Null: True"
-        bool phd_completed "HSST Ph.D. Complete (Y/N), Null: True"
-        date phd_completion_date "HSST Ph.D. Completion Date, Null: True"
-        bool ceng_completed "HSST CEng Complete (Y/N), Null: True"
-        date ceng_completion_date "HSST CEng Completion Date, Null: True"
-        bool portfolio_signed "HSST Supervisor Portfolio Signoff (Y/N), Null: True"
-        date portfolio_signed_date "HSST Supervisor Portfolio Signoff Date, Null: True"
-    }
-    HEIRecord {
-        int id PK
-        int training_record FK
-        bool qualification_completed "HEI Qualification complete (Y/N), Null: True"
-        date qualification_date "HEI Qualification date, Null: True"
-        int qualification_outcome FK "HEI Qualification outcome, Null: True"
-        bool extension "HEI Extension"
-        date extension_date "HEI Extension date, Null: True"
-        string(MAX) extension_date_comments "HEI Extension detail, Null: True"
-        int awards FK "HEI Awarding Qualification, Null: True"
-    }
-    HCPCRecord {
-        int id PK
-        int training_record FK
-        string(20) registration "Trainee HCPC Registration Number, Null: True"
-        date registration_date "Trainee HCPC Registration Date, Null: True"
-        bool signoff_required "HCPC Signoff Required (Y/N), Null: True"
-        bool counter_signoff_required "HCPC Countersignoff Required (Y/N), Null: True"
-        string(200) signoff_name "HCPC Signoff Name, Null: True"
-        string(50) signoff_number "HCPC Signoff Number, Null: True"
-    }
     TrainingRecord {
         int id PK
+        bool hei_qualification_completed "HEI Qualification complete (Y/N), Null: True"
+        date hei_qualification_date "HEI Qualification date, Null: True"
+        int hei_qualification_outcome FK "HEI Qualification outcome, Null: True"
+        bool hei_extension "HEI Extension"
+        date hei_extension_date "HEI Extension date, Null: True"
+        string(MAX) hei_extension_comments "HEI Extension detail, Null: True"
         bool program_certification "Programme certification (Y/N), Null: True"
         date program_certification_date "Programme certification date, Null: True"
+        int hsst_pathway FK "HSST Pathway, Null: True"
+        bool hsst_portfolio_completed "HSST Portfolio Complete (Y/N), Null: True"
+        date hsst_portfolio_completion_date "HSST Portfolio Completion Date, Null: True"
+        bool hsst_arp_completed "HSST ARP Complete (Y/N), Null: True"
+        date hsst_arp_completion_date "HSST ARP Completion Date, Null: True"
+        bool hsst_d_clin_part_a_completed "HSST DClinSci Part A Complete (Y/N), Null: True"
+        date hsst_d_clin_part_a_completion_date "HSST DClinSci Part A Completion Date, Null: True"
+        bool hsst_d_clin_part_b_completed "HSST DclinSci part B Complete (Y/N), Null: True"
+        date hsst_d_clin_part_b_completion_date "HSST DclinSci part B Completion Date, Null: True"
+        bool hsst_d_clin_part_c1_completed "HSST DClinSci Part C1 Complete (Y/N), Null: True"
+        date hsst_d_clin_part_c1_completion_date "HSST DClinSci Part C1 Completion Date, Null: True"
+        bool hsst_d_clin_part_c2_completed "HSST DClinSci Part C2 Complete (Y/N), Null: True"
+        date hsst_d_clin_part_c2_completion_date "HSST DClinSci Part C2 Completion Date, Null: True"
+        bool hsst_fcrpath_completed "HSST FRCPath Complete (Y/N), Null: True"
+        date hsst_fcrpath_completion_date "HSST FRCPath Completion Date, Null: True"
+        bool hsst_iaps_completed "HSST IAPS Complete (Y/N), Null: True"
+        date hsst_iaps_completion_date "HSST IAPS Completion Date, Null: True"
+        bool hsst_phd_completed "HSST PhD Complete (Y/N), Null: True"
+        date hsst_phd_completion_date "HSST PhD Completion Date, Null: True"
+        bool hsst_ceng_completed "HSST CEng Complete (Y/N), Null: True"
+        date hsst_ceng_completion_date "HSST CEng Completion Date, Null: True"
+        bool hsst_portfolio_signed "HSST Supervisor Portfolio Signoff (Y/N), Null: True"
+        date hsst_portfolio_signed_date "HSST Supervisor Portfolio Signoff Date, Null: True"
         date program_leaving_date "Programme leaving date (if 'Left'), Null: True"
         string(MAX) program_leaving_reason "Programme leaving reason, Null: True"
         string(MAX) program_leaving_comments "Programme leaving comments, Null: True"
         bool reasonable_adjustments "Reasonable adjustments for final assessments (Y/N), Null: True"
         string(MAX) reasonable_adjustments_comments "Reasonable adjustments for final assessments detail, Null: True"
+        string(20) hpcp_registration "Trainee HCPC Registration Number, Null: True"
+        date hpcp_registration_date "Trainee HCPC Registration Date, Null: True"
         int start_month "Null: True"
         int start_year "Null: True"
         int expected_completion_month "STP Expected Completion Month, Null: True"
         int expected_completion_year "STP Expected Completion Year, Null: True"
+        date hsst_expected_exit "HSST Expected EXIT Date, Null: True"
         int specalism FK "Specialism, Null: True"
         int recruitment_method FK "Recruitment Method, Null: True"
+        int hei_awards FK "HEI Awarding Qualification, Null: True"
         date portfolio_expected_completion_date "Portfolio expected completion date, Null: True"
         date portfolio_actual_completion_date "Actual portfolio completion date, Null: True"
+        bool hcpc_signoff_required "HCPC Signoff Required (Y/N), Null: True"
+        bool hcpc_counter_signoff_required "HCPC Countersignoff Required (Y/N), Null: True"
+        string(200) hcpc_signoff_name "HCPC Signoff Name, Null: True"
+        string(50) hcpc_signoff_number "HCPC Signoff Number, Null: True"
         int ahcs_registration "Trainee AHCS Registration Number, Null: True"
-        string(MAX) portfolio_extended "Portfolio Extension In place (Y/N), Null: True"
+        bool portfolio_extended "Portfolio Extension In place (Y/N), Null: True"
     }
     HEIAward {
         int id PK
@@ -242,15 +237,15 @@
     }
     Contact {
         int id PK
-        string title "Undefined, further refinement needed"
+        string title "Undefined, further refinment needed"
     }
     TraineeContact {
         int id PK "Contact Primary Key"
         int trainee FK 
         int type FK "Type of Contact, Null: True"
         int contact_id FK "Contact, Null: True"
-        date start_date "Start Date (as a contact), Null: True"
-        date end_date "End Date (as a contact), Null: True"
+        date start_date "Start Date (as contact), Null: True"
+        date end_date "End Date (as contact), Null: True"
         bool current_contact "Current Contact (Y/N)"
     }
     ContactType {
@@ -271,7 +266,7 @@
     }
     EmploymentRecord {
         int ID PK
-        int trainee FK
+        int trainee_id FK
         int employer FK "Employer/Trust"
         int specific_site FK "Specific Site, Null: True"
         date start_date "Start Date"
@@ -288,10 +283,10 @@
     }
     ExitAssementRecord {
         int id
-        int training_record FK
+        int training_id FK
         date date "Assessment Date, Null: True"
         int type "Assessment Type, Null: True"
-        int result "Assessment Result, Null: True"
+        int result FK "Assessment Result, Null: True"
         string(MAX) comments "Assessment Comments, Null: True"
     }
     AssessmentType {
@@ -300,16 +295,16 @@
     }
     LeaveOfAbsenceRecord {
         int id PK
-        int trainee FK 
+        int trainee_id FK 
         date start_date
         date end_date "Null: True"
         string(MAX) reason "Leave Reason, Null: True"
         string(MAX) comments "Leave extended comments, Null: True"
-        bool enable_notification "Parental leave or career breaks require notifications if they are within 30 days"
+        bool enable_notification "Parental leave or careerbreaks require notifications if they are within 30days"
     }
     SupportRecord {
         int id
-        int trainee FK 
+        int trainee_id FK 
         date date "Support Record Date Entered onto DB, Null: True"
         string(MAX) comments "Support Description, Null: True"
     }
