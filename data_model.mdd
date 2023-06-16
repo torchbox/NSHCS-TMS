@@ -33,10 +33,11 @@
         SupportRecord }o--|| Trainee: has
         AnualReviewProgression ||--|{ Outcome: has
         PostTraining ||--|| JobSector: has
-        PostTraining ||--|| JobTitle: has
         PostTraining ||--|| NHSBand: has
         PostTraining ||--|| ContractType: has
         PostTraining ||--|| JobType: has
+        PostTraining ||--|| Salary: has
+        PostTraining ||--|| Employer: has
         ExitAssementRecord ||--|| AssessmentType: has
         ExitAssementRecord ||--|| Outcome: has
         TraineeStatus {
@@ -57,6 +58,7 @@
         date date_of_birth "Null: True"
         int ethnicity FK "Null: True"
         string(150) ethnicity_other "Null: True"
+        int disability_status "Yes, no, prefer not to say; Null: True"
         int disable_category FK "Null: True"
         string(MAX) disability_details "Null: True"
         int gender FK "Null: True"
@@ -78,7 +80,7 @@
         string(100) funding_provider_comments "Null: True"
         int training_program FK "Null: True"
         int cohort_number "HSST Cohort Number, Null: True"
-        int status FK "Trainee Status (on programe), Null: True"
+        int status FK "Trainee Status (on programme), Null: True"
         decimal whole_time_equivilent "Whole-time equivalent (if part time), Null: True"
         int onefile_id "OneFile ID (if used OneFile), Null: True"
         string(100) ecc_reference "Null: True"
@@ -94,19 +96,19 @@
         int id PK
         int job_sector FK "First Job Sector after training"
         string(255) description "First Job description (title)"
-        int job_ FK "First Job after Training NHS Trust (if NHS)"
+        int nhs_employer FK "First Job after Training NHS Trust (if NHS) TODO add FK"
         string(100) non_nhs_employer "First Job after training Employer name (if not NHS)"
         int nhs_band FK "First Job after training NHS Band, Null: True"
-        int salary "First Job after training Salary, Null: True"
+        int non_nhs_salary FK "First Job after training Salary for non-nhs salary, Null: True"
         int contract_type FK "First Job after training contract type, Null: True"
-        date start_date "First Job after training start date, Null: True"
+        date start_date "First Job after the training start date, Null: True"
         string(MAX) comments "Null: True"
     }
-    JobSector {
+    Salary {
         int id PK
-        string(25) title "Static Entity"
+        string value "Static Entity"
     }
-    JobTitle {
+    JobSector {
         int id PK
         string(25) title "Static Entity"
     }
@@ -135,7 +137,7 @@
         string(100) title "Static entity" 
     }
     DisabillityCategory {
-        int id PK "Disabillity ID"
+        int id PK "Disability ID"
         String category "Static entity"
     }
     Religion {
@@ -166,7 +168,7 @@
         bool hei_extension "HEI Extension"
         date hei_extension_date "HEI Extension date, Null: True"
         string(MAX) hei_extension_comments "HEI Extension detail, Null: True"
-        bool program_certification "Programme certification (Y/N), Null: True"
+        int program_certification "Programme certification (Y/N), Null: True"
         date program_certification_date "Programme certification date, Null: True"
         int hsst_pathway FK "HSST Pathway, Null: True"
         bool hsst_portfolio_completed "HSST Portfolio Complete (Y/N), Null: True"
@@ -237,15 +239,15 @@
     }
     Contact {
         int id PK
-        string title "Undefined, further refinment needed"
+        string title "Undefined, further refinement needed relates to contact ID"
     }
     TraineeContact {
         int id PK "Contact Primary Key"
         int trainee FK 
         int type FK "Type of Contact, Null: True"
         int contact_id FK "Contact, Null: True"
-        date start_date "Start Date (as contact), Null: True"
-        date end_date "End Date (as contact), Null: True"
+        date start_date "Start Date (as a contact), Null: True"
+        date end_date "End Date (as a contact), Null: True"
         bool current_contact "Current Contact (Y/N)"
     }
     ContactType {
@@ -274,11 +276,13 @@
         string(MAX) comments "Comments, Null: True"
     }
     Employer {
-        int id PK 
+        int id PK
+        bool is_nhs "Defines private vs NHS employer" 
         string(255) title "Static Entity"
     }
     EmployerLocation {
         int id PK
+        int employer FK "Employer/Trust, multiple records can relate to a single employer Null: True"
         string(255) title "Static Entity"
     }
     ExitAssementRecord {
@@ -300,7 +304,7 @@
         date end_date "Null: True"
         string(MAX) reason "Leave Reason, Null: True"
         string(MAX) comments "Leave extended comments, Null: True"
-        bool enable_notification "Parental leave or careerbreaks require notifications if they are within 30days"
+        bool enable_notification "Parental leave or career breaks require notifications if they are within 30days"
     }
     SupportRecord {
         int id
