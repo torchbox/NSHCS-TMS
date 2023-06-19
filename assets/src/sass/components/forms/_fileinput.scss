@@ -1,0 +1,18 @@
+@use 'config' as *;
+
+.fileinput {
+    // sets the label size
+    @include font-size(body);
+}
+
+input::file-selector-button {
+    @include default-button();
+    // resets the button size
+    @include rem-font-size(16px);
+    margin-right: 10px;
+    font-family: $font--default;
+
+    @include media-query(large) {
+        margin-right: 30px;
+    }
+}
