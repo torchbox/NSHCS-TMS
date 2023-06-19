@@ -1,0 +1,5 @@
+assets/dist
+*.html
+.git
+node_modules
+

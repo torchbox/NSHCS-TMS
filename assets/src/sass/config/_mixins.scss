@@ -1,0 +1,193 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'functions' as *;
+@use 'variables' as *;
+
+/* ============================================
+    Media queries
+*/
+@mixin media-query($queries...) {
+    @each $query in $queries {
+        @each $breakpoint in $breakpoints {
+            $name: list.nth($breakpoint, 1);
+            $declaration: list.nth($breakpoint, 2);
+
+            @if $query == $name and $declaration {
+                @media only screen and #{$declaration} {
+                    @content;
+                }
+            }
+        }
+    }
+}
+
+/* ============================================
+    z-index
+*/
+
+@mixin z-index($key) {
+    z-index: z-index($key);
+}
+
+/* ============================================
+  Placeholder text
+*/
+@mixin placeholder-text() {
+    &.placeholder {
+        @content;
+    }
+
+    &::placeholder {
+        @content;
+    }
+}
+
+/* ============================================
+  iOS Native vertical scroll
+*/
+@mixin native-vertical-scroll() {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ============================================
+    Output a rem and px fallback value for the given property
+*/
+@mixin rem($property, $values) {
+    $px: ();
+    $rem: ();
+
+    @each $value in $values {
+        @if $value == 0 or $value == auto or $value == inherit {
+            $px: list.append($px, $value);
+            $rem: list.append($rem, $value);
+        } @else {
+            $px: list.append($px, $value);
+            $rem: list.append($rem, rem(strip-unit($value)));
+        }
+    }
+    #{$property}: $px;
+    #{$property}: $rem;
+}
+
+/* ============================================
+    Output a `font-size: [x]rem;` declaration for the given px value
+*/
+@mixin rem-font-size($font-size) {
+    @include rem(font-size, $font-size);
+}
+
+/* ============================================
+    Font sizes
+*/
+@mixin font-size($keyword) {
+    $small-size: map.get($small-font-sizes, $keyword);
+    $medium-size: map.get($medium-font-sizes, $keyword);
+    $large-size: map.get($large-font-sizes, $keyword);
+
+    @if $small-size == null or $medium-size == null or $large-size == null {
+        @warn 'Font size ‘#{$keyword}’ does not exist';
+    } @else {
+        @include rem-font-size($small-size);
+
+        @include media-query(medium) {
+            @include rem-font-size($medium-size);
+        }
+
+        @include media-query(large) {
+            @include rem-font-size($large-size);
+        }
+    }
+}
+
+/* ============================================
+    Checkbox styles - used by checkbox.scss and tbxforms-overrides.scss
+*/
+
+@mixin checkbox-wrapper() {
+    display: flex;
+    position: relative;
+    padding-top: 2px;
+    padding-left: 40px;
+    align-items: center;
+    min-height: 42px;
+    margin-bottom: 15px;
+
+    @include media-query(large) {
+        margin-right: 30px;
+    }
+}
+
+@mixin checkbox-input() {
+    opacity: 0;
+    position: absolute;
+
+    &:focus + label::before {
+        border: 2px solid $focus-bg;
+    }
+
+    &:checked + label {
+        &::after {
+            opacity: 1;
+        }
+
+        &::before {
+            border: 2px solid $color--nhs-blue;
+        }
+    }
+}
+
+@mixin checkbox-label() {
+    @include font-size(body);
+    cursor: pointer;
+    margin-left: 20px;
+    display: block;
+    width: 100%;
+
+    &::before {
+        content: '';
+        position: absolute;
+        background-color: $color--white;
+        border-radius: $br-default;
+        border: 2px solid $color--black;
+        width: 42px;
+        height: 42px;
+        left: 0;
+        top: 0;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        border-radius: 3px;
+        background: $color--nhs-blue;
+        left: 9px;
+        top: 9px;
+        opacity: 0;
+        transition: opacity $transition;
+    }
+}
+
+/* ============================================
+    Button styles that are re-used
+*/
+
+@mixin default-button() {
+    border: 0;
+    background-color: $color--nhs-blue;
+    color: $color--white;
+    padding: 9px 20px;
+    font-weight: $weight--bold;
+    border-radius: $br-default;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color $transition, color $transition;
+
+    &:hover {
+        color: $color--nhs-blue;
+        background-color: $color--nhs-blue;
+    }
+}

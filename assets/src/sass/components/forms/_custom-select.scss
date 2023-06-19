@@ -1,0 +1,68 @@
+@use 'config' as *;
+
+.custom-select {
+    $root: &;
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid $color--black;
+    border-radius: $br-default;
+    overflow: hidden;
+
+    @include media-query(large) {
+        width: 280px;
+    }
+
+    // Dropdown icon
+    &::after {
+        content: '';
+        position: absolute;
+        width: 25px;
+        height: 48px;
+        right: 0;
+        top: 0;
+        background: url('../images/cssBackgrounds/select-arrow.svg') center
+            no-repeat;
+        pointer-events: none;
+    }
+
+    &--full-width {
+        @include media-query(large) {
+            min-width: 215px;
+            width: 100%;
+        }
+    }
+
+    // Select
+    &__item {
+        @include font-size(body);
+        background: $color--white;
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+        padding: 12px;
+        width: 100%;
+        color: $color--black;
+        line-height: 24px;
+        -moz-appearance: none; // stylelint-disable-line property-no-vendor-prefix
+        appearance: none;
+
+        &::-ms-expand {
+            display: none;
+        }
+
+        &--small-text {
+            @include rem-font-size(17px);
+        }
+
+        &:focus {
+            outline: $focus-width solid $focus-bg;
+
+            &:not(:active):not(:hover) {
+                border-color: $focus-bg;
+                background-color: $focus-bg;
+                color: $focus-color;
+            }
+        }
+    }
+}

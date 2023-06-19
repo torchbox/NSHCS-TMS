@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    // Webpack will convert ES modules to the required format.
+    "module": "esnext",
+    "esModuleInterop": true,
+    // Setting a very low target for IE11 compatibility.
+    "target": "es2020",
+    // Make it possible to gradually adopt TypeScript, or not use it at all.
+    "allowJs": true,
+    // Turn on stricter type checking.
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "sourceMap": true,
+    "jsx": "react"
+  },
+  "include": ["assets/src"],
+  "exclude": ["node_modules", "assets/dist"]
+}
