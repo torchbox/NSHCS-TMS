@@ -1,4 +1,13 @@
+@use 'config' as *;
+
 .wrapper {
+    padding: 0 20px;
+    margin: 0 auto;
+
+    &--default {
+        max-width: $site-width;
+    }
+
     &--small {
         max-width: 755px;
     }

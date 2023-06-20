@@ -1,4 +1,5 @@
 import SkipLink from './components/skip-link';
+import './components/storage';
 
 // IE11 polyfills
 import foreachPolyfill from './polyfills/foreach-polyfill';

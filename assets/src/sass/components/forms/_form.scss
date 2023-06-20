@@ -1,0 +1,55 @@
+@use 'config' as *;
+
+.form {
+    border: 1px solid #eee;
+    padding: 40px;
+    margin: 20px 0;
+
+    &__legend {
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 50px;
+    }
+
+    &__fieldset {
+        padding: 0;
+        border: 0;
+    }
+
+    &__label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+        margin-top: 30px;
+    }
+
+    &__input {
+        @include font-size(body);
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 2px solid $color--border-black;
+        display: block;
+        width: 100%;
+        max-width: 300px;
+
+        &--dob {
+            width: 50px;
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        &--dob-wide {
+            width: 70px;
+            display: inline-block;
+        }
+
+        &--edit-view {
+            padding: 0;
+            border: 2px solid transparent;
+
+            &:focus {
+                border: 2px solid $color--border-black;
+            }
+        }
+    }
+}
