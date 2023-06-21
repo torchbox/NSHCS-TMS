@@ -102,17 +102,15 @@
 }
 
 /* ============================================
-    Checkbox styles - used by checkbox.scss and tbxforms-overrides.scss
+    Checkbox styles
 */
 
 @mixin checkbox-wrapper() {
     display: flex;
     position: relative;
-    padding-top: 2px;
-    padding-left: 40px;
+    padding-left: 20px;
     align-items: center;
-    min-height: 42px;
-    margin-bottom: 15px;
+    margin: 5px 0;
 
     @include media-query(large) {
         margin-right: 30px;
@@ -131,10 +129,6 @@
         &::after {
             opacity: 1;
         }
-
-        &::before {
-            border: 2px solid $color--nhs-blue;
-        }
     }
 }
 
@@ -148,11 +142,9 @@
     &::before {
         content: '';
         position: absolute;
-        background-color: $color--white;
-        border-radius: $br-default;
         border: 2px solid $color--black;
-        width: 42px;
-        height: 42px;
+        width: 24px;
+        height: 24px;
         left: 0;
         top: 0;
     }
@@ -160,13 +152,76 @@
     &::after {
         content: '';
         position: absolute;
-        width: 24px;
-        height: 24px;
-        border-radius: 3px;
-        background: $color--nhs-blue;
-        left: 9px;
-        top: 9px;
+        width: 14px;
+        height: 12px;
+        left: 5px;
+        top: 6px;
         opacity: 0;
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxMiIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iIzBCMEMwQyIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJtMCA2LjE4MyAyLjAzLTEuOTg1IDIuOTEzIDMuMDU4TDExLjk2MyAwIDE0IDIuMDZsLTkuMDU3IDkuMDdMMCA2LjE4M1oiIGNsaXAtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPgo=');
+        transition: opacity $transition;
+    }
+}
+
+/* ============================================
+    Radio styles
+*/
+
+@mixin radio-wrapper() {
+    display: flex;
+    position: relative;
+    padding-left: 20px;
+    align-items: center;
+    margin: 5px 0;
+
+    @include media-query(large) {
+        margin-right: 30px;
+    }
+}
+
+@mixin radio-input() {
+    opacity: 0;
+    position: absolute;
+
+    &:focus + label::before {
+        border: 2px solid $focus-bg;
+    }
+
+    &:checked + label {
+        &::after {
+            opacity: 1;
+        }
+    }
+}
+
+@mixin radio-label() {
+    @include font-size(body);
+    cursor: pointer;
+    margin-left: 20px;
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+
+    &::before {
+        content: '';
+        position: absolute;
+        border: 2px solid $color--black;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        left: 0;
+        top: 0;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 8px;
+        left: 8px;
+        border-radius: 50%;
+        opacity: 0;
+        background-color: $color--border-black;
         transition: opacity $transition;
     }
 }

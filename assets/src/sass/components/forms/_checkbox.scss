@@ -11,14 +11,3 @@
         @include checkbox-label();
     }
 }
-
-.checkbox-wrapper {
-    border-top: 1px solid $color--black;
-    border-bottom: 1px solid $color--black;
-    padding: 30px 0;
-
-    @include media-query(medium) {
-        margin-bottom: 50px;
-        padding: 50px 0;
-    }
-}

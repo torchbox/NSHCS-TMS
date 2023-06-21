@@ -18,6 +18,8 @@ $color--default: $color--off-black;
 // NHS colours
 $color--nhs-blue: #015eb8;
 $color--border-black: #212b32;
+$color--border-grey: #d8dde0;
+$color--helptext: #768692;
 
 // Button colours
 $button-colours: (
@@ -40,7 +42,7 @@ $color-box-shadow: color.adjust(#dd4600, $alpha: -0.5);
 
 // --------------------------------- Fonts -------------------------------------
 
-$font--default: sans-serif;
+$font--default: 'Frutiger', sans-serif;
 
 // Font weights
 $weight--bold: 700;
@@ -58,7 +60,7 @@ $large-font-sizes: (
     feature-one: 90px,
     feature-two: 76px,
     heading-one: 64px,
-    heading-two: 30px,
+    heading-two: 36px,
     heading-three: 26px,
     heading-four: 24px,
     heading-five: 20px,
@@ -71,7 +73,7 @@ $medium-font-sizes: (
     feature-one: 78px,
     feature-two: 68px,
     heading-one: 45px,
-    heading-two: 24px,
+    heading-two: 30px,
     heading-three: 22px,
     heading-four: 20px,
     heading-five: 20px,
@@ -103,8 +105,9 @@ $breakpoints: (
 );
 
 // Layout
-$site-width: 1320px;
+$site-width: 1015px;
 $centred-width: 880px;
+$form-width: 835px;
 
 // Grid setup
 $grid: 20px;

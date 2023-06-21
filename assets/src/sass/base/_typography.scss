@@ -3,6 +3,23 @@
 /* ============================================
     Base font
 */
+
+@font-face {
+    font-family: 'Frutiger';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Frutiger'),
+        url('../fonts/FrutigerLTStd-Roman.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Frutiger Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Frutiger Bold'),
+        url('../fonts/FrutigerLTStd-Bold.woff') format('woff');
+}
+
 html {
     font-family: $font--default;
     font-size: $base-font-size;
@@ -95,6 +112,7 @@ small {
 
     &--two {
         @include font-size(heading-two);
+        font-weight: bold;
     }
 
     &--three {

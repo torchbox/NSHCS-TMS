@@ -1,55 +1,118 @@
 @use 'config' as *;
 
 .form {
-    border: 1px solid #eee;
-    padding: 40px;
-    margin: 20px 0;
+    max-width: $form-width;
 
     &__legend {
-        font-size: 30px;
+        @include rem-font-size(30px);
         font-weight: bold;
-        margin-bottom: 50px;
+    }
+
+    &__sub-legend {
+        @include font-size(heading-five);
+        font-weight: bold;
     }
 
     &__fieldset {
         padding: 0;
         border: 0;
+
+        & + & {
+            margin-top: 50px;
+        }
+
+        &--nested {
+            & + & {
+                margin-top: 30px;
+            }
+        }
+    }
+
+    &__inline-container {
+        display: flex;
+    }
+
+    &__item {
+        display: grid;
+        grid-template-columns: 3fr 4fr;
+        margin: 15px 0 5px;
+        align-items: start;
+
+        .edit-view & {
+            border-bottom: 1px solid $color--border-grey;
+            margin: 0;
+            padding: 15px 0 10px;
+        }
+    }
+
+    &__helptext {
+        @include rem-font-size(12px);
+        color: $color--helptext;
+        margin-bottom: 10px;
     }
 
     &__label {
+        @include rem-font-size(16px);
         font-weight: bold;
-        margin-bottom: 5px;
         display: block;
-        margin-top: 30px;
+        margin-top: 10px;
+        margin-bottom: 0;
+        cursor: pointer;
+
+        &--large {
+            @include font-size(body-feature);
+        }
+
+        .edit-view & {
+            pointer-events: none;
+            cursor: text;
+            margin-top: 0;
+        }
     }
 
     &__input {
-        @include font-size(body);
-        padding: 10px;
-        margin-bottom: 10px;
+        @include rem-font-size(16px);
+        padding: 10px 10px 6px;
         border: 2px solid $color--border-black;
         display: block;
         width: 100%;
-        max-width: 300px;
 
-        &--dob {
+        &--full-width {
+            max-width: 100%;
+        }
+
+        &--two-thirds-width {
+            max-width: 66.66%;
+        }
+
+        &--half-width {
+            max-width: 50%;
+        }
+
+        &--number {
             width: 50px;
             margin-right: 10px;
             display: inline-block;
+            text-align: center;
+            padding: 10px 10px 6px 8px;
+
+            .edit-view & {
+                padding: 0;
+                text-align: left;
+                width: 25px;
+                margin-right: 0;
+            }
         }
 
-        &--dob-wide {
+        &--number-wide {
             width: 70px;
             display: inline-block;
         }
 
-        &--edit-view {
+        .edit-view & {
+            border-color: transparent;
+            pointer-events: none;
             padding: 0;
-            border: 2px solid transparent;
-
-            &:focus {
-                border: 2px solid $color--border-black;
-            }
         }
     }
 }

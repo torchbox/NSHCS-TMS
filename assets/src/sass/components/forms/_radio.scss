@@ -1,0 +1,13 @@
+@use 'config' as *;
+
+.radio-input {
+    @include radio-wrapper();
+
+    input {
+        @include radio-input();
+    }
+
+    label {
+        @include radio-label();
+    }
+}

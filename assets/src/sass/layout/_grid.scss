@@ -1,0 +1,6 @@
+@use 'config' as *;
+
+.grid-three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}

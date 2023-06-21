@@ -4,55 +4,52 @@
     $root: &;
     position: relative;
     width: 100%;
-    max-width: 400px;
-    border: 1px solid $color--black;
-    border-radius: $br-default;
+    border: 2px solid $color--border-black;
     overflow: hidden;
 
-    @include media-query(large) {
-        width: 280px;
+    .edit-view & {
+        border-color: transparent;
+        pointer-events: none;
+        padding: 0;
     }
 
     // Dropdown icon
     &::after {
         content: '';
         position: absolute;
-        width: 25px;
-        height: 48px;
+        width: 35px;
+        height: 40px;
         right: 0;
         top: 0;
         background: url('../images/cssBackgrounds/select-arrow.svg') center
             no-repeat;
         pointer-events: none;
-    }
 
-    &--full-width {
-        @include media-query(large) {
-            min-width: 215px;
-            width: 100%;
+        .edit-view & {
+            background: none;
         }
     }
 
     // Select
     &__item {
-        @include font-size(body);
+        @include rem-font-size(16px);
         background: $color--white;
         border: none;
         border-radius: 0;
         cursor: pointer;
-        padding: 12px;
+        padding: 8px 10px;
         width: 100%;
         color: $color--black;
         line-height: 24px;
         -moz-appearance: none; // stylelint-disable-line property-no-vendor-prefix
         appearance: none;
 
-        &::-ms-expand {
-            display: none;
+        .edit-view & {
+            padding: 0;
         }
 
-        &--small-text {
-            @include rem-font-size(17px);
+        &::-ms-expand {
+            display: none;
         }
 
         &:focus {

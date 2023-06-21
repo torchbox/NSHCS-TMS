@@ -3,6 +3,7 @@ export default function storage() {
     const saveButton = document.getElementById('save');
     const clearButton = document.getElementById('clear');
     const editButton = document.getElementById('edit');
+    const nameHeading = document.querySelector('[data-name-heading]');
     const userData = [];
 
     // Retrieve from localStorage or create new
@@ -11,11 +12,12 @@ export default function storage() {
 
     // Define input data shape
     class FormInput {
-        constructor(id, dataName, type, value) {
+        constructor(id, dataName, type, value, checked) {
             this.id = id;
             this.dataName = dataName;
             this.type = type;
             this.value = value;
+            this.checked = checked;
         }
     }
 
@@ -32,6 +34,7 @@ export default function storage() {
                 element.dataset.form,
                 element.type,
                 element.value,
+                element.checked,
             );
 
             userData.push(inputObject);
@@ -60,7 +63,15 @@ export default function storage() {
                     `[data-form='${item.dataName}']`,
                 );
 
-                targetElement.value = item.value;
+                if (targetElement) {
+                    targetElement.value = item.value;
+                    targetElement.checked = item.checked;
+                }
+
+                // Set page title (user's name)
+                if (item.dataName === 'name') {
+                    nameHeading.textContent = item.value;
+                }
             });
         }
     }
