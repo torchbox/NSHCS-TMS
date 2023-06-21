@@ -1,0 +1,20 @@
+@use 'config' as *;
+
+.tag {
+    @include rem-font-size(12px);
+    padding: 5px 8px 3px;
+    font-weight: bold;
+    color: $color--white;
+
+    &:not(:last-of-type) {
+        margin-right: 10px;
+    }
+
+    &--green {
+        background-color: $color--green;
+    }
+
+    &--red {
+        background-color: $color--red;
+    }
+}

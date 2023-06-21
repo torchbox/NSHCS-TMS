@@ -1,0 +1,47 @@
+@use 'config' as *;
+
+.button {
+    @include rem-font-size(12px);
+    padding: 12px 20px;
+    border: 0;
+    text-align: center;
+    transition: background-color $transition, color $transition;
+    cursor: pointer;
+
+    &:focus {
+        outline: $focus-width solid transparent;
+        background-color: $focus-bg;
+        box-shadow: (
+            0 (-$focus-width/2) $focus-bg,
+            0 $focus-width $focus-color
+        );
+    }
+
+    &--cancel {
+        color: $color--link;
+        background-color: transparent;
+        text-decoration: underline;
+
+        &:hover {
+            color: darken($color--link, 10%);
+        }
+    }
+
+    &--grey {
+        color: $color--white;
+        background-color: $color--blue-grey;
+
+        &:hover {
+            background-color: darken($color--blue-grey, 10%);
+        }
+    }
+
+    &--green {
+        color: $color--white;
+        background-color: $color--green;
+
+        &:hover {
+            background-color: darken($color--green, 10%);
+        }
+    }
+}

@@ -3,12 +3,15 @@
 @use 'base/typography';
 
 // Components
+@use 'components/button';
+@use 'components/intro';
+@use 'components/skip-link';
+@use 'components/tag';
 
 // Forms
 @use 'components/forms/form';
 @use 'components/forms/checkbox';
 @use 'components/forms/fileinput';
-@use 'components/skip-link';
 @use 'components/forms/radio';
 @use 'components/forms/select';
 

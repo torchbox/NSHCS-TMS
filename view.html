@@ -14,115 +14,33 @@
         <main id="main-content">
             <div class="wrapper wrapper--default">
 
-                <h1 class="heading heading--two" data-name-heading="name"></h1>
+                <div class="intro">
+                    <div>
+                        <div class="intro__heading-container">
+                            <h1 class="intro__heading heading heading--two" data-name-heading="name">Victoria Thomas</h1>
+                            <div class="tag tag--green">Active - FT</div>
+                            <div class="tag tag--red">Parental leave - FT</div>
+                        </div>
+                        <p class="intro__subheading">
+                            NSHCS registration number: 124047
+                        </p>
+                    </div>
+                    <div>
+                        <button class="intro__button button button--grey" data-edit>Edit this page</button>
+                    </div>
+                </div>
 
                 <form class="form" id="form-populate">
-
-                    <!-- Checkboxes -->
-                    <fieldset class="form__fieldset">
-                        <p class="form__label form__label--large" for="statuses">Which statuses apply to this trainee?</p>
-                        <div class="form__helptext">Select all options that are relevant</div>
-                        <div class="grid-three-col">
-                            <div class="checkbox-input">
-                                <input type="checkbox" id="status-active-ft" name="status-active-ft" data-form="status-active-ft" value="off" />
-                                <label for="status-active-ft">
-                                    Active - FT
-                                </label>
-                            </div>
-                            <div class="checkbox-input">
-                                <input type="checkbox" id="status-parental-leave" name="status-parental-leave" data-form="status-parental-leave" value="off" />
-                                <label for="status-parental-leave">
-                                    Parental leave
-                                </label>
-                            </div>
-                            <div class="checkbox-input">
-                                <input type="checkbox" id="status-left" name="status-left" data-form="status-left" value="off" />
-                                <label for="status-left">
-                                    Left
-                                </label>
-                            </div>
-                            <div class="checkbox-input">
-                                <input type="checkbox" id="status-active-pt" name="status-active-pt" data-form="status-active-pt" value="off" />
-                                <label for="status-active-pt">
-                                    Active - PT
-                                </label>
-                            </div>
-                            <div class="checkbox-input">
-                                <input type="checkbox" id="status-sickness" name="status-sickness" data-form="status-sickness" value="off" />
-                                <label for="status-sickness">
-                                    Sickness
-                                </label>
-                            </div>
-                            <div class="checkbox-input">
-                                <input type="checkbox" id="status-failed" name="status-failed" data-form="status-failed" value="off" />
-                                <label for="status-failed">
-                                    Failed
-                                </label>
-                            </div>
-                            <div class="checkbox-input">
-                                <input type="checkbox" id="status-passed" name="status-passed" data-form="status-passed" value="off" />
-                                <label for="status-passed">
-                                    Passed
-                                </label>
-                            </div>
-                            <div class="checkbox-input">
-                                <input type="checkbox" id="status-defer-suspend" name="status-defer-suspend" data-form="status-defer-suspend" value="off" />
-                                <label for="status-defer-suspend">
-                                    Defer / Suspend
-                                </label>
-                            </div>
-                            <div class="checkbox-input">
-                                <input type="checkbox" id="status-withdrawn" name="status-withdrawn" data-form="status-withdrawn" value="off" />
-                                <label for="status-withdrawn">
-                                    Withdrawn
-                                </label>
-                            </div>
-                            <div class="checkbox-input">
-                                <input type="checkbox" id="status-preregistration" name="status-preregistration" data-form="status-preregistration" value="off" />
-                                <label for="status-preregistration">
-                                    Preregistration
-                                </label>
-                            </div>
-                            <div class="checkbox-input">
-                                <input type="checkbox" id="status-resit" name="status-resit" data-form="status-resit" value="off" />
-                                <label for="status-resit">
-                                    Resit
-                                </label>
-                            </div>
-                            <div class="checkbox-input">
-                                <input type="checkbox" id="status-deceased" name="status-deceased" data-form="status-deceased" value="off" />
-                                <label for="status-deceased">
-                                    Deceased
-                                </label>
-                            </div>
-                            <div class="checkbox-input">
-                                <input type="checkbox" id="status-career-break" name="status-career-break" data-form="status-career-break" value="off" />
-                                <label for="status-career-break">
-                                    Career break
-                                </label>
-                            </div>
-                            <div class="checkbox-input">
-                                <input type="checkbox" id="status-dismissed" name="status-dismissed" data-form="status-dismissed" value="off" />
-                                <label for="status-dismissed">
-                                    Dismissed
-                                </label>
-                            </div>
-                            <div class="checkbox-input">
-                                <input type="checkbox" id="status-covid19-interruption" name="status-covid19-interruption" data-form="status-covid19-interruption" value="off" />
-                                <label for="status-covid19-interruption">
-                                    COVID19 interruption
-                                </label>
-                            </div>
-                        </div>
-                    </fieldset>
 
                     <!-- Personal -->
                     <fieldset class="form__fieldset">
                         <legend class="form__legend">Personal details</legend>
+
                         <div class="form__item">
                             <label class="form__label" for="name">Name</label>
-                            <input class="form__input" type="text" id="name" name="name" data-form="name" autocomplete="given-name"/>
+                            <input class="form__input" type="text" id="name" name="name" data-form="name" autocomplete="given-name" value="[First Second]"/>
                         </div>
+
                         <div class="form__item">
                             <p class="form__label" for="dob">Date of birth</p>
                             <div>
@@ -152,17 +70,6 @@
                             <div></div>
                             <label class="form__label sr-only" for="address-4">Address 4</label>
                             <input class="form__input" type="text" id="address-4" name="address-4" data-form="address-4"/>
-                        </div>
-                        <div class="form__item">
-                            <label class="form__label" for="select-menu">Some select menu</label>
-                            <div class="custom-select">
-                                <select id="select-menu" name="select-menu" class="custom-select__item" data-form="select-menu">
-                                    <option value="">------</option>
-                                    <option value="Option one">Option one</option>
-                                    <option value="Option two">Option two</option>
-                                    <option value="Option three">Option three</option>
-                                </select>
-                            </div>
                         </div>
                         <div class="form__item">
                             <label class="form__label" for="work-telephone">Work telephone</label>
@@ -507,6 +414,7 @@
                         </div>
                     </fieldset>
                 </form>
+
 
                 <button id="save">Save and proceed</button>
                 <button id="clear">Clear data</button>

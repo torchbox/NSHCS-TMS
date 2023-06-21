@@ -1,8 +1,9 @@
 export default function storage() {
     const formInputs = document.querySelectorAll('[data-form]');
-    const saveButton = document.getElementById('save');
+    const saveButton = document.querySelector('[data-save]');
+    const cancelButton = document.querySelector('[data-cancel]');
+    const editButton = document.querySelector('[data-edit]');
     const clearButton = document.getElementById('clear');
-    const editButton = document.getElementById('edit');
     const nameHeading = document.querySelector('[data-name-heading]');
     const userData = [];
 
@@ -50,7 +51,7 @@ export default function storage() {
         // Navigate to edit page
         if (redirect) {
             window.location.replace(
-                window.location.pathname.replace(/\/[^\/]*$/, '/edit.html'),
+                window.location.pathname.replace(/\/[^\/]*$/, '/view.html'),
             );
         }
     }
@@ -87,6 +88,16 @@ export default function storage() {
     if (saveButton) {
         saveButton.addEventListener('click', () => {
             saveInitialData(true);
+        });
+    }
+
+    if (cancelButton) {
+        cancelButton.addEventListener('click', () => {
+            populateData();
+
+            window.location.replace(
+                window.location.pathname.replace(/\/[^\/]*$/, '/view.html'),
+            );
         });
     }
 
