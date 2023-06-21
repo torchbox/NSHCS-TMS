@@ -94,7 +94,14 @@ export default function storage() {
     // Find any empty nodes and remove the block entirely
     function removeEmptyFields() {
         document.querySelectorAll('[data-form]').forEach((item) => {
-            if (item.textContent.length === 0) {
+            if (
+                item.getAttribute('data-form') === 'address-1' ||
+                item.getAttribute('data-form') === 'address-2' ||
+                item.getAttribute('data-form') === 'address-3' ||
+                item.getAttribute('data-form') === 'address-4'
+            ) {
+                // console.log(item);
+            } else if (item.textContent.length === 0) {
                 item.parentNode.remove();
             }
         });
