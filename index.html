@@ -9,17 +9,15 @@
         <link rel="stylesheet" type="text/css" href="./assets/dist/css/main.css">
     </head>
 
-    <body>
+    <body data-mode="edit">
         <a href="#main-content" class="skip-link" data-skip-link>Skip to main content</a>
         <main id="main-content">
             <div class="wrapper wrapper--default">
 
                 <div class="intro">
                     <div>
-                        <div class="intro__heading-container">
+                        <div class="intro__heading-container" data-status-container>
                             <h1 class="intro__heading heading heading--two" data-name-heading="name">[First Second]</h1>
-                            <div class="tag tag--green">Active - FT</div>
-                            <div class="tag tag--red">Parental leave - FT</div>
                         </div>
                         <p class="intro__subheading">
                             NSHCS registration number: 124047
@@ -39,91 +37,91 @@
                         <div class="form__helptext">Select all options that are relevant</div>
                         <div class="grid-three-col">
                             <div class="checkbox-input">
-                                <input type="checkbox" id="status-active-ft" name="status-active-ft" data-form="status-active-ft" value="off" />
+                                <input type="checkbox" id="status-active-ft" name="status-active-ft" data-status="true" data-form="status-active-ft" value="Active - FT" />
                                 <label for="status-active-ft">
                                     Active - FT
                                 </label>
                             </div>
                             <div class="checkbox-input">
-                                <input type="checkbox" id="status-parental-leave" name="status-parental-leave" data-form="status-parental-leave" value="off" />
+                                <input type="checkbox" id="status-parental-leave" name="status-parental-leave" data-status="true" data-form="status-parental-leave" value="Parental leave" />
                                 <label for="status-parental-leave">
                                     Parental leave
                                 </label>
                             </div>
                             <div class="checkbox-input">
-                                <input type="checkbox" id="status-left" name="status-left" data-form="status-left" value="off" />
+                                <input type="checkbox" id="status-left" name="status-left" data-status="true" data-form="status-left" value="Left" />
                                 <label for="status-left">
                                     Left
                                 </label>
                             </div>
                             <div class="checkbox-input">
-                                <input type="checkbox" id="status-active-pt" name="status-active-pt" data-form="status-active-pt" value="off" />
+                                <input type="checkbox" id="status-active-pt" name="status-active-pt" data-status="true" data-form="status-active-pt" value="Active - PT" />
                                 <label for="status-active-pt">
                                     Active - PT
                                 </label>
                             </div>
                             <div class="checkbox-input">
-                                <input type="checkbox" id="status-sickness" name="status-sickness" data-form="status-sickness" value="off" />
+                                <input type="checkbox" id="status-sickness" name="status-sickness" data-status="true" data-form="status-sickness" value="Sickness" />
                                 <label for="status-sickness">
                                     Sickness
                                 </label>
                             </div>
                             <div class="checkbox-input">
-                                <input type="checkbox" id="status-failed" name="status-failed" data-form="status-failed" value="off" />
+                                <input type="checkbox" id="status-failed" name="status-failed" data-status="true" data-form="status-failed" value="Failed" />
                                 <label for="status-failed">
                                     Failed
                                 </label>
                             </div>
                             <div class="checkbox-input">
-                                <input type="checkbox" id="status-passed" name="status-passed" data-form="status-passed" value="off" />
+                                <input type="checkbox" id="status-passed" name="status-passed" data-status="true" data-form="status-passed" value="Passed" />
                                 <label for="status-passed">
                                     Passed
                                 </label>
                             </div>
                             <div class="checkbox-input">
-                                <input type="checkbox" id="status-defer-suspend" name="status-defer-suspend" data-form="status-defer-suspend" value="off" />
+                                <input type="checkbox" id="status-defer-suspend" name="status-defer-suspend" data-status="true" data-form="status-defer-suspend" value="Defer / Suspend" />
                                 <label for="status-defer-suspend">
                                     Defer / Suspend
                                 </label>
                             </div>
                             <div class="checkbox-input">
-                                <input type="checkbox" id="status-withdrawn" name="status-withdrawn" data-form="status-withdrawn" value="off" />
+                                <input type="checkbox" id="status-withdrawn" name="status-withdrawn" data-status="true" data-form="status-withdrawn" value="Withdrawn" />
                                 <label for="status-withdrawn">
                                     Withdrawn
                                 </label>
                             </div>
                             <div class="checkbox-input">
-                                <input type="checkbox" id="status-preregistration" name="status-preregistration" data-form="status-preregistration" value="off" />
+                                <input type="checkbox" id="status-preregistration" name="status-preregistration" data-status="true" data-form="status-preregistration" value="Preregistration" />
                                 <label for="status-preregistration">
                                     Preregistration
                                 </label>
                             </div>
                             <div class="checkbox-input">
-                                <input type="checkbox" id="status-resit" name="status-resit" data-form="status-resit" value="off" />
+                                <input type="checkbox" id="status-resit" name="status-resit" data-status="true" data-form="status-resit" value="Resit" />
                                 <label for="status-resit">
                                     Resit
                                 </label>
                             </div>
                             <div class="checkbox-input">
-                                <input type="checkbox" id="status-deceased" name="status-deceased" data-form="status-deceased" value="off" />
+                                <input type="checkbox" id="status-deceased" name="status-deceased" data-status="true" data-form="status-deceased" value="Deceased" />
                                 <label for="status-deceased">
                                     Deceased
                                 </label>
                             </div>
                             <div class="checkbox-input">
-                                <input type="checkbox" id="status-career-break" name="status-career-break" data-form="status-career-break" value="off" />
+                                <input type="checkbox" id="status-career-break" name="status-career-break" data-status="true" data-form="status-career-break" value="Career break" />
                                 <label for="status-career-break">
                                     Career break
                                 </label>
                             </div>
                             <div class="checkbox-input">
-                                <input type="checkbox" id="status-dismissed" name="status-dismissed" data-form="status-dismissed" value="off" />
+                                <input type="checkbox" id="status-dismissed" name="status-dismissed" data-status="true" data-form="status-dismissed" value="Dismissed" />
                                 <label for="status-dismissed">
                                     Dismissed
                                 </label>
                             </div>
                             <div class="checkbox-input">
-                                <input type="checkbox" id="status-covid19-interruption" name="status-covid19-interruption" data-form="status-covid19-interruption" value="off" />
+                                <input type="checkbox" id="status-covid19-interruption" name="status-covid19-interruption" data-status="true" data-form="status-covid19-interruption" value="COVID19 interruption" />
                                 <label for="status-covid19-interruption">
                                     COVID19 interruption
                                 </label>
@@ -229,7 +227,7 @@
                             <div class="custom-select">
                                 <select id="entry-type" name="entry-type" class="custom-select__item" data-form="entry-type">
                                     <option value="">------</option>
-                                    <option value="Option one">Direct</option>
+                                    <option value="Direct">Direct</option>
                                     <option value="Option two">Option two</option>
                                     <option value="Option three">Option three</option>
                                 </select>
@@ -241,7 +239,7 @@
                             <div class="custom-select">
                                 <select id="funding-provider" name="funding-provider" class="custom-select__item" data-form="funding-provider">
                                     <option value="">------</option>
-                                    <option value="Option one">Self</option>
+                                    <option value="Self">Self</option>
                                     <option value="Option two">Option two</option>
                                     <option value="Option three">Option three</option>
                                 </select>
@@ -253,7 +251,7 @@
                             <div class="custom-select">
                                 <select id="specialism" name="specialism" class="custom-select__item" data-form="specialism">
                                     <option value="">------</option>
-                                    <option value="Option one">Gastrointestinal Physiology</option>
+                                    <option value="Gastrointestinal Physiology">Gastrointestinal Physiology</option>
                                     <option value="Option two">Option two</option>
                                     <option value="Option three">Option three</option>
                                 </select>
@@ -265,7 +263,7 @@
                             <div class="custom-select">
                                 <select id="hei" name="hei" class="custom-select__item" data-form="hei">
                                     <option value="">------</option>
-                                    <option value="Option one">Sheffield Hallam University</option>
+                                    <option value="Sheffield Hallam University">Sheffield Hallam University</option>
                                     <option value="Option two">Option two</option>
                                     <option value="Option three">Option three</option>
                                 </select>
@@ -362,7 +360,7 @@
                             </div>
 
                             <div class="form__item">
-                                <p class="form__label" for="training-head-of-department-to">From</p>
+                                <p class="form__label" for="training-head-of-department-to">To</p>
                                 <div>
                                     <label class="sr-only" for="training-head-of-department-to-day">Day</label>
                                     <input class="form__input form__input--number" type="text" id="training-head-of-department-to-day" name="training-head-of-department-to-day" data-form="training-head-of-department-to-day"/>
@@ -414,27 +412,27 @@
                         </div>
 
                         <div class="form__item">
-                                <p class="form__label" for="training-from">From</p>
-                                <div>
-                                    <label class="sr-only" for="training-from-day">Day</label>
-                                    <input class="form__input form__input--number" type="text" id="training-from-day" name="training-from-day" data-form="training-from-day"/>
-                                    <label class="sr-only" for="training-from-month">Month</label>
-                                    <input class="form__input form__input--number" type="text" id="training-from-month" name="training-from-month" data-form="training-from-month"/>
-                                    <label class="sr-only" for="training-from-year">Year</label>
-                                    <input class="form__input form__input--number-wide" type="text" id="training-from-year" name="training-from-year" data-form="training-from-year"/>
-                                </div>
+                            <p class="form__label" for="training-from">From</p>
+                            <div>
+                                <label class="sr-only" for="training-from-day">Day</label>
+                                <input class="form__input form__input--number" type="text" id="training-from-day" name="training-from-day" data-form="training-from-day"/>
+                                <label class="sr-only" for="training-from-month">Month</label>
+                                <input class="form__input form__input--number" type="text" id="training-from-month" name="training-from-month" data-form="training-from-month"/>
+                                <label class="sr-only" for="training-from-year">Year</label>
+                                <input class="form__input form__input--number-wide" type="text" id="training-from-year" name="training-from-year" data-form="training-from-year"/>
+                            </div>
                         </div>
 
                         <div class="form__item">
-                                <p class="form__label" for="training-to">From</p>
-                                <div>
-                                    <label class="sr-only" for="training-to-day">Day</label>
-                                    <input class="form__input form__input--number" type="text" id="training-to-day" name="training-to-day" data-form="training-to-day"/>
-                                    <label class="sr-only" for="training-to-month">Month</label>
-                                    <input class="form__input form__input--number" type="text" id="training-to-month" name="training-to-month" data-form="training-to-month"/>
-                                    <label class="sr-only" for="training-to-year">Year</label>
-                                    <input class="form__input form__input--number-wide" type="text" id="training-to-year" name="training-to-year" data-form="training-to-year"/>
-                                </div>
+                            <p class="form__label" for="training-to">To</p>
+                            <div>
+                                <label class="sr-only" for="training-to-day">Day</label>
+                                <input class="form__input form__input--number" type="text" id="training-to-day" name="training-to-day" data-form="training-to-day"/>
+                                <label class="sr-only" for="training-to-month">Month</label>
+                                <input class="form__input form__input--number" type="text" id="training-to-month" name="training-to-month" data-form="training-to-month"/>
+                                <label class="sr-only" for="training-to-year">Year</label>
+                                <input class="form__input form__input--number-wide" type="text" id="training-to-year" name="training-to-year" data-form="training-to-year"/>
+                            </div>
                         </div>
                     </fieldset>
 
@@ -498,13 +496,13 @@
                             </div>
                             <div class="form__inline-container">
                                 <div class="radio-input">
-                                    <input type="radio" id="verified-yes" name="verified" data-form="verified-yes" value="verified-yes" />
+                                    <input type="radio" id="verified-yes" name="verified" data-form="verified-yes" value="Yes" />
                                     <label for="verified-yes">
                                         Yes
                                     </label>
                                 </div>
                                 <div class="radio-input">
-                                    <input type="radio" id="verified-no" name="verified" data-form="verified-no" value="verified-no" />
+                                    <input type="radio" id="verified-no" name="verified" data-form="verified-no" value="No" />
                                     <label for="verified-no">
                                         No
                                     </label>
@@ -513,10 +511,6 @@
                         </div>
                     </fieldset>
                 </form>
-
-                <button id="save">Save and proceed</button>
-                <button id="clear">Clear data</button>
-
             </div>
         </main>
         <script src="./assets/dist/js/main.js"></script>

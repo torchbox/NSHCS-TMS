@@ -2,6 +2,7 @@
 
 .form {
     max-width: $form-width;
+    margin-bottom: 100px;
 
     &__legend {
         @include rem-font-size(30px);
@@ -38,10 +39,19 @@
         margin: 15px 0 5px;
         align-items: start;
 
-        .edit-view & {
+        .view-mode & {
             border-bottom: 1px solid $color--border-grey;
             margin: 0;
             padding: 15px 0 10px;
+        }
+
+        a {
+            color: $color--email;
+            text-decoration: underline;
+
+            &:hover {
+                color: darken($color--email, 10%);
+            }
         }
     }
 
@@ -63,7 +73,7 @@
             @include font-size(body-feature);
         }
 
-        .edit-view & {
+        .view-mode & {
             pointer-events: none;
             cursor: text;
             margin-top: 0;
@@ -96,7 +106,7 @@
             text-align: center;
             padding: 10px 10px 6px 8px;
 
-            .edit-view & {
+            .view-mode & {
                 padding: 0;
                 text-align: left;
                 width: 25px;
@@ -109,7 +119,7 @@
             display: inline-block;
         }
 
-        .edit-view & {
+        .view-mode & {
             border-color: transparent;
             pointer-events: none;
             padding: 0;

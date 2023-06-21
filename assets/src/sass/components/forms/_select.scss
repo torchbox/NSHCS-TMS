@@ -7,7 +7,7 @@
     border: 2px solid $color--border-black;
     overflow: hidden;
 
-    .edit-view & {
+    .view-mode & {
         border-color: transparent;
         pointer-events: none;
         padding: 0;
@@ -25,7 +25,7 @@
             no-repeat;
         pointer-events: none;
 
-        .edit-view & {
+        .view-mode & {
             background: none;
         }
     }
@@ -44,7 +44,7 @@
         -moz-appearance: none; // stylelint-disable-line property-no-vendor-prefix
         appearance: none;
 
-        .edit-view & {
+        .view-mode & {
             padding: 0;
         }
 
