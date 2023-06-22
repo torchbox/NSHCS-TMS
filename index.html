@@ -45,6 +45,8 @@
 
         <main id="main-content">
             <div class="wrapper wrapper--default">
+
+                <!-- Heading -->
                 <div class="intro">
                     <div>
                         <div class="intro__heading-container" data-status-container>
@@ -60,7 +62,7 @@
                     </div>
                 </div>
 
-                <form class="form" id="form-populate">
+                <form class="form">
 
                     <!-- Checkboxes -->
                     <fieldset class="form__fieldset">
@@ -165,23 +167,23 @@
                         <legend class="form__legend">Personal details</legend>
                         <div class="form__item">
                             <label class="form__label" for="name">Name</label>
-                            <input class="form__input" type="text" id="name" name="name" data-form="name" autocomplete="given-name" value="[First Second]"/>
+                            <input class="form__input" type="text" id="name" name="name" data-form="name" autocomplete="given-name" value="Victoria Thomas"/>
                         </div>
 
                         <div class="form__item">
                             <p class="form__label" for="dob">Date of birth</p>
                             <div>
                                 <label class="sr-only" for="dob-day">Day</label>
-                                <input class="form__input form__input--number" type="text" id="dob-day" name="dob-day" data-form="dob-day"/>
+                                <input class="form__input form__input--number" type="text" id="dob-day" name="dob-day" data-form="dob-day" value="03"/>
                                 <label class="sr-only" for="dob-month">Month</label>
-                                <input class="form__input form__input--number" type="text" id="dob-month" name="dob-month" data-form="dob-month"/>
+                                <input class="form__input form__input--number" type="text" id="dob-month" name="dob-month" data-form="dob-month" value="09"/>
                                 <label class="sr-only" for="dob-year">Year</label>
-                                <input class="form__input form__input--number-wide" type="text" id="dob-year" name="dob-year" data-form="dob-year"/>
+                                <input class="form__input form__input--number-wide" type="text" id="dob-year" name="dob-year" data-form="dob-year" value="1995"/>
                             </div>
                         </div>
                         <div class="form__item">
                             <label class="form__label" for="address-1">Home address</label>
-                            <input class="form__input" type="text" id="address-1" name="address-1" data-form="address-1"/>
+                            <input class="form__input" type="text" id="address-1" name="address-1" data-form="address-1" value="72 Guild Street"/>
                         </div>
                         <div class="form__item">
                             <div></div>
@@ -191,12 +193,12 @@
                         <div class="form__item">
                             <div></div>
                             <label class="form__label sr-only" for="address-3">Address 3</label>
-                            <input class="form__input form__input--two-thirds" type="text" id="address-3" name="address-3" data-form="address-3"/>
+                            <input class="form__input form__input--two-thirds" type="text" id="address-3" name="address-3" data-form="address-3" value="London"/>
                         </div>
                         <div class="form__item">
                             <div></div>
                             <label class="form__label sr-only" for="address-4">Address 4</label>
-                            <input class="form__input form__input--two-thirds" type="text" id="address-4" name="address-4" data-form="address-4"/>
+                            <input class="form__input form__input--two-thirds" type="text" id="address-4" name="address-4" data-form="address-4" value="SE23 6FH"/>
                         </div>
                         <div class="form__item">
                             <div></div>
@@ -205,19 +207,19 @@
                         </div>
                         <div class="form__item">
                             <label class="form__label" for="work-telephone">Work telephone</label>
-                            <input class="form__input form__input--half" type="text" id="work-telephone" name="work-telephone" data-form="work-telephone"/>
+                            <input class="form__input form__input--half" type="text" id="work-telephone" name="work-telephone" data-form="work-telephone" value="0121 496 0316"/>
                         </div>
                         <div class="form__item">
                             <label class="form__label" for="personal-telephone">Personal telephone</label>
-                            <input class="form__input form__input--half" type="text" id="personal-telephone" name="personal-telephone" data-form="personal-telephone"/>
+                            <input class="form__input form__input--half" type="text" id="personal-telephone" name="personal-telephone" data-form="personal-telephone" value="07700 900452"/>
                             <label class="form__preferred-label">Preferred</label>
                         </div>
                         <div class="form__item">
                             <label class="form__label" for="work-email">Work email</label>
-                            <input class="form__input" type="email" id="work-email" name="work-email" data-form="work-email"/>
+                            <input class="form__input" type="email" id="work-email" name="work-email" data-form="work-email" value="v.thomas@nhsmail.net"/>
                             <div class="form__preferred-input-wrapper">
                                 <div class="radio-input">
-                                    <input type="radio" id="preferred-1" name="preferred" data-preferred="true" data-form="preferred-1" value="Yes" />
+                                    <input type="radio" id="preferred-1" name="preferred" data-preferred="true" data-form="preferred-1" value="Yes" checked/>
                                     <label for="preferred-1">
                                     </label>
                                 </div>
@@ -225,7 +227,7 @@
                         </div>
                         <div class="form__item">
                             <label class="form__label" for="academic-email">Academic email</label>
-                            <input class="form__input" type="email" id="academic-email" name="academic-email" data-form="academic-email"/>
+                            <input class="form__input" type="email" id="academic-email" name="academic-email" data-form="academic-email" value="vthomas4@sheffhallam.ac.uk"/>
                             <div class="form__preferred-input-wrapper">
                                 <div class="radio-input">
                                     <input type="radio" id="preferred-2" name="preferred" data-preferred="true" data-form="preferred-2" value="Yes" />
@@ -236,7 +238,7 @@
                         </div>
                         <div class="form__item">
                             <label class="form__label" for="personal-email">Personal email</label>
-                            <input class="form__input" type="email" id="personal-email" data-preferred="true" name="personal-email" data-form="personal-email"/>
+                            <input class="form__input" type="email" id="personal-email" data-preferred="true" name="personal-email" data-form="personal-email" value="supervikstick@madeupmail.com"/>
                             <div class="form__preferred-input-wrapper">
                                 <div class="radio-input">
                                     <input type="radio" id="preferred-3" name="preferred" data-form="preferred-3" value="Yes" />
@@ -255,8 +257,7 @@
                             <label class="form__label" for="programme">Programme</label>
                             <div class="custom-select">
                                 <select id="programme" name="programme" class="custom-select__item" data-form="programme">
-                                    <option value="">------</option>
-                                    <option value="Option one">HSST - Higher Specialist Scientist Training</option>
+                                    <option value="HSST - Higher Specialist Scientist Training">HSST - Higher Specialist Scientist Training</option>
                                     <option value="Option two">Option two</option>
                                     <option value="Option three">Option three</option>
                                 </select>
@@ -266,16 +267,16 @@
                         <div class="form__item">
                             <label class="form__label" for="start-date-1">Start date</label>
                             <div>
-                                <input class="form__input form__input--number" type="text" id="start-date-1" name="start-date" data-form="start-date-1"/>
-                                <input class="form__input form__input--number-wide" type="text" id="start-date-2" name="start-date" data-form="start-date-2"/>
+                                <input class="form__input form__input--number" type="text" id="start-date-1" name="start-date" data-form="start-date-1" value="09"/>
+                                <input class="form__input form__input--number-wide" type="text" id="start-date-2" name="start-date" data-form="start-date-2" value="2020"/>
                             </div>
                         </div>
 
                         <div class="form__item">
                             <label class="form__label" for="name">Exit date (anticipated)</label>
                             <div>
-                                <input class="form__input form__input--number" type="text" id="exit-date-1" name="exit-date" data-form="exit-date-1"/>
-                                <input class="form__input form__input--number-wide" type="text" id="exit-date-2" name="exit-date" data-form="exit-date-2"/>
+                                <input class="form__input form__input--number" type="text" id="exit-date-1" name="exit-date" data-form="exit-date-1" value="08"/>
+                                <input class="form__input form__input--number-wide" type="text" id="exit-date-2" name="exit-date" data-form="exit-date-2" value="2025"/>
                             </div>
                         </div>
 
@@ -283,7 +284,6 @@
                             <label class="form__label" for="entry-type">Entry type</label>
                             <div class="custom-select custom-select--half">
                                 <select id="entry-type" name="entry-type" class="custom-select__item" data-form="entry-type">
-                                    <option value="">------</option>
                                     <option value="Direct">Direct</option>
                                     <option value="Option two">Option two</option>
                                     <option value="Option three">Option three</option>
@@ -295,7 +295,6 @@
                             <label class="form__label" for="funding-provider">Funding provider</label>
                             <div class="custom-select custom-select--two-thirds">
                                 <select id="funding-provider" name="funding-provider" class="custom-select__item" data-form="funding-provider">
-                                    <option value="">------</option>
                                     <option value="Self">Self</option>
                                     <option value="Option two">Option two</option>
                                     <option value="Option three">Option three</option>
@@ -307,7 +306,6 @@
                             <label class="form__label" for="specialism">Specialism</label>
                             <div class="custom-select">
                                 <select id="specialism" name="specialism" class="custom-select__item" data-form="specialism">
-                                    <option value="">------</option>
                                     <option value="Gastrointestinal Physiology">Gastrointestinal Physiology</option>
                                     <option value="Option two">Option two</option>
                                     <option value="Option three">Option three</option>
@@ -319,7 +317,6 @@
                             <label class="form__label" for="hei">HEI</label>
                             <div class="custom-select">
                                 <select id="hei" name="hei" class="custom-select__item" data-form="hei">
-                                    <option value="">------</option>
                                     <option value="Sheffield Hallam University">Sheffield Hallam University</option>
                                     <option value="Option two">Option two</option>
                                     <option value="Option three">Option three</option>
@@ -336,18 +333,18 @@
 
                             <div class="form__item">
                                 <label class="form__label" for="training-name">Name</label>
-                                <input class="form__input form__input" type="text" id="training-name" name="training-name" data-form="training-name" autocomplete="given-name"/>
+                                <input class="form__input form__input" type="text" id="training-name" name="training-name" data-form="training-name" autocomplete="given-name" value="Ray Purchase"/>
                             </div>
 
                             <div class="form__item">
                                 <p class="form__label" for="contracts-training-from">From</p>
                                 <div>
                                     <label class="sr-only" for="contracts-training-from-day">Day</label>
-                                    <input class="form__input form__input--number" type="text" id="contracts-training-from-day" name="contracts-training-from-day" data-form="contracts-training-from-day"/>
+                                    <input class="form__input form__input--number" type="text" id="contracts-training-from-day" name="contracts-training-from-day" data-form="contracts-training-from-day" value="21"/>
                                     <label class="sr-only" for="contracts-training-from-month">Month</label>
-                                    <input class="form__input form__input--number" type="text" id="contracts-training-from-month" name="contracts-training-from-month" data-form="contracts-training-from-month"/>
+                                    <input class="form__input form__input--number" type="text" id="contracts-training-from-month" name="contracts-training-from-month" data-form="contracts-training-from-month" value="09"/>
                                     <label class="sr-only" for="contracts-training-from-year">Year</label>
-                                    <input class="form__input form__input--number-wide" type="text" id="contracts-training-from-year" name="contracts-training-from-year" data-form="contracts-training-from-year"/>
+                                    <input class="form__input form__input--number-wide" type="text" id="contracts-training-from-year" name="contracts-training-from-year" data-form="contracts-training-from-year" value="2020"/>
                                 </div>
                             </div>
 
@@ -365,22 +362,22 @@
                                 <p class="form__label" for="contracts-training-to">To</p>
                                 <div>
                                     <label class="sr-only" for="contracts-training-to-day">Day</label>
-                                    <input class="form__input form__input--number" type="text" id="contracts-training-to-day" name="contracts-training-to-day" data-form="contracts-training-to-day"/>
+                                    <input class="form__input form__input--number" type="text" id="contracts-training-to-day" name="contracts-training-to-day" data-form="contracts-training-to-day" value="12"/>
                                     <label class="sr-only" for="contracts-training-to-month">Month</label>
-                                    <input class="form__input form__input--number" type="text" id="contracts-training-to-month" name="contracts-training-to-month" data-form="contracts-training-to-month"/>
+                                    <input class="form__input form__input--number" type="text" id="contracts-training-to-month" name="contracts-training-to-month" data-form="contracts-training-to-month" value="03"/>
                                     <label class="sr-only" for="contracts-training-to-year">Year</label>
-                                    <input class="form__input form__input--number-wide" type="text" id="contracts-training-to-year" name="contracts-training-to-year" data-form="contracts-training-to-year"/>
+                                    <input class="form__input form__input--number-wide" type="text" id="contracts-training-to-year" name="contracts-training-to-year" data-form="contracts-training-to-year" value="2022"/>
                                 </div>
                             </div>
 
                             <div class="form__item">
                                 <label class="form__label" for="training-email">Email</label>
-                                <input class="form__input" type="email" id="training-email" name="training-email" data-form="training-email"/>
+                                <input class="form__input" type="email" id="training-email" name="training-email" data-form="training-email" value="r.purchase@nhsmail.net"/>
                             </div>
 
                             <div class="form__item">
                                 <label class="form__label" for="training-telephone">Telephone</label>
-                                <input class="form__input form__input--half" type="text" id="training-telephone" name="training-telephone" data-form="training-telephone"/>
+                                <input class="form__input form__input--half" type="text" id="training-telephone" name="training-telephone" data-form="training-telephone" value="0121 496 8754"/>
                             </div>
                         </fieldset>
 
@@ -389,18 +386,18 @@
 
                             <div class="form__item">
                                 <label class="form__label" for="training-head-of-department-name">Name</label>
-                                <input class="form__input" type="text" id="training-head-of-department-name" name="training-head-of-department-name" data-form="training-head-of-department-name"/>
+                                <input class="form__input" type="text" id="training-head-of-department-name" name="training-head-of-department-name" data-form="training-head-of-department-name" value="Jasmine Morris"/>
                             </div>
 
                             <div class="form__item">
                                 <p class="form__label" for="training-head-of-department-from">From</p>
                                 <div>
                                     <label class="sr-only" for="training-head-of-department-from-day">Day</label>
-                                    <input class="form__input form__input--number" type="text" id="training-head-of-department-from-day" name="training-head-of-department-from-day" data-form="training-head-of-department-from-day"/>
+                                    <input class="form__input form__input--number" type="text" id="training-head-of-department-from-day" name="training-head-of-department-from-day" data-form="training-head-of-department-from-day" value="21"/>
                                     <label class="sr-only" for="training-head-of-department-from-month">Month</label>
-                                    <input class="form__input form__input--number" type="text" id="training-head-of-department-from-month" name="training-head-of-department-from-month" data-form="training-head-of-department-from-month"/>
+                                    <input class="form__input form__input--number" type="text" id="training-head-of-department-from-month" name="training-head-of-department-from-month" data-form="training-head-of-department-from-month" value="09"/>
                                     <label class="sr-only" for="training-head-of-department-from-year">Year</label>
-                                    <input class="form__input form__input--number-wide" type="text" id="training-head-of-department-from-year" name="training-head-of-department-from-year" data-form="training-head-of-department-from-year"/>
+                                    <input class="form__input form__input--number-wide" type="text" id="training-head-of-department-from-year" name="training-head-of-department-from-year" data-form="training-head-of-department-from-year" value="2020"/>
                                 </div>
                             </div>
 
@@ -409,7 +406,7 @@
                                     <label class="form__label" for="current">Current</label>
                                 </div>
                                 <div class="checkbox-input">
-                                    <input type="checkbox" id="current" name="current" data-form="current" value="off" />
+                                    <input type="checkbox" id="current" name="current" data-form="current" value="off" checked/>
                                     <label for="current"></label>
                                 </div>
                             </div>
@@ -418,22 +415,22 @@
                                 <p class="form__label" for="training-head-of-department-to">To</p>
                                 <div>
                                     <label class="sr-only" for="training-head-of-department-to-day">Day</label>
-                                    <input class="form__input form__input--number" type="text" id="training-head-of-department-to-day" name="training-head-of-department-to-day" data-form="training-head-of-department-to-day"/>
+                                    <input class="form__input form__input--number" type="text" id="training-head-of-department-to-day" name="training-head-of-department-to-day" data-form="training-head-of-department-to-day" value="12"/>
                                     <label class="sr-only" for="training-head-of-department-to-month">Month</label>
-                                    <input class="form__input form__input--number" type="text" id="training-head-of-department-to-month" name="training-head-of-department-to-month" data-form="training-head-of-department-to-month"/>
+                                    <input class="form__input form__input--number" type="text" id="training-head-of-department-to-month" name="training-head-of-department-to-month" data-form="training-head-of-department-to-month" value="03"/>
                                     <label class="sr-only" for="training-head-of-department-to-year">Year</label>
-                                    <input class="form__input form__input--number-wide" type="text" id="training-head-of-department-to-year" name="training-head-of-department-to-year" data-form="training-head-of-department-to-year"/>
+                                    <input class="form__input form__input--number-wide" type="text" id="training-head-of-department-to-year" name="training-head-of-department-to-year" data-form="training-head-of-department-to-year" value="2022"/>
                                 </div>
                             </div>
 
                             <div class="form__item">
                                 <label class="form__label" for="training-head-of-department-email">Email</label>
-                                <input class="form__input" type="email" id="training-head-of-department-email" name="training-head-of-department-email" data-form="training-head-of-department-email"/>
+                                <input class="form__input" type="email" id="training-head-of-department-email" name="training-head-of-department-email" data-form="training-head-of-department-email" value="j.morris@nhsmail.net"/>
                             </div>
 
                             <div class="form__item">
                                 <label class="form__label" for="training-head-of-department-telephone">Telephone</label>
-                                <input class="form__input form__input--half" type="text" id="training-head-of-department-telephone" name="training-head-of-department-telephone" data-form="training-head-of-department-telephone"/>
+                                <input class="form__input form__input--half" type="text" id="training-head-of-department-telephone" name="training-head-of-department-telephone" data-form="training-head-of-department-telephone" value="0121 496 6235"/>
                             </div>
                         </fieldset>
                     </fieldset>
@@ -446,7 +443,6 @@
                             <label class="form__label" for="training-trust">Training trust</label>
                             <div class="custom-select">
                                 <select id="training-trust" name="training-trust" class="custom-select__item" data-form="training-trust">
-                                    <option value="">------</option>
                                     <option value="Sheffield Training Hospitals Trust">Sheffield Training Hospitals Trust</option>
                                     <option value="Option two">Option two</option>
                                     <option value="Option three">Option three</option>
@@ -458,7 +454,6 @@
                             <label class="form__label" for="training-hospital-site">Training hospital site</label>
                             <div class="custom-select">
                                 <select id="training-hospital-site" name="training-hospital-site" class="custom-select__item" data-form="training-hospital-site">
-                                    <option value="">------</option>
                                     <option value="Sheffield Hallam Hospital">Sheffield Hallam Hospital</option>
                                     <option value="Option two">Option two</option>
                                     <option value="Option three">Option three</option>
@@ -470,11 +465,11 @@
                             <p class="form__label" for="training-from">From</p>
                             <div>
                                 <label class="sr-only" for="training-from-day">Day</label>
-                                <input class="form__input form__input--number" type="text" id="training-from-day" name="training-from-day" data-form="training-from-day"/>
+                                <input class="form__input form__input--number" type="text" id="training-from-day" name="training-from-day" data-form="training-from-day" value="21"/>
                                 <label class="sr-only" for="training-from-month">Month</label>
-                                <input class="form__input form__input--number" type="text" id="training-from-month" name="training-from-month" data-form="training-from-month"/>
+                                <input class="form__input form__input--number" type="text" id="training-from-month" name="training-from-month" data-form="training-from-month" value="09"/>
                                 <label class="sr-only" for="training-from-year">Year</label>
-                                <input class="form__input form__input--number-wide" type="text" id="training-from-year" name="training-from-year" data-form="training-from-year"/>
+                                <input class="form__input form__input--number-wide" type="text" id="training-from-year" name="training-from-year" data-form="training-from-year" value="2020"/>
                             </div>
                         </div>
 
@@ -500,7 +495,6 @@
                             <label class="form__label" for="qualification-type">Qualification type</label>
                             <div class="custom-select">
                                 <select id="qualification-type" name="qualification-type" class="custom-select__item" data-form="qualification-type">
-                                    <option value="">------</option>
                                     <option value="Undergraduate">Undergraduate</option>
                                     <option value="Option two">Option two</option>
                                     <option value="Option three">Option three</option>
@@ -512,7 +506,6 @@
                             <label class="form__label" for="institution">Institution</label>
                             <div class="custom-select">
                                 <select id="institution" name="institution" class="custom-select__item" data-form="institution">
-                                    <option value="">------</option>
                                     <option value="Nottingham Trent University">Nottingham Trent University</option>
                                     <option value="Option two">Option two</option>
                                     <option value="Option three">Option three</option>
@@ -522,14 +515,13 @@
 
                         <div class="form__item">
                             <label class="form__label" for="subject">Subject</label>
-                            <input class="form__input" type="text" id="subject" name="subject" data-form="subject"/>
+                            <input class="form__input" type="text" id="subject" name="subject" data-form="subject" value="History"/>
                         </div>
 
                         <div class="form__item">
                             <label class="form__label" for="mark">Mark</label>
                             <div class="custom-select custom-select--half">
                                 <select id="mark" name="mark" class="custom-select__item" data-form="mark">
-                                    <option value="">------</option>
                                     <option value="1st">1st</option>
                                     <option value="2:1">2:1</option>
                                     <option value="2:2">2:2</option>
@@ -551,7 +543,7 @@
                             </div>
                             <div class="form__inline-container">
                                 <div class="radio-input">
-                                    <input type="radio" id="verified-yes" name="verified" data-form="verified-yes" value="Yes" />
+                                    <input type="radio" id="verified-yes" name="verified" data-form="verified-yes" value="Yes" checked/>
                                     <label for="verified-yes">
                                         Yes
                                     </label>
@@ -567,6 +559,7 @@
                     </fieldset>
                 </form>
 
+                <!-- Save/cancel -->
                 <div class="intro">
                     <div></div>
                     <div>
