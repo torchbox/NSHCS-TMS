@@ -6,11 +6,13 @@
     &__legend {
         @include rem-font-size(30px);
         font-weight: bold;
+        margin-bottom: 10px;
     }
 
     &__sub-legend {
         @include font-size(heading-five);
         font-weight: bold;
+        margin: 5px 0;
     }
 
     &__fieldset {
