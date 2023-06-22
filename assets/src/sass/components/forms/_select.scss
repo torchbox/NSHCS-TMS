@@ -7,6 +7,26 @@
     border: 2px solid $color--border-black;
     overflow: hidden;
 
+    &--full {
+        max-width: 100%;
+    }
+
+    &--two-thirds {
+        max-width: 66.66%;
+    }
+
+    &--half {
+        max-width: 50%;
+    }
+
+    &--one-third {
+        max-width: 33.33%;
+    }
+
+    &--one-quarter {
+        max-width: 25%;
+    }
+
     .view-mode & {
         border-color: transparent;
         pointer-events: none;

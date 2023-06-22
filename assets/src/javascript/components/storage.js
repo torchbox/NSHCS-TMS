@@ -1,8 +1,8 @@
 export default function storage() {
     const formInputs = document.querySelectorAll('[data-form]');
-    const saveButton = document.querySelector('[data-save]');
+    const saveButton = document.querySelectorAll('[data-save]');
     const cancelButton = document.querySelector('[data-cancel]');
-    const editButton = document.querySelector('[data-edit]');
+    const editButton = document.querySelectorAll('[data-edit]');
     const clearButton = document.getElementById('clear');
     const nameHeading = document.querySelector('[data-name-heading]');
     const statusContainer = document.querySelector('[data-status-container');
@@ -17,10 +17,11 @@ export default function storage() {
 
     // Define item shape
     class FormInput {
-        constructor(id, dataName, status, type, value, checked) {
+        constructor(id, dataName, status, preferred, type, value, checked) {
             this.id = id;
             this.dataName = dataName;
             this.status = status;
+            this.preferred = preferred;
             this.type = type;
             this.value = value;
             this.checked = checked;
@@ -39,6 +40,7 @@ export default function storage() {
                 i,
                 element.dataset.form,
                 element.dataset.status,
+                element.dataset.preferred,
                 element.type,
                 element.value,
                 element.checked,
@@ -94,12 +96,7 @@ export default function storage() {
     // Find any empty nodes and remove the block entirely
     function removeEmptyFields() {
         document.querySelectorAll('[data-form]').forEach((item) => {
-            if (
-                item.getAttribute('data-form') === 'address-1' ||
-                item.getAttribute('data-form') === 'address-2' ||
-                item.getAttribute('data-form') === 'address-3' ||
-                item.getAttribute('data-form') === 'address-4'
-            ) {
+            if (item.getAttribute('data-no-hide') === 'true') {
                 // console.log(item);
             } else if (item.textContent.length === 0) {
                 item.parentNode.remove();
@@ -143,7 +140,7 @@ export default function storage() {
                         targetElement.textContent = item.value;
 
                         // More special treatment for these fields in view mode
-                        if (item.type === 'email') {
+                        if (item.type === 'email' && item.value) {
                             targetElement.innerHTML = `<a href=mailto:${item.value}>${item.value}</a>`;
                         }
 
@@ -156,7 +153,13 @@ export default function storage() {
                         if (item.type === 'radio') {
                             targetElement.textContent = '';
                             if (item.checked) {
-                                targetElement.textContent = item.value;
+                                if (item.preferred) {
+                                    targetElement.innerHTML = `<div
+                                            class="tag tag--light-blue tag--width-auto"
+                                        >Preferred</div>`;
+                                } else {
+                                    targetElement.textContent = item.value;
+                                }
                             }
                         }
                     }
@@ -173,18 +176,24 @@ export default function storage() {
         }
     }
 
-    // Helper
-    function clearData() {
-        localStorage.removeItem(storeLabel);
-
-        window.location.replace(
-            window.location.pathname.replace(/\/[^\/]*$/, '/index.html'),
-        );
+    if (saveButton) {
+        saveButton.forEach((item) => {
+            item.addEventListener('click', () => {
+                saveInitialData(true);
+            });
+        });
     }
 
-    if (saveButton) {
-        saveButton.addEventListener('click', () => {
-            saveInitialData(true);
+    if (editButton) {
+        editButton.forEach((item) => {
+            item.addEventListener('click', () => {
+                window.location.replace(
+                    window.location.pathname.replace(
+                        /\/[^\/]*$/,
+                        '/index.html',
+                    ),
+                );
+            });
         });
     }
 
@@ -198,14 +207,11 @@ export default function storage() {
         });
     }
 
+    // Dev helper
     if (clearButton) {
         clearButton.addEventListener('click', () => {
-            clearData();
-        });
-    }
+            localStorage.removeItem(storeLabel);
 
-    if (editButton) {
-        editButton.addEventListener('click', () => {
             window.location.replace(
                 window.location.pathname.replace(/\/[^\/]*$/, '/index.html'),
             );

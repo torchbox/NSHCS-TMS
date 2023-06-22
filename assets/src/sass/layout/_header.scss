@@ -1,5 +1,76 @@
 @use 'config' as *;
 
 .header {
-    color: $color--black;
+    $root: &;
+    margin-bottom: 90px;
+
+    &__top {
+        padding: 40px 0;
+    }
+
+    &__bottom {
+        background-color: $color--nhs-blue;
+    }
+
+    &__logos {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__list {
+        display: flex;
+    }
+
+    &__list-item {
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: calc(100% - 40px);
+            height: 10px;
+            background-color: $color--yellow;
+            transform: translateY(3px);
+            opacity: 0;
+            transition: transform $transition, opacity $transition;
+        }
+
+        &--active,
+        &:hover {
+            color: $color--white;
+
+            &::before {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        &:first-of-type {
+            &::before {
+                width: calc(100% - 20px);
+                right: initial;
+                margin: 0;
+            }
+
+            #{$root}__link {
+                padding-left: 0;
+            }
+        }
+    }
+
+    &__link {
+        @include font-size(body-feature);
+        display: inline-block;
+        color: $color--white;
+        padding: 18px 20px 16px;
+
+        &--active,
+        &:hover {
+            color: $color--white;
+        }
+    }
 }

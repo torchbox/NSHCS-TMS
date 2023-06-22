@@ -17,4 +17,12 @@
     &--red {
         background-color: $color--red;
     }
+
+    &--light-blue {
+        background-color: $color--nhs-blue;
+    }
+
+    &--width-auto {
+        display: inline-block;
+    }
 }
