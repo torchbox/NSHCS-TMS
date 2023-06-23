@@ -160,3 +160,4 @@ cython_debug/
 
 # FE static
 node_modules
+.DS_Store
