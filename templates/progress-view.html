@@ -6,7 +6,7 @@
         <meta name="description" content="NSHCS-TMS prototype" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="noindex">
-        <link rel="stylesheet" type="text/css" href="./assets/dist/css/main.css">
+        <link rel="stylesheet" type="text/css" href="../assets/dist/css/main.css">
     </head>
 
     <body data-mode="view" class="view-mode">
@@ -28,10 +28,10 @@
                             <li class="header__list-item">
                                 <a href="#" class="header__link">Dashboard</a>
                             </li>
-                            <li class="header__list-item header__list-item--active">
+                            <li class="header__list-item">
                                 <a href="details-edit.html" class="header__link">Trainee details</a>
                             </li>
-                            <li class="header__list-item">
+                            <li class="header__list-item header__list-item--active">
                                 <a href="progress-edit.html" class="header__link">Progress</a>
                             </li>
                             <li class="header__list-item">
@@ -57,275 +57,318 @@
                         </p>
                     </div>
                     <div>
-                        <button class="intro__button button button--grey" data-edit>Edit this page</button>
+                        <button class="intro__button button button--grey" data-edit="progress">Edit this page</button>
                     </div>
                 </div>
 
                 <form class="form">
 
-                    <!-- Personal -->
+                    <!-- Workplace portfolio -->
                     <fieldset class="form__fieldset">
-                        <legend class="form__legend">Personal details</legend>
+                        <legend class="form__legend">Workplace portfolio</legend>
 
                         <div class="form__item">
-                            <div class="form__label" for="name">Name</div>
-                            <div data-form="name"></div>
+                            <div class="form__label form__label--disabled">Overall progress</div>
+                            <div class="form__oversized-text">97% as of 13 October 2022</div>
                         </div>
-
                         <div class="form__item">
-                            <p class="form__label" for="dob">Date of birth</p>
+                            <div class="form__label form__label--disabled">OneFile ID</div>
+                            <div><a href="#">1187705</a></div>
+                        </div>
+                        <div class="form__item">
+                            <p class="form__label">Expected completion date</p>
                             <div data-date>
-                                <span data-form="dob-year"></span>
-                                <span data-form="dob-month"></span>
-                                <span data-form="dob-day"></span>
+                                <span data-form="expected-completion-year"></span>
+                                <span data-form="expected-completion-month"></span>
+                                <span data-form="expected-completion-day"></span>
                             </div>
                         </div>
+
+                        <table class="progress-table">
+                            <tr>
+                                <th class="progress-table__heading progress-table__heading--code">Module code</th>
+                                <th class="progress-table__heading progress-table__heading--title">Module title</th>
+                                <th class="progress-table__heading progress-table__heading--type">Module type</th>
+                                <th class="progress-table__heading progress-table__heading--progress">Progress</th>
+                            </tr>
+                            <tr>
+                                <td>MSF</td>
+                                <td>Multi-source feedback</td>
+                                <td>Core</td>
+                                <td>100%</td>
+                            </tr>
+                            <tr>
+                                <td>MSF</td>
+                                <td>Multi-source feedback</td>
+                                <td>Core</td>
+                                <td>100%</td>
+                            </tr>
+                            <tr>
+                                <td>SCC110</td>
+                                <td>Introduction to Healthcare Science, Professional Practice and Clinical Leadership</td>
+                                <td>Core</td>
+                                <td>100%</td>
+                            </tr>
+                            <tr>
+                                <td>SCC121</td>
+                                <td>Elective module</td>
+                                <td>Core</td>
+                                <td>0%</td>
+                            </tr>
+                            <tr>
+                                <td>SPE101</td>
+                                <td>Imaging with Ionising Radiation</td>
+                                <td>Rotation</td>
+                                <td>100%</td>
+                            </tr>
+                            <tr>
+                                <td>SPE102</td>
+                                <td>Radiation Safety Physics</td>
+                                <td>Rotation</td>
+                                <td>100%</td>
+                            </tr>
+                            <tr>
+                                <td>SPE103</td>
+                                <td>Radiotherapy Physics</td>
+                                <td>Rotation</td>
+                                <td>100%</td>
+                            </tr>
+                            <tr>
+                                <td>SPE104</td>
+                                <td>Imaging with Non-Ionising Radiation</td>
+                                <td>Rotation</td>
+                                <td>88%</td>
+                            </tr>
+                            <tr>
+                                <td>SPE157c1</td>
+                                <td>Dosimetry and Treatment Equipment</td>
+                                <td>Specialist</td>
+                                <td>100%</td>
+                            </tr>
+                            <tr>
+                                <td>SPE157c2</td>
+                                <td>Treatment Planning</td>
+                                <td>Specialist</td>
+                                <td>100%</td>
+                            </tr>
+                            <tr>
+                                <td>SPE158c3</td>
+                                <td>Brachytherapy</td>
+                                <td>Specialist</td>
+                                <td>100%</td>
+                            </tr>
+                            <tr>
+                                <td>SPE158c3</td>
+                                <td>Computing Related to Radiotherapy</td>
+                                <td>Specialist</td>
+                                <td>100%</td>
+                            </tr>
+                        </table>
+
                         <div class="form__item">
-                            <p class="form__label">Home address</p>
-                            <div>
-                                <div data-form="address-1" data-no-hide="true"></div>
-                                <div data-form="address-2" data-no-hide="true"></div>
-                                <div data-form="address-3" data-no-hide="true"></div>
-                                <div data-form="address-4" data-no-hide="true"></div>
-                                <div data-form="address-5" data-no-hide="true"></div>
-                            </div>
+                            <p class="form__label">EEC reference number</p>
+                            <div data-form="eec-reference-number"></div>
                         </div>
                         <div class="form__item">
-                            <p class="form__label">Work telephone</p>
-                            <div data-form="work-telephone"></div>
+                            <p class="form__label">HCPC sign off required</p>
+                            <div>Yes</div>
                         </div>
                         <div class="form__item">
-                            <p class="form__label">Personal telephone</p>
-                            <div data-form="personal-telephone"></div>
+                            <p class="form__label">HCPC sign off name</p>
+                            <div data-form="hcpc-sign-off-name"></div>
                         </div>
                         <div class="form__item">
-                            <p class="form__label">Work email</p>
-                            <div data-form="work-email"></div>
-                            <div data-form="preferred-1" data-no-hide="true"></div>
+                            <p class="form__label">HCPC registration number</p>
+                            <div data-form="hcpc-registration-number-1"></div>
                         </div>
                         <div class="form__item">
-                            <p class="form__label">Academic email</p>
-                            <div data-form="academic-email"></div>
-                            <div data-form="preferred-2" data-no-hide="true"></div>
-                        </div>
-                        <div class="form__item">
-                            <p class="form__label">Personal email</p>
-                            <div data-form="personal-email"></div>
-                            <div data-form="preferred-3" data-no-hide="true"></div>
+                            <p class="form__label">Countersign required</p>
+                            <div>No</div>
                         </div>
                     </fieldset>
 
-                    <!-- Training details -->
+                    <!-- Assessment results -->
                     <fieldset class="form__fieldset">
-                        <legend class="form__legend">Training details</legend>
-
                         <div class="form__item">
-                            <p class="form__label">Programme</p>
-                            <div data-form="programme"></div>
-                        </div>
-
-                        <div class="form__item">
-                            <p class="form__label">Start date</p>
+                            <p class="form__label" for="assessment-date">Award date</p>
                             <div data-date>
-                                <span data-form="start-date-2"></span>
-                                <span data-form="start-date-1"></span>
+                                <span data-form="assessment-date-year"></span>
+                                <span data-form="assessment-date-month"></span>
+                                <span data-form="assessment-date-day"></span>
                             </div>
                         </div>
 
                         <div class="form__item">
-                            <p class="form__label">Exit date (anticipated)</p>
+                            <div class="form__label">Assessment type</div>
+                            <div data-form="assessment-type"></div>
+                        </div>
+
+                        <div class="form__item">
+                            <div class="form__label">Assessment comment</div>
+                            <div data-form="assessment-comment"></div>
+                        </div>
+
+                        <div class="form__item">
+                            <div class="form__label">Assessment result</div>
+                            <div data-form="assessment-result"></div>
+                        </div>
+
+                        <div class="form__item">
+                            <p class="form__label" for="next-assessment">Next assessment</p>
                             <div data-date>
-                                <span data-form="exit-date-2"></span>
-                                <span data-form="exit-date-1"></span>
+                                <span data-form="next-assessment-year"></span>
+                                <span data-form="next-assessment-month"></span>
+                                <span data-form="next-assessment-day"></span>
                             </div>
                         </div>
 
                         <div class="form__item">
-                            <p class="form__label">Entry type</p>
-                            <div data-form="entry-type"></div>
+                            <div class="form__label">Reasonable adjustments</div>
+                            <div data-form="reasonable-adjustments-yes"></div>
                         </div>
 
                         <div class="form__item">
-                            <p class="form__label">Funding provider</p>
-                            <div data-form="funding-provider"></div>
-                        </div>
-
-                        <div class="form__item">
-                            <p class="form__label">Specialism</p>
-                            <div data-form="specialism"></div>
-                        </div>
-
-                        <div class="form__item">
-                            <p class="form__label">HEI</p>
-                            <div data-form="hei"></div>
+                            <div class="form__label">Reasonable adjustments</div>
+                            <div data-form="reasonable-adjustments-no"></div>
                         </div>
                     </fieldset>
 
                     <!-- Training contacts -->
                     <fieldset class="form__fieldset">
-                        <legend class="form__legend">Training contacts</legend>
-                        <fieldset class="form__fieldset form__fieldset--nested">
-                            <p class="form__sub-legend">Training officer</p>
-
-                            <div class="form__item">
-                                <p class="form__label">Name</p>
-                                <div data-form="training-name"></div>
-                            </div>
-
-                            <div class="form__item">
-                                <p class="form__label" for="contracts-training-from">From</p>
-                                <div data-date>
-                                    <span data-form="contracts-training-from-year"></span>
-                                    <span data-form="contracts-training-from-month"></span>
-                                    <span data-form="contracts-training-from-day"></span>
-                                </div>
-                            </div>
-
-                            <div class="form__item">
-                                <p class="form__label">Current</p>
-                                <div data-form="training-current"></div>
-                            </div>
-
-                            <div class="form__item">
-                                <p class="form__label" for="contracts-training-to">To</p>
-                                <div data-date>
-                                    <span data-form="contracts-training-to-year"></span>
-                                    <span data-form="contracts-training-to-month"></span>
-                                    <span data-form="contracts-training-to-day"></span>
-                                </div>
-                            </div>
-
-                            <div class="form__item">
-                                <p class="form__label">Email</p>
-                                <div data-form="training-email"></div>
-                            </div>
-
-                            <div class="form__item">
-                                <p class="form__label">Telephone</p>
-                                <div data-form="training-telephone"></div>
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="form__fieldset form__fieldset--nested">
-                            <p class="form__sub-legend">Head of department</p>
-
-                            <div class="form__item">
-                                <p class="form__label">Name</p>
-                                <div data-form="training-head-of-department-name"></div>
-                            </div>
-
-                            <div class="form__item">
-                                <p class="form__label" for="training-head-of-department-from">From</p>
-                                <div data-date>
-                                    <span data-form="training-head-of-department-from-year"></span>
-                                    <span data-form="training-head-of-department-from-month"></span>
-                                    <span data-form="training-head-of-department-from-day"></span>
-                                </div>
-                            </div>
-
-                            <div class="form__item">
-                                <p class="form__label">Current</p>
-                                <div data-form="current"></div>
-                            </div>
-
-                            <div class="form__item">
-                                <p class="form__label" for="training-head-of-department-to">To</p>
-                                <div data-date>
-                                    <span data-form="training-head-of-department-to-year"></span>
-                                    <span data-form="training-head-of-department-to-month"></span>
-                                    <span data-form="training-head-of-department-to-day"></span>
-                                </div>
-                            </div>
-
-                            <div class="form__item">
-                                <p class="form__label">Email</p>
-                                <div data-form="training-head-of-department-email"></div>
-                            </div>
-
-                            <div class="form__item">
-                                <p class="form__label">Telephone</p>
-                                <div data-form="training-head-of-department-telephone"></div>
-                            </div>
-                        </fieldset>
-                    </fieldset>
-
-                    <!-- Employment and training sites -->
-                    <fieldset class="form__fieldset">
-                        <legend class="form__legend">Employment and training sites</legend>
-
+                        <legend class="form__legend">HEI qualifications</legend>
                         <div class="form__item">
-                            <p class="form__label">Training trust</label>
-                            <div data-form="training-trust"></div>
+                            <div class="form__label">Qualification complete</div>
+                            <div data-form="qualification-complete-yes"></div>
                         </div>
 
                         <div class="form__item">
-                            <label class="form__label">Training hospital site</label>
-                            <div data-form="training-hospital-site"></div>
+                            <div class="form__label">Qualification complete</div>
+                            <div data-form="qualification-complete-no"></div>
                         </div>
 
                         <div class="form__item">
-                            <p class="form__label" for="training-from">From</p>
+                            <p class="form__label" for="award-date">Award date</p>
                             <div data-date>
-                                <span data-form="training-from-year"></span>
-                                <span data-form="training-from-month"></span>
-                                <span data-form="training-from-day"></span>
+                                <span data-form="award-date-year"></span>
+                                <span data-form="award-date-month"></span>
+                                <span data-form="award-date-day"></span>
                             </div>
                         </div>
 
                         <div class="form__item">
-                            <p class="form__label" for="training-to">To</p>
-                            <div data-date>
-                                <span data-form="training-to-year"></span>
-                                <span data-form="training-to-month"></span>
-                                <span data-form="training-to-day"></span>
-                            </div>
+                            <p class="form__label">Outcome</p>
+                            <div data-form="award-outcome"></div>
+                        </div>
+
+                        <div class="form__item">
+                            <div class="form__label">Extension given</div>
+                            <div data-form="extension-given-yes"></div>
+                        </div>
+
+                        <div class="form__item">
+                            <div class="form__label">Extension given</div>
+                            <div data-form="extension-given-no"></div>
                         </div>
                     </fieldset>
 
-                     <!-- Pre-employment -->
+                    <!-- Programme certification and registration -->
                     <fieldset class="form__fieldset">
-                        <legend class="form__legend">Pre-employment</legend>
-                        <p class="form__sub-legend">Previous qualifications</p>
+                        <legend class="form__legend">Programme certification and registration</legend>
 
                         <div class="form__item">
-                            <p class="form__label">Qualification type</p>
-                            <div data-form="qualification-type"></div>
+                            <div class="form__label">Programme certification obtained</div>
+                            <div data-form="programme-certification-obtained-yes"></div>
                         </div>
 
                         <div class="form__item">
-                            <p class="form__label">Institution</p>
-                            <div data-form="institution"></div>
+                            <div class="form__label">Programme certification obtained</div>
+                            <div data-form="programme-certification-obtained-no"></div>
                         </div>
 
                         <div class="form__item">
-                            <p class="form__label">Subject</p>
-                            <div data-form="subject"></div>
+                            <p class="form__label">Certificate issue date</p>
+                            <div data-date>
+                                <span data-form="certificate-issue-date-year"></span>
+                                <span data-form="certificate-issue-date-month"></span>
+                                <span data-form="certificate-issue-date-day"></span>
+                            </div>
                         </div>
 
                         <div class="form__item">
-                            <p class="form__label">Mark</p>
-                            <div data-form="mark"></div>
+                            <div class="form__label">Consent to share data with AHCS</div>
+                            <div data-form="consent-to-share-data-with-ahcs-yes"></div>
                         </div>
 
                         <div class="form__item">
-                            <div class="form__label">Year</div>
-                            <div data-form="year"></div>
+                            <div class="form__label">Consent to share data with AHCS</div>
+                            <div data-form="consent-to-share-data-with-ahcs-no"></div>
                         </div>
 
                         <div class="form__item">
-                            <div class="form__label">Verified</div>
-                            <div data-form="verified-yes"></div>
+                            <div class="form__label">Post training email preference</div>
+                            <div data-form="post-training-email-preference"></div>
                         </div>
 
                         <div class="form__item">
-                            <div class="form__label">Verified</div>
-                            <div data-form="verified-no"></div>
+                            <div class="form__label">HCPC registration number</div>
+                            <div data-form="hcpc-registration-number-2"></div>
+                        </div>
+
+                        <div class="form__item">
+                            <p class="form__label">HCPC registration date</p>
+                            <div data-date>
+                                <span data-form="hcpc-registration-date-year"></span>
+                                <span data-form="hcpc-registration-date-month"></span>
+                                <span data-form="hcpc-registration-date-day"></span>
+                            </div>
+                        </div>
+
+                        <div class="form__item">
+                            <div class="form__label">Certification method</div>
+                            <div data-form="certification-method"></div>
+                        </div>
+
+                        <div class="form__item">
+                            <div class="form__label">Chosen pathway</div>
+                            <div data-form="chosen-pathway"></div>
+                        </div>
+
+                        <div class="form__item">
+                            <p class="form__label">Workplace portfolio completion date</p>
+                            <div data-date>
+                                <span data-form="workplace-portfolio-completion-date-year"></span>
+                                <span data-form="workplace-portfolio-completion-date-month"></span>
+                                <span data-form="workplace-portfolio-completion-date-day"></span>
+                            </div>
+                        </div>
+
+                        <div class="form__item">
+                            <p class="form__label">Annual review of progression date</p>
+                            <div data-date>
+                                <span data-form="annual-review-of-progression-date-year"></span>
+                                <span data-form="annual-review-of-progression-date-month"></span>
+                                <span data-form="annual-review-of-progression-date-day"></span>
+                            </div>
+                        </div>
+
+                        <div class="form__item">
+                            <p class="form__label">Supervisor sign-off </p>
+                            <div data-date>
+                                <span data-form="supervisor-sign-off-year"></span>
+                                <span data-form="supervisor-sign-off-month"></span>
+                                <span data-form="supervisor-sign-off-day"></span>
+                            </div>
+                        </div>
+
+                        <div class="form__item">
+                            <div class="form__label">First employment after training</div>
+                            <div data-form="first-employment-after-training"></div>
                         </div>
                     </fieldset>
                 </form>
             </div>
         </main>
-        <script src="./assets/dist/js/main.js"></script>
+        <script src="../assets/dist/js/main.js"></script>
     </body>
 </html>
 

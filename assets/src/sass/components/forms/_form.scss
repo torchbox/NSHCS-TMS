@@ -47,6 +47,11 @@
             padding: 15px 0 10px;
         }
 
+        .disabled & {
+            pointer-events: none;
+            color: $color--helptext;
+        }
+
         a {
             color: $color--email;
             text-decoration: underline;
@@ -129,6 +134,11 @@
             display: inline-block;
         }
 
+        &--textarea {
+            width: 100%;
+            height: 100px;
+        }
+
         .view-mode & {
             border-color: transparent;
             pointer-events: none;
@@ -143,5 +153,15 @@
     &__preferred-label {
         @include font-size(supporting);
         align-self: flex-end;
+    }
+
+    &__oversized-text {
+        @include font-size(heading-two);
+        line-height: 30px;
+        grid-column: 2 / span 2;
+    }
+
+    &__disabled-value {
+        margin-top: 10px;
     }
 }

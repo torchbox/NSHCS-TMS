@@ -1,0 +1,59 @@
+<!-- Text input -->
+<div class="form__item">
+    <label class="form__label" for="">Label title</label>
+    <input class="form__input" type="text" id="" name="" data-form="" value="Victoria Thomas"/>
+</div>
+
+<!-- Email input -->
+<div class="form__item">
+    <label class="form__label" for="">Label title</label>
+    <input class="form__input" type="email" id="" name="" data-form="" value="test@example.com"/>
+</div>
+
+<!-- Select -->
+<div class="form__item">
+    <label class="form__label" for="">Label title</label>
+    <div class="custom-select custom-select--two-thirds">
+        <select id="" name="" class="custom-select__item" data-form="">
+            <option value="Option one">Option one</option>
+            <option value="Option two">Option two</option>
+            <option value="Option three">Option three</option>
+        </select>
+    </div>
+</div>
+
+<!-- Radio -->
+<div class="form__item">
+    <div>
+        <div class="form__label">General title</div>
+        <label class="form__label sr-only" for="-yes">Label title yes</label>
+        <label class="form__label sr-only" for="-no">Label title no</label>
+    </div>
+    <div class="form__inline-container">
+        <div class="radio-input">
+            <input type="radio" id="-yes" name="-yes" data-form="-yes" value="Yes"/>
+            <label for="-yes">
+                Yes
+            </label>
+        </div>
+        <div class="radio-input">
+            <input type="radio" id="-no" name="-yes" data-form="-no" value="No" checked/>
+            <label for="-no">
+                No
+            </label>
+        </div>
+    </div>
+</div>
+
+<!-- Date DD-MM-YYY -->
+<div class="form__item">
+    <p class="form__label">Label title</p>
+    <div>
+        <label class="sr-only" for="-day">Day</label>
+        <input class="form__input form__input--number" type="text" id="-day" name="-day" data-form="-day" value="20"/>
+        <label class="sr-only" for="-month">Month</label>
+        <input class="form__input form__input--number" type="text" id="-month" name="-month" data-form="-month" value="07"/>
+        <label class="sr-only" for="-year">Year</label>
+        <input class="form__input form__input--number-wide" type="text" id="-year" name="-year" data-form="-year" value="2022"/>
+    </div>
+</div>

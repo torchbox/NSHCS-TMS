@@ -1,0 +1,56 @@
+@use 'config' as *;
+
+.progress-table {
+    $root: &;
+    width: 100%;
+    margin: 50px 0;
+    border-collapse: collapse;
+
+    &__heading {
+        border-bottom: 1px solid $color--black;
+        font-weight: bold;
+        padding: 12px 0 7px;
+        text-align: left;
+
+        &--code {
+            width: 20%;
+        }
+
+        &--title {
+            width: 50%;
+        }
+
+        &--type {
+            width: 20%;
+        }
+
+        &--progress {
+            width: 10%;
+            text-align: center;
+        }
+    }
+
+    tr {
+        border-bottom: 1px solid $color--light-grey;
+    }
+
+    td {
+        padding: 12px 0 7px;
+        text-align: left;
+        vertical-align: top;
+
+        &:last-of-type {
+            text-align: center;
+        }
+    }
+
+    &--disabled {
+        #{$root}__heading,
+        td,
+        tr {
+            pointer-events: none;
+            color: $color--helptext;
+            border-color: $color--light-grey;
+        }
+    }
+}
