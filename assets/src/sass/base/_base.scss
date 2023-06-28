@@ -104,3 +104,12 @@ ol {
     white-space: nowrap;
     border-width: 0;
 }
+
+.basic-link {
+    color: $color--email;
+    text-decoration: underline;
+
+    &:hover {
+        color: darken($color--email, 10%);
+    }
+}
