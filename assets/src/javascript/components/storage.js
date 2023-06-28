@@ -720,7 +720,7 @@ export default function storage() {
                 window.location.replace(
                     window.location.pathname.replace(
                         /\/[^\/]*$/,
-                        `/templates/${label}-view.html`,
+                        `/${label}-view.html`,
                     ),
                 );
             });
@@ -734,7 +734,7 @@ export default function storage() {
                 window.location.replace(
                     window.location.pathname.replace(
                         /\/[^\/]*$/,
-                        `/templates/${label}-edit.html`,
+                        `/${label}-edit.html`,
                     ),
                 );
             });
@@ -749,7 +749,7 @@ export default function storage() {
             window.location.replace(
                 window.location.pathname.replace(
                     /\/[^\/]*$/,
-                    `/templates/${label}-view.html`,
+                    `/${label}-view.html`,
                 ),
             );
         });

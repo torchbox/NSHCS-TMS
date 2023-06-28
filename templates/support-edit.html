@@ -57,64 +57,93 @@
                         </p>
                     </div>
                     <div>
-                        <button class="intro__button button button--green" data-save>Save changes</button>
-                        <button class="intro__button button button--cancel" data-cancel>Cancel</button>
+                        <button class="intro__button button button--green" data-save="support">Save changes</button>
+                        <button class="intro__button button button--cancel" data-cancel="support">Cancel</button>
                     </div>
                 </div>
 
                 <form class="form">
-                    <!-- Personal -->
+                    <!-- Bereavement -->
                     <fieldset class="form__fieldset">
                         <legend class="form__legend">Bereavement</legend>
-<!--                        <div class="form__item">
-                            <label class="form__label" for="name">Name</label>
-                            <input class="form__input" type="text" id="name" name="name" data-form="name" autocomplete="given-name" value="Victoria Thomas"/>
-                        </div>-->
-
                         <div class="form__item">
-                            <p class="form__label" for="dob">Date case opened</p>
+                            <p class="form__label" for="case-opened">Case opened</p>
                             <div>
-                                <label class="sr-only" for="dob-day">Day</label>
-                                <input class="form__input form__input--number" type="text" id="dob-day" name="dob-day" data-form="dob-day" value="03"/>
-                                <label class="sr-only" for="dob-month">Month</label>
-                                <input class="form__input form__input--number" type="text" id="dob-month" name="dob-month" data-form="dob-month" value="09"/>
-                                <label class="sr-only" for="dob-year">Year</label>
-                                <input class="form__input form__input--number-wide" type="text" id="dob-year" name="dob-year" data-form="dob-year" value="1995"/>
+                                <label class="sr-only" for="case-opened-day">Day</label>
+                                <input class="form__input form__input--number" type="text" id="case-opened-day" name="case-opened-day" data-form="case-opened-day" value="19"/>
+                                <label class="sr-only" for="case-opened-month">Month</label>
+                                <input class="form__input form__input--number" type="text" id="case-opened-month" name="case-opened-month" data-form="case-opened-month" value="05"/>
+                                <label class="sr-only" for="case-opened-year">Year</label>
+                                <input class="form__input form__input--number-wide" type="text" id="case-opened-year" name="case-opened-year" data-form="case-opened-year" value="2022"/>
                             </div>
                         </div>
                         <div class="form__item">
-                            <label class="form__label" for="address-1">Issue</label>
-                            <input class="form__input" type="text" id="address-1" name="address-1" data-form="address-1" value="72 Guild Street"/>
+                            <label class="form__label" for="bereavement-issue">Issue</label>
+                            <input class="form__input" type="text" id="bereavement-issue" name="bereavement-issue" data-form="bereavement-issue" value="Bereavement"/>
                         </div>
-<!--
-
- -->                       <div class="form__item">
-                            <label class="form__label" for="personal-email">Description</label>
-                            <input class="form__input" type="email" id="personal-email" data-preferred="true" name="personal-email" data-form="personal-email" value="supervikstick@madeupmail.com"/>
-<!--
-                            <div class="form__preferred-input-wrapper">
-                                <div class="radio-input">
-                                    <input type="radio" id="preferred-3" name="preferred" data-form="preferred-3" value="Yes" />
-                                    <label for="preferred-3">
-                                    </label>
-                                </div>
+                        <div class="form__item">
+                            <label class="form__label" for="bereavement-description">Description</label>
+                            <textarea data-form="bereavement-description" class="form__input form__input--textarea-tall" id="bereavement-description" name="bereavement-description" ></textarea>
+                        </div>
+                        <div class="form__item">
+                            <label class="form__label" for="support-status">Support status</label>
+                            <div class="custom-select custom-select--two-thirds">
+                                <select id="support-status" name="support-status" class="custom-select__item" data-form="support-status">
+                                    <option value="Suspend">Suspend</option>
+                                    <option value="Option two">Option two</option>
+                                    <option value="Option three">Option three</option>
+                                </select>
                             </div>
--->
                         </div>
                     </fieldset>
 
+                    <!-- Case log -->
+                    <fieldset class="form__fieldset">
+                        <legend class="form__legend">Case log</legend>
 
-
-
-
+                        <div class="form__item">
+                            <div>
+                                <p class="form__label">Date</p>
+                                <div>
+                                    <label class="sr-only" for="case-1-date-day">Day</label>
+                                    <input class="form__input form__input--number" type="text" id="case-1-date-day" name="case-1-date-day" data-form="case-1-date-day" value="23"/>
+                                    <label class="sr-only" for="case-1-date-month">Month</label>
+                                    <input class="form__input form__input--number" type="text" id="case-1-date-month" name="case-1-date-month" data-form="case-1-date-month" value="05"/>
+                                    <label class="sr-only" for="case-1-date-year">Year</label>
+                                    <input class="form__input form__input--number-wide" type="text" id="case-1-date-year" name="case-1-date-year" data-form="case-1-date-year" value="2022"/>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form__label" for="case-1-description">Description</label>
+                                <textarea data-form="case-1-description" class="form__input form__input--textarea-medium" id="case-1-description" name="case-1-description" ></textarea>
+                            </div>
+                        </div>
+                        <div class="form__item">
+                            <div>
+                                <p class="form__label">Date</p>
+                                <div>
+                                    <label class="sr-only" for="case-2-date-day">Day</label>
+                                    <input class="form__input form__input--number" type="text" id="case-2-date-day" name="case-2-date-day" data-form="case-2-date-day" value="29"/>
+                                    <label class="sr-only" for="case-2-date-month">Month</label>
+                                    <input class="form__input form__input--number" type="text" id="case-2-date-month" name="case-2-date-month" data-form="case-2-date-month" value="05"/>
+                                    <label class="sr-only" for="case-2-date-year">Year</label>
+                                    <input class="form__input form__input--number-wide" type="text" id="case-2-date-year" name="case-2-date-year" data-form="case-2-date-year" value="2022"/>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form__label" for="case-2-description">Description</label>
+                                <textarea data-form="case-2-description" class="form__input form__input--textarea-medium" id="case-2-description" name="case-2-description" ></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
                 </form>
 
                 <!-- Save/cancel -->
                 <div class="intro">
                     <div></div>
                     <div>
-                        <button class="intro__button button button--green" data-save>Save changes</button>
-                        <button class="intro__button button button--cancel" data-cancel>Cancel</button>
+                        <button class="intro__button button button--green" data-save="support">Save changes</button>
+                        <button class="intro__button button button--cancel" data-cancel="support">Cancel</button>
                     </div>
                 </div>
             </div>

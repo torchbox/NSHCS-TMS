@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="../assets/dist/css/main.css">
     </head>
 
-    <body data-mode="edit">
+    <body data-mode="view" class="view-mode">
         <a href="#main-content" class="skip-link" data-skip-link>Skip to main content</a>
 
         <header class="header">
@@ -57,38 +57,30 @@
                         </p>
                     </div>
                 </div>
-                <div class="intro">
-                    <div>
-                        <p class="intro__subheading">Open support cases</p>
-                    </div>
-                </div>
-				<div>
-				  <table width="66%" border="0">
-				    <tbody>
-				      <tr>
-				        <td><a href="support-edit.html">Bereavement</a></td>
-				        <td>19 May 2022</td>
-			          </tr>
-			        </tbody>
-			      </table>
-				</div>
-				<div class="intro">
-				  <div>
-                        <p class="intro__subheading">Closed support cases</p>
-                    </div>
-			</div>
-				<div>
-				  <table width="66%" border="0">
-				    <tbody>
-				      <tr>
-				        <td><a href="#">Sickness</a></td>
-				        <td>10 December 2022</td>
-			          </tr>
-			        </tbody>
-			      </table>
-				</div>
+
+                <form class="form">
+                    <fieldset class="form__fieldset">
+                        <legend class="form__legend">Open support cases</legend>
+                        <div class="form__item">
+                            <div class="form__label">Bereavement</div>
+                            <div>
+                                <a href="support-edit.html">19 May 2022</a>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="form__fieldset">
+                        <legend class="form__legend">Closed support cases</legend>
+                        <div class="form__item">
+                            <div class="form__label">Sickness</div>
+                            <div>
+                                10 December 2022
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
         </main>
+
         <script src="../assets/dist/js/main.js"></script>
     </body>
 </html>
