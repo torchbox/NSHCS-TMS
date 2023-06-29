@@ -241,7 +241,12 @@
     }
     Contact {
         int id PK
-        string title "Undefined, further refinement needed relates to contact ID"
+        string forename
+        string surname
+        string email
+        string phone
+        string onefile_username
+        string onefile_id
     }
     TraineeContact {
         int id PK "Contact Primary Key"

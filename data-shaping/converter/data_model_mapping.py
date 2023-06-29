@@ -80,8 +80,13 @@ SIMPLE_REFERENCE_MAPPING = {
         "title": {"sheet": "tlkpEntryType", "column": "ENENTR"},
     },
     "Contact": {
-        "id": {},
-        "title": {},
+        "id": {"sheet": "tlkpContacts", "column": "CTID"},
+        "forename": {"sheet": "tlkpContacts", "column": "CTFNAME"},
+        "surname": {"sheet": "tlkpContacts", "column": "CTSNAME"},
+        "email": {"sheet": "tlkpContacts", "column": "CTEML"},
+        "phone": {"sheet": "tlkpContacts", "column": "CTPHONE"},
+        "onefile_username": {"sheet": "tlkpContacts", "column": "CTOFUN"},
+        "onefile_id": {"sheet": "tlkpContacts", "column": "CTOFUID"},
     },
     "ContactType": {
         "id": {"sheet": "tlkpContactType", "column": "NTID"},
