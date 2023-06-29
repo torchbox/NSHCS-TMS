@@ -43,8 +43,10 @@
 
         SupportRecord }o--|| Trainee: has
 
+        AnnualReviewProgression }o--|| Outcome: has
         AnnualReviewProgression }o--o| Outcome: has
-        AnnualReviewProgression }o--o| Outcome: has
+
+        MidReviewProgression }o--o| Outcome: has
 
         PostTraining }o--|| JobSector: has
         PostTraining }o--o| NHSBand: has
@@ -54,7 +56,6 @@
 
         ExitAssessmentRecord }o--o| AssessmentType: has
         ExitAssessmentRecord }o--o| Outcome: has
-
         TraineeStatus {
             int id PK
             string(100) title "Static Entity"
@@ -291,7 +292,19 @@
         int revised_outcome_id FK "Review of Progression Revised Outcome, Null: True"
         string(MAX) comments "Review of Progression Comments, Null: True"
     }
+    MidtermReviewProgression {
+        int id PK
+        int training_record FK
+        date date_of_review "Review of Progression Date, Null: True"
+        int outcome FK "Review of Progression Outcome, pass/fail?"
+        int revised_outcome FK "Review of Progression Revised Outcome, Null: True"
+        string(MAX) comments "Review of Progression Comments, Null: True"
+    }
     Outcome {
+        int id PK
+        string title "Static entity"
+    }
+    ExitAssessmentOutcome {
         int id PK
         string title "Static entity"
     }
