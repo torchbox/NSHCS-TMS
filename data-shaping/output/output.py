@@ -388,7 +388,6 @@ def transfer_trainees(path, sheets):
         deferreds.append(row['RGDEF'])
         deferral_comments.append(row['RGDEFCM'])
 
-        # TODO: Extract the post_training
         print(i)
         next_post_training_id = 0
         next_post_training_cnt = 0
