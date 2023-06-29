@@ -195,9 +195,9 @@ def transfer_midterm_review_progression(path, sheets):
         comments = []
 
         for _, row in sheets[OLD_ARP_SHEET_NAME].iterrows():
-            ids.append(row['ARID'])
+            ids.append(row['MRID'])
             training_records.append(row['RGID'])
-            date_of_reviews.append(row['ARDT'])
+            date_of_reviews.append(row['MRDT'])
             outcomes.append(row['MROTCM'])
             revised_outcomes.append(row['MRREVOTCM'])
             comments.append(row['MRCMNTS'])
