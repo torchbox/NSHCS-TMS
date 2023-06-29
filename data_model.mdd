@@ -37,7 +37,6 @@
         PostTraining ||--|| JobSector: has
         PostTraining ||--|| NHSBand: has
         PostTraining ||--|| ContractType: has
-        PostTraining ||--|| JobType: has
         PostTraining ||--|| Salary: has
         PostTraining ||--|| Employer: has
         ExitAssementRecord ||--|| AssessmentType: has
@@ -125,10 +124,6 @@
     Title {
         int id PK "Title ID"
         string(25) title "Static Entity"
-    }
-    JobType {
-        int id PK "JobType ID"
-        string(100) name "Static entity"
     }
     Gender {
         int id PK "Gender ID"

@@ -180,6 +180,42 @@ def transfer_annual_review_progression(path, sheets):
         arps.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
 
+def transfer_midterm_review_progression(path, sheets):
+    SHEET_NAME = "MidtermReviewProgression"
+    OLD_ARP_SHEET_NAME = "tblMRP"
+    with pd.ExcelWriter(
+        path, mode="a", engine="openpyxl", if_sheet_exists="overlay"
+    ) as writer:
+
+        ids = []
+        training_records = []
+        date_of_reviews = []
+        outcomes = []
+        revised_outcomes = []
+        comments = []
+
+        for _, row in sheets[OLD_ARP_SHEET_NAME].iterrows():
+            ids.append(row['ARID'])
+            training_records.append(row['RGID'])
+            date_of_reviews.append(row['ARDT'])
+            outcomes.append(row['MROTCM'])
+            revised_outcomes.append(row['MRREVOTCM'])
+            comments.append(row['MRCMNTS'])
+
+
+        arps = pd.DataFrame(
+            data={
+                "id": ids,
+                "training_record": training_records,
+                "date_of_review": date_of_reviews,
+                "outcome": outcomes,
+                "revised_outcome": revised_outcomes,
+                "comments": comments,
+            }
+        )
+        arps.to_excel(writer, sheet_name=SHEET_NAME, index=False)
+
+
 def transfer_employment_record(path, sheets):
     SHEET_NAME = "EmploymentRecord"
     OLD_EMPLOYMENT_RECORDS_SHEET = "tblEmployers"
