@@ -25,6 +25,7 @@
         EmploymentRecord ||--|| Employer: has
         EmploymentRecord ||--|| EmployerLocation: has
         TrainingRecord ||--o{ AnualReviewProgression: has
+        TrainingRecord ||--o{ MidtermReviewProgression: has
         TrainingRecord ||--o{ ExitAssementRecord: has
         TrainingRecord ||--|| RecruitmentMethod: has
         TrainingRecord ||--|| ProgramCertification: has
@@ -32,6 +33,7 @@
         TrainingRecord ||--|| HEIAward: has
         SupportRecord }o--|| Trainee: has
         AnualReviewProgression ||--|{ Outcome: has
+        MidtermReviewProgression ||--|{ Outcome: has
         PostTraining ||--|| JobSector: has
         PostTraining ||--|| NHSBand: has
         PostTraining ||--|| ContractType: has
@@ -39,7 +41,7 @@
         PostTraining ||--|| Salary: has
         PostTraining ||--|| Employer: has
         ExitAssementRecord ||--|| AssessmentType: has
-        ExitAssementRecord ||--|| Outcome: has
+        ExitAssementRecord ||--|| ExitAssessmentOutcome: has
         TraineeStatus {
             int id PK
             string(100) title "Static Entity"
@@ -262,7 +264,19 @@
         int revised_outcome FK "Review of Progression Revised Outcome, Null: True"
         string(MAX) comments "Review of Progression Comments, Null: True"
     }
+    MidtermReviewProgression {
+        int id PK
+        int training_record FK
+        date date_of_review "Review of Progression Date, Null: True"
+        int outcome FK "Review of Progression Outcome, pass/fail?"
+        int revised_outcome FK "Review of Progression Revised Outcome, Null: True"
+        string(MAX) comments "Review of Progression Comments, Null: True"
+    }
     Outcome {
+        int id PK
+        string title "Static entity"
+    }
+    ExitAssessmentOutcome {
         int id PK
         string title "Static entity"
     }

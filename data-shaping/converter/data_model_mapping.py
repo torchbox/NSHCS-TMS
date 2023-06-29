@@ -92,6 +92,14 @@ SIMPLE_REFERENCE_MAPPING = {
         "title": {"sheet": "tlkpOSFAType", "column": "OTTYPE"},
     },
     "Outcome": {
+        "id": {"sheet": "tlkpReviewOutcomes", "column": "AOID"},
+        "title": {"sheet": "tlkpReviewOutcomes", "column": "AOCODE"},
+    },
+    "ExitAssessmentOutcome": {
+        "id": {"sheet": "tlkpOSFAResult", "column": "RSID"},
+        "title": {"sheet": "tlkpOSFAResult", "column": "RSLT"},
+    },
+    "ExitAssessmentOutcome": {
         "id": {"sheet": "tlkpOSFAType", "column": "OTID"},
         "title": {"sheet": "tlkpOSFAType", "column": "OTTYPE"},
     },
