@@ -99,9 +99,5 @@ SIMPLE_REFERENCE_MAPPING = {
         "id": {"sheet": "tlkpTrusts", "column": "TSID"},
         "is_nhs": {"sheet": "tlkpTrusts", "column": "TSNHS"},
         "title": {"sheet": "tlkpTrusts", "column": "TSTRUST"},
-    },
-    "EmployerLocation": {
-        "id": {"sheet": "tlkpLETB", "column": "REID"},
-        "title": {"sheet": "tlkpLETB", "column": "RELETB"},
-    },
+    }
 }
