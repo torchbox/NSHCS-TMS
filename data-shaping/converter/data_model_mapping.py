@@ -104,7 +104,7 @@ SIMPLE_REFERENCE_MAPPING = {
         "id": {"sheet": "tlkpOSFAResult", "column": "RSID"},
         "title": {"sheet": "tlkpOSFAResult", "column": "RSLT"},
     },
-    "ExitAssessmentOutcome": {
+    "AssessmentType": {
         "id": {"sheet": "tlkpOSFAType", "column": "OTID"},
         "title": {"sheet": "tlkpOSFAType", "column": "OTTYPE"},
     },
