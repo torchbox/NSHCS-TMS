@@ -1,5 +1,5 @@
 from ingest.ingest import read_spreadsheet 
-from output.output import transfer_data, transfer_leave_of_absence_record, transfer_support_record, transfer_trainee_contact, transfer_annual_review_progression, transfer_employment_record, transfer_exit_assessment_record, transfer_trainees
+from output.output import transfer_data, transfer_leave_of_absence_record, transfer_support_record, transfer_trainee_contact, transfer_annual_review_progression, transfer_employment_record, transfer_exit_assessment_record, transfer_trainees, transfer_midterm_review_progression
 import os
 
 
@@ -20,6 +20,7 @@ transfer_leave_of_absence_record(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_support_record(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_trainee_contact(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_annual_review_progression(path=OUTPUT_DATABASE_PATH, sheets=sheets)
+transfer_midterm_review_progression(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_employment_record(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_exit_assessment_record(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_trainees(path=OUTPUT_DATABASE_PATH, sheets=sheets)
