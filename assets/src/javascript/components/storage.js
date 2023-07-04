@@ -919,9 +919,8 @@ export default function storage() {
             {
                 id: 3,
                 dataName: 'bereavement-issue',
-                type: 'text',
+                type: 'select-one',
                 value: 'Bereavement',
-                checked: false,
             },
             {
                 id: 4,

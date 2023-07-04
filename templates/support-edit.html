@@ -79,7 +79,13 @@
                         </div>
                         <div class="form__item">
                             <label class="form__label" for="bereavement-issue">Issue</label>
-                            <input class="form__input" type="text" id="bereavement-issue" name="bereavement-issue" data-form="bereavement-issue" value="Bereavement"/>
+                            <div class="custom-select custom-select--full">
+                                <select id="bereavement-issue" name="bereavement-issue" class="custom-select__item" data-form="bereavement-issue">
+                                    <option value="Bereavement">Bereavement</option>
+                                    <option value="Change in personal circumstances">Change in personal circumstances</option>
+                                    <option value="Sickness">Sickness</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form__item">
                             <label class="form__label" for="bereavement-description">Description</label>
