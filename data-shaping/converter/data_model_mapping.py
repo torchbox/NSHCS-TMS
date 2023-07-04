@@ -39,7 +39,7 @@ SIMPLE_REFERENCE_MAPPING = {
         "id": {"sheet": "tlkpEthnic", "column": "ECID"},
         "title": {"sheet": "tlkpEthnic", "column": "ECDESC"},
     },
-    "DisabillityCategory": {
+    "DisabilityCategory": {
         "id": {"sheet": "tlkpDisabilityCategory", "column": "DCID"},
         "title": {"sheet": "tlkpDisabilityCategory", "column": "DCDESC"},
     },
@@ -62,10 +62,15 @@ SIMPLE_REFERENCE_MAPPING = {
     "FundingProvider": {
         "id": {"sheet": "tlkpLETB", "column": "REID"},
         "title": {"sheet": "tlkpLETB", "column": "RELETB"},
+        "abbreviation": {"sheet": "tlkpLETB", "column": "REABBR"},
     },
-    "HEIAward": {
+    "HEIAwardingInstitution": {
         "id": {"sheet": "tlkpHEI", "column": "HEID"},
         "title": {"sheet": "tlkpHEI", "column": "HENM"},
+    },
+    "HEIOutcome": {
+        "id": {"sheet": "tlkpMScOutcome", "column": "OCID"},
+        "title": {"sheet": "tlkpMScOutcome", "column": "OCOTCM"},
     },
     "HSSTPathway": {
         "id": {"sheet": "tlkpHSSTPathway", "column": "PTID"},
@@ -112,5 +117,15 @@ SIMPLE_REFERENCE_MAPPING = {
         "id": {"sheet": "tlkpTrusts", "column": "TSID"},
         "is_nhs": {"sheet": "tlkpTrusts", "column": "TSNHS"},
         "title": {"sheet": "tlkpTrusts", "column": "TSTRUST"},
+    },
+    "TraineeStatuses": {
+        "id": {},
+        "trainee_id": {},
+        "trainee_status_id": {},
+    },
+    "EmployerLocations": {
+        "id": {},
+        "employer_id": {},
+        "employer_location_id": {},
     }
 }

@@ -292,7 +292,7 @@
         int revised_outcome_id FK "Review of Progression Revised Outcome, Null: True"
         string(MAX) comments "Review of Progression Comments, Null: True"
     }
-    MidtermReviewProgression {
+    MidReviewProgression {
         int id PK
         int training_record FK
         date date_of_review "Review of Progression Date, Null: True"
