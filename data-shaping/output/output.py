@@ -255,7 +255,7 @@ def transfer_employment_record(path, sheets):
 
 
 def transfer_exit_assessment_record(path, sheets):
-    SHEET_NAME = "ExitAssementRecord"
+    SHEET_NAME = "ExitAssessmentRecord"
     OLD_ASSESSMENT_RECORDS_SHEETS = 'tblOSFA'
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay"
@@ -281,7 +281,7 @@ def transfer_exit_assessment_record(path, sheets):
         )
         ears.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
-def transfer_post_training(path, id, job_sector, description, job, non_nhs_employer, nhs_band, salary, contract_type, start_date, comments,):
+def transfer_post_training(path, id, job_sector, description, job, non_nhs_employer, nhs_band, salary, contract_type, start_date, comments):
     SHEET_NAME = "PostTraining"
 
     pts = pd.DataFrame(
@@ -302,7 +302,7 @@ def transfer_post_training(path, id, job_sector, description, job, non_nhs_emplo
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay"
     ) as writer:
-        pts.to_excel(writer, sheet_name=SHEET_NAME)
+        pts.to_excel(writer, sheet_name=SHEET_NAME, index=False, startrow=0 if id == None or id == 1 else id, header=id==1)
 
 
 
@@ -350,6 +350,12 @@ def transfer_trainees(path, sheets):
     deferral_comments = []
     post_trainings = []
 
+
+    next_post_training_id = 1
+    next_post_training_cnt = 1
+    next_training_record_id = 1
+    next_training_record_cnt = 1
+
     for i, row in  sheets[OLD_REGISTRATION_SHEET_NAME].iterrows():
         ids.append(row['RGID'])
         nshc_trainee_ids.append(row['RGSCID'])
@@ -389,20 +395,16 @@ def transfer_trainees(path, sheets):
         deferral_comments.append(row['RGDEFCM'])
 
         print(f'Processing registration: {i}')
-        next_post_training_id = 0
-        next_post_training_cnt = 0
-        next_training_record_id = 0
-        next_training_record_cnt = 0
 
-        if row['RGFJTP'] or \
-            row['RGFRJB'] or \
-            row['RGFJTRST'] or \
-            row['RGFREM'] or \
-            row['RGFJBAND'] or \
-            row['RGFJSAL'] or \
-            row['RGFRCNT'] or \
-            row['RGFRSTDT'] or \
-            row['RGFRCMT']:
+        if pd.notna(row['RGFJTP']) or \
+            pd.notna(row['RGFRJB']) or \
+            pd.notna(row['RGFJTRST']) or \
+            pd.notna(row['RGFREM']) or \
+            pd.notna(row['RGFJBAND']) or \
+            pd.notna(row['RGFJSAL']) or \
+            pd.notna(row['RGFRCNT']) or \
+            pd.notna(row['RGFRSTDT']) or \
+            pd.notna(row['RGFRCMT']):
 
             next_post_training_id = next_post_training_cnt
             transfer_post_training(
@@ -422,60 +424,61 @@ def transfer_trainees(path, sheets):
         else:
             next_post_training_id = None
 
-        if row['RGMScCMP'] or \
-            row['RGMScDT'] or \
-            row['RGMScOTCM'] or \
-            row['RGMScEX'] or \
-            row['RGMScEXDT'] or \
-            row['RGMSCEXDTL'] or \
-            row['RGCERTIS'] or \
-            row['RGCERTDT'] or \
-            row['RGHCPATH'] or \
-            row['RGHCPORT'] or \
-            row['RGHCPORTDT'] or \
-            row['RGHCARP'] or \
-            row['RGHCARPDT'] or \
-            row['RGHCDCSA'] or \
-            row['RGHCDCSADT'] or \
-            row['RGHCDCSB'] or \
-            row['RGHCDCSBDT'] or \
-            row['RGHCDCSC1'] or \
-            row['RGHCDCSC1DT'] or \
-            row['RGHCDCSC2'] or \
-            row['RGHCDCSC2DT'] or \
-            row['RGHCFRC'] or \
-            row['RGHCFRCDT'] or \
-            row['RGHCIAPS'] or \
-            row['RGHCIAPSDT'] or \
-            row['RGHCIAPSDT'] or \
-            row['RGHCPHDDT'] or \
-            row['RGHCCENG'] or \
-            row['RGHCCENGDT'] or \
-            row['RGHCSUP'] or \
-            row['RHCSUPDT'] or \
-            row['RGLVDT'] or \
-            row['RGLVRS'] or \
-            row['RGLVCM'] or \
-            row['RGOSRA'] or \
-            row['RGOSRADTL'] or \
-            row['RGHCPC'] or \
-            row['RGHCPCDT'] or \
-            row['RGHEXCM'] or \
-            row['RGSPEC'] or \
-            row['RGENTRY'] or \
-            row['RGHEI'] or \
-            row['RGOLEXCMDT'] or \
-            row['RGOLCMPDT'] or \
-            row['RGHCREQ'] or \
-            row['RGHCSREQ'] or \
-            row['RGHCNM'] or \
-            row['RGHCNUM'] or \
-            row['RGAHCS'] or \
-            row['RGOLEXT']: 
+        if pd.notna(row['RGMScCMP']) or \
+            pd.notna(row['RGMScDT']) or \
+            pd.notna(row['RGMScOTCM']) or \
+            pd.notna(row['RGMScEX']) or \
+            pd.notna(row['RGMScEXDT']) or \
+            pd.notna(row['RGMSCEXDTL']) or \
+            pd.notna(row['RGCERTIS']) or \
+            pd.notna(row['RGCERTDT']) or \
+            pd.notna(row['RGHCPATH']) or \
+            pd.notna(row['RGHCPORT']) or \
+            pd.notna(row['RGHCPORTDT']) or \
+            pd.notna(row['RGHCARP']) or \
+            pd.notna(row['RGHCARPDT']) or \
+            pd.notna(row['RGHCDCSA']) or \
+            pd.notna(row['RGHCDCSADT']) or \
+            pd.notna(row['RGHCDCSB']) or \
+            pd.notna(row['RGHCDCSBDT']) or \
+            pd.notna(row['RGHCDCSC1']) or \
+            pd.notna(row['RGHCDCSC1DT']) or \
+            pd.notna(row['RGHCDCSC2']) or \
+            pd.notna(row['RGHCDCSC2DT']) or \
+            pd.notna(row['RGHCFRC']) or \
+            pd.notna(row['RGHCFRCDT']) or \
+            pd.notna(row['RGHCIAPS']) or \
+            pd.notna(row['RGHCIAPSDT']) or \
+            pd.notna(row['RGHCIAPSDT']) or \
+            pd.notna(row['RGHCPHDDT']) or \
+            pd.notna(row['RGHCCENG']) or \
+            pd.notna(row['RGHCCENGDT']) or \
+            pd.notna(row['RGHCSUP']) or \
+            pd.notna(row['RHCSUPDT']) or \
+            pd.notna(row['RGLVDT']) or \
+            pd.notna(row['RGLVRS']) or \
+            pd.notna(row['RGLVCM']) or \
+            pd.notna(row['RGOSRA']) or \
+            pd.notna(row['RGOSRADTL']) or \
+            pd.notna(row['RGHCPC']) or \
+            pd.notna(row['RGHCPCDT']) or \
+            pd.notna(row['RGHEXCM']) or \
+            pd.notna(row['RGSPEC']) or \
+            pd.notna(row['RGENTRY']) or \
+            pd.notna(row['RGHEI']) or \
+            pd.notna(row['RGOLEXCMDT']) or \
+            pd.notna(row['RGOLCMPDT']) or \
+            pd.notna(row['RGHCREQ']) or \
+            pd.notna(row['RGHCSREQ']) or \
+            pd.notna(row['RGHCNM']) or \
+            pd.notna(row['RGHCNUM']) or \
+            pd.notna(row['RGAHCS']) or \
+            pd.notna(row['RGOLEXT']): 
         
+            next_training_record_id = next_training_record_cnt
             transfer_training_record_separate(
                 path=path,
-                id=next_post_training_id,
+                id=next_training_record_id,
                 hei_qualification_completed=row['RGMScCMP'],
                 hei_qualification_date=row['RGMScDT'],
                 hei_qualification_outcome=row['RGMScOTCM'],
@@ -540,11 +543,10 @@ def transfer_trainees(path, sheets):
         else: 
             next_training_record_id = None
 
-
-        training_records.append(next_post_training_id)
-        post_trainings.append(next_training_record_id)
-
-        ts =  pd.DataFrame(
+        training_records.append(next_training_record_id)
+        post_trainings.append(next_post_training_id)
+    
+    ts =  pd.DataFrame(
         data= {
             "id": ids,
             "training_record_id": training_records,
@@ -584,8 +586,8 @@ def transfer_trainees(path, sheets):
             "deferred": deferreds,
             "deferral_comments": deferral_comments,
             "post_training_id": post_trainings,
-            }
-        )
+        }
+    )
 
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay"
@@ -593,67 +595,8 @@ def transfer_trainees(path, sheets):
         ts.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
 
-training_record = {
-"id": None,
-"hei_qualification_completed": None,
-"hei_qualification_date": None,
-"hei_qualification_outcome": None,
-"hei_extension": None,
-"hei_extension_date": None,
-"hei_extension_date_comments": None,
-"program_certification": None,
-"program_certification_date": None,
-"hsst_pathway": None,
-"hsst_portfolio_completed": None,
-"hsst_portfolio_completion_date": None,
-"hsst_arp_completed": None,
-"hsst_arp_completion_date": None,
-"hsst_d_clin_part_a_completed": None,
-"hsst_d_clin_part_a_completion_date": None,
-"hsst_d_clin_part_b_completed": None,
-"hsst_d_clin_part_b_completion_date": None,
-"hsst_d_clin_part_c1_completed": None,
-"hsst_d_clin_part_c1_completion_date": None,
-"hsst_d_clin_part_c2_completed": None,
-"hsst_d_clin_part_c2_completion_date": None,
-"hsst_fcrpath_completed": None,
-"hsst_fcrpath_completion_date": None,
-"hsst_iaps_completed": None,
-"hsst_iaps_completion_date": None,
-"hsst_phd_completed": None,
-"hsst_phd_completion_date": None,
-"hsst_ceng_completed": None,
-"hsst_ceng_completion_date": None,
-"hsst_portfolio_signed": None,
-"hsst_portfolio_signed_date": None,
-"program_leaving_date": None,
-"program_leaving_reason": None,
-"program_leaving_comments": None,
-"reasonable_adjustments": None,
-"reasonable_adjustments_comments": None,
-"hpcp_registration": None,
-"hpcp_registration_date": None,
-"start_month": None,
-"start_year": None,
-"expected_completion_month": None,
-"expected_completion_year": None,
-"hsst_expected_exit": None,
-"specalism": None,
-"recruitment_method": None,
-"hei_awards": None,
-"portfolio_expected_completion_date": None,
-"portfolio_actual_completion_date": None,
-"hcpc_signoff_required": None,
-"hcpc_counter_signoff_required": None,
-"hcpc_signoff_name": None,
-"hcpc_signoff_number": None,
-"ahcs_registration": None,
-"portfolio_extended": None
-}
-
 def transfer_training_record_separate(path, id, hei_qualification_completed, hei_qualification_date, hei_qualification_outcome, hei_extension, hei_extension_date, hei_extension_date_comments, program_certification, program_certification_date, hsst_pathway, hsst_portfolio_completed, hsst_portfolio_completion_date, hsst_arp_completed, hsst_arp_completion_date, hsst_d_clin_part_a_completed, hsst_d_clin_part_a_completion_date, hsst_d_clin_part_b_completed, hsst_d_clin_part_b_completion_date, hsst_d_clin_part_c1_completed, hsst_d_clin_part_c1_completion_date, hsst_d_clin_part_c2_completed, hsst_d_clin_part_c2_completion_date, hsst_fcrpath_completed, hsst_fcrpath_completion_date, hsst_iaps_completed, hsst_iaps_completion_date, hsst_phd_completed, hsst_phd_completion_date, hsst_ceng_completed, hsst_ceng_completion_date, hsst_portfolio_signed, hsst_portfolio_signed_date, program_leaving_date, program_leaving_reason, program_leaving_comments, reasonable_adjustments, reasonable_adjustments_comments, hpcp_registration, hpcp_registration_date, hsst_expected_exit, specalism, recruitment_method, hei_awards, portfolio_expected_completion_date, portfolio_actual_completion_date, hcpc_signoff_required, hcpc_counter_signoff_required, hcpc_signoff_name, hcpc_signoff_number, ahcs_registration, portfolio_extended, hsst_start_month, hsst_start_year, hsst_expected_completion_month, hsst_expected_completion_year, stp_start_month, stp_start_year, stp_expected_completion_month, stp_expected_completion_year):
-    SHEET_NAME = "PostTraining"
-
+    SHEET_NAME = "TrainingRecord"
     pts = pd.DataFrame(
         data= {
                 "id": id,
@@ -721,4 +664,4 @@ def transfer_training_record_separate(path, id, hei_qualification_completed, hei
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay"
     ) as writer:
-        pts.to_excel(writer, sheet_name=SHEET_NAME, index=False)
+        pts.to_excel(writer, sheet_name=SHEET_NAME, index=False, startrow=0 if id == None or id == 1 else id, header=id==1)
