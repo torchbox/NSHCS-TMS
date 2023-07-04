@@ -133,8 +133,8 @@ def transfer_trainee_contact(path, sheets):
         tcs = pd.DataFrame(
             data={
                 "id": id,
-                "trainee": trainee,
-                "type": type,
+                "trainee_id": trainee,
+                "type_id": type,
                 "contact_id": contact_id,
                 "start_date": start_date,
                 "end_date": end_date,
@@ -145,7 +145,7 @@ def transfer_trainee_contact(path, sheets):
 
 
 def transfer_annual_review_progression(path, sheets):
-    SHEET_NAME = "AnualReviewProgression"
+    SHEET_NAME = "AnnualReviewProgression"
     OLD_ARP_SHEET_NAME = "tblARP"
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay"
@@ -170,18 +170,18 @@ def transfer_annual_review_progression(path, sheets):
         arps = pd.DataFrame(
             data={
                 "id": ids,
-                "training_record": training_records,
+                "training_record_id": training_records,
                 "date_of_review": date_of_reviews,
-                "outcome": outcomes,
-                "revised_outcome": revised_outcomes,
+                "outcome_id": outcomes,
+                "revised_outcome_id": revised_outcomes,
                 "comments": comments,
             }
         )
         arps.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
 
-def transfer_midterm_review_progression(path, sheets):
-    SHEET_NAME = "MidtermReviewProgression"
+def transfer_mid_review_progression(path, sheets):
+    SHEET_NAME = "MidReviewProgression"
     OLD_ARP_SHEET_NAME = "tblMRP"
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay"
@@ -244,8 +244,8 @@ def transfer_employment_record(path, sheets):
             data={
                 "id": ids,
                 "trainee_id": trainee_ids,
-                "employer": employers,
-                "specific_site": specific_sites,
+                "employer_id": employers,
+                "specific_site_id": specific_sites,
                 "start_date": start_dates,
                 "finish_date": finish_dates,
                 "comments": comments,
@@ -277,7 +277,7 @@ def transfer_exit_assessment_record(path, sheets):
             comments.append(row['OSCMNT'])
 
         ears = pd.DataFrame(
-            data={"id": ids, "training_id": training_ids, "date": dates, "type": types, "result": results, "comments": comments}
+            data={"id": ids, "training_record_id": training_ids, "date": dates, "type_id": types, "result_id": results, "comments": comments}
         )
         ears.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
@@ -287,13 +287,13 @@ def transfer_post_training(path, id, job_sector, description, job, non_nhs_emplo
     pts = pd.DataFrame(
         data= {
             "id": [id],
-            "job_sector": [job_sector],
+            "job_sector_id": [job_sector],
             "description": [description],
-            "nhs_employer": [job],
+            "employer_id": [job],
             "non_nhs_employer": [non_nhs_employer],
-            "nhs_band": [nhs_band],
-            "salary": [salary],
-            "contract_type": [contract_type],
+            "nhs_band_id": [nhs_band],
+            "non_nhs_salary_id": [salary],
+            "contract_type_id": [contract_type],
             "start_date": [start_date],
             "comments": [comments],
             }
@@ -388,7 +388,7 @@ def transfer_trainees(path, sheets):
         deferreds.append(row['RGDEF'])
         deferral_comments.append(row['RGDEFCM'])
 
-        print(i)
+        print(f'Processing registration: {i}')
         next_post_training_id = 0
         next_post_training_cnt = 0
         next_training_record_id = 0
@@ -473,11 +473,6 @@ def transfer_trainees(path, sheets):
             row['RGAHCS'] or \
             row['RGOLEXT']: 
         
-            start_month = row['RGSSMTH'] or row['RGHCMTH'] or None
-            start_year = row['RGCHRT'] or row['RGHCYR'] or None
-            end_month = row['RGSEMTH'] or row['RGHEMTH'] or None
-            end_year = row['RGANEX'] or row['RGHEYR'] or None
-        
             transfer_training_record_separate(
                 path=path,
                 id=next_post_training_id,
@@ -519,10 +514,14 @@ def transfer_trainees(path, sheets):
                 reasonable_adjustments_comments=row['RGOSRADTL'],
                 hpcp_registration=row['RGHCPC'],
                 hpcp_registration_date=row['RGHCPCDT'],
-                start_month=[start_month],
-                start_year=[start_year],
-                expected_completion_month=[end_month],
-                expected_completion_year=[end_year],
+                hsst_start_month=row['RGHCMTH'],
+                hsst_start_year=row['RGHCYR'],
+                hsst_expected_completion_month=row['RGHEMTH'],
+                hsst_expected_completion_year=row['RGHEYR'],
+                stp_start_month=row['RGSSMTH'],
+                stp_start_year=row['RGCHRT'],
+                stp_expected_completion_month=row['RGSEMTH'],
+                stp_expected_completion_year=row['RGANEX'],
                 hsst_expected_exit=row['RGHEXCM'],
                 specalism=row['RGSPEC'],
                 recruitment_method=row['RGENTRY'],
@@ -548,22 +547,22 @@ def transfer_trainees(path, sheets):
         ts =  pd.DataFrame(
         data= {
             "id": ids,
-            "training_record": training_records,
+            "training_record_id": training_records,
             "nshc_trainee_id": nshc_trainee_ids,
-            "title": titles,
+            "title_id": titles,
             "surname": surnames,
             "forename": forenames,
             "date_of_birth": date_of_births,
-            "ethnicity": ethnicities,
+            "ethnicity_id": ethnicities,
             "ethnicity_other": ethnicity_others,
             "disability_status": disability_statuses,
-            "disable_category": disable_categories,
+            "disable_category_id": disable_categories,
             "disability_details": disability_details,
-            "gender": genders,
-            "sexual_orientation": sexual_orientations,
-            "religion": religions,
-            "nationality": nationalities,
-            "marital_status": marital_statuses,
+            "gender_id": genders,
+            "sexual_orientation_id": sexual_orientations,
+            "religion_id": religions,
+            "nationality_id": nationalities,
+            "marital_status_id": marital_statuses,
             "address_line_1": address_line_1s,
             "address_line_2": address_line_2s,
             "address_line_3": address_line_3s,
@@ -572,11 +571,11 @@ def transfer_trainees(path, sheets):
             "work_phone": work_phones,
             "academic_email": academic_emails,
             "personal_email": personal_emails,
-            "email_preference": email_preferences,
+            "email_preference_id": email_preferences,
             "personal_phone": personal_phones,
-            "funding_provider": funding_providers,
+            "funding_provider_id": funding_providers,
             "funding_provider_comments": funding_provider_comments,
-            "training_program": training_programs,
+            "training_program_id": training_programs,
             "cohort_number": cohort_numbers,
             "status": statuses,
             "whole_time_equivilent": whole_time_equivilents,
@@ -584,7 +583,7 @@ def transfer_trainees(path, sheets):
             "ecc_reference": ecc_references,
             "deferred": deferreds,
             "deferral_comments": deferral_comments,
-            "post_training": post_trainings,
+            "post_training_id": post_trainings,
             }
         )
 
@@ -652,25 +651,28 @@ training_record = {
 "portfolio_extended": None
 }
 
-def transfer_training_record_separate(path, id, hei_qualification_completed, hei_qualification_date, hei_qualification_outcome, hei_extension, hei_extension_date, hei_extension_date_comments, program_certification, program_certification_date, hsst_pathway, hsst_portfolio_completed, hsst_portfolio_completion_date, hsst_arp_completed, hsst_arp_completion_date, hsst_d_clin_part_a_completed, hsst_d_clin_part_a_completion_date, hsst_d_clin_part_b_completed, hsst_d_clin_part_b_completion_date, hsst_d_clin_part_c1_completed, hsst_d_clin_part_c1_completion_date, hsst_d_clin_part_c2_completed, hsst_d_clin_part_c2_completion_date, hsst_fcrpath_completed, hsst_fcrpath_completion_date, hsst_iaps_completed, hsst_iaps_completion_date, hsst_phd_completed, hsst_phd_completion_date, hsst_ceng_completed, hsst_ceng_completion_date, hsst_portfolio_signed, hsst_portfolio_signed_date, program_leaving_date, program_leaving_reason, program_leaving_comments, reasonable_adjustments, reasonable_adjustments_comments, hpcp_registration, hpcp_registration_date, start_month, start_year, expected_completion_month, expected_completion_year, hsst_expected_exit, specalism, recruitment_method, hei_awards, portfolio_expected_completion_date, portfolio_actual_completion_date, hcpc_signoff_required, hcpc_counter_signoff_required, hcpc_signoff_name, hcpc_signoff_number, ahcs_registration, portfolio_extended):
+def transfer_training_record_separate(path, id, hei_qualification_completed, hei_qualification_date, hei_qualification_outcome, hei_extension, hei_extension_date, hei_extension_date_comments, program_certification, program_certification_date, hsst_pathway, hsst_portfolio_completed, hsst_portfolio_completion_date, hsst_arp_completed, hsst_arp_completion_date, hsst_d_clin_part_a_completed, hsst_d_clin_part_a_completion_date, hsst_d_clin_part_b_completed, hsst_d_clin_part_b_completion_date, hsst_d_clin_part_c1_completed, hsst_d_clin_part_c1_completion_date, hsst_d_clin_part_c2_completed, hsst_d_clin_part_c2_completion_date, hsst_fcrpath_completed, hsst_fcrpath_completion_date, hsst_iaps_completed, hsst_iaps_completion_date, hsst_phd_completed, hsst_phd_completion_date, hsst_ceng_completed, hsst_ceng_completion_date, hsst_portfolio_signed, hsst_portfolio_signed_date, program_leaving_date, program_leaving_reason, program_leaving_comments, reasonable_adjustments, reasonable_adjustments_comments, hpcp_registration, hpcp_registration_date, hsst_expected_exit, specalism, recruitment_method, hei_awards, portfolio_expected_completion_date, portfolio_actual_completion_date, hcpc_signoff_required, hcpc_counter_signoff_required, hcpc_signoff_name, hcpc_signoff_number, ahcs_registration, portfolio_extended, hsst_start_month, hsst_start_year, hsst_expected_completion_month, hsst_expected_completion_year, stp_start_month, stp_start_year, stp_expected_completion_month, stp_expected_completion_year):
     SHEET_NAME = "PostTraining"
-
-
 
     pts = pd.DataFrame(
         data= {
                 "id": id,
                 "hei_qualification_completed": hei_qualification_completed,
                 "hei_qualification_date": hei_qualification_date,
-                "hei_qualification_outcome": hei_qualification_outcome,
+                "hei_qualification_outcome_id": hei_qualification_outcome,
+                "hei_awarding_institution_id": hei_awards,
                 "hei_extension": hei_extension,
                 "hei_extension_date": hei_extension_date,
                 "hei_extension_date_comments": hei_extension_date_comments,
                 "program_certification": program_certification,
                 "program_certification_date": program_certification_date,
-                "hsst_pathway": hsst_pathway,
+                "program_leaving_date": program_leaving_date,
+                "program_leaving_reason": program_leaving_reason,
+                "program_leaving_comments": program_leaving_comments,
+                "hsst_pathway_id": hsst_pathway,
                 "hsst_portfolio_completed": hsst_portfolio_completed,
                 "hsst_portfolio_completion_date": hsst_portfolio_completion_date,
+                "hsst_expected_exit_date": hsst_expected_exit,
                 "hsst_arp_completed": hsst_arp_completed,
                 "hsst_arp_completion_date": hsst_arp_completion_date,
                 "hsst_d_clin_part_a_completed": hsst_d_clin_part_a_completed,
@@ -691,23 +693,22 @@ def transfer_training_record_separate(path, id, hei_qualification_completed, hei
                 "hsst_ceng_completion_date": hsst_ceng_completion_date,
                 "hsst_portfolio_signed": hsst_portfolio_signed,
                 "hsst_portfolio_signed_date": hsst_portfolio_signed_date,
-                "program_leaving_date": program_leaving_date,
-                "program_leaving_reason": program_leaving_reason,
-                "program_leaving_comments": program_leaving_comments,
+                "hsst_start_month": [hsst_start_month],
+                "hsst_start_year": [hsst_start_year],
+                "hsst_expected_completion_month": [hsst_expected_completion_month],
+                "hsst_expected_completion_year": [hsst_expected_completion_year],
                 "reasonable_adjustments": reasonable_adjustments,
                 "reasonable_adjustments_comments": reasonable_adjustments_comments,
-                "hpcp_registration": hpcp_registration,
-                "hpcp_registration_date": hpcp_registration_date,
-                "start_month": start_month,
-                "start_year": start_year,
-                "expected_completion_month": expected_completion_month,
-                "expected_completion_year": expected_completion_year,
-                "hsst_expected_exit": hsst_expected_exit,
-                "specalism": specalism,
-                "recruitment_method": recruitment_method,
-                "hei_awards": hei_awards,
+                "stp_start_month": [stp_start_month],
+                "stp_start_year": [stp_start_year],
+                "stp_expected_completion_month": [stp_expected_completion_month],
+                "stp_expected_completion_year": [stp_expected_completion_year],
+                "specalism_id": specalism,
+                "recruitment_method_id": recruitment_method,
                 "portfolio_expected_completion_date": portfolio_expected_completion_date,
                 "portfolio_actual_completion_date": portfolio_actual_completion_date,
+                "hpcp_registration": hpcp_registration,
+                "hpcp_registration_date": hpcp_registration_date,
                 "hcpc_signoff_required": hcpc_signoff_required,
                 "hcpc_counter_signoff_required": hcpc_counter_signoff_required,
                 "hcpc_signoff_name": hcpc_signoff_name,
@@ -720,4 +721,4 @@ def transfer_training_record_separate(path, id, hei_qualification_completed, hei
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay"
     ) as writer:
-        pts.to_excel(writer, sheet_name=SHEET_NAME)
+        pts.to_excel(writer, sheet_name=SHEET_NAME, index=False)
