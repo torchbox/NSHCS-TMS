@@ -295,7 +295,7 @@ export default function storage() {
                 id: 37,
                 dataName: 'entry-type',
                 type: 'select-one',
-                value: 'Direct',
+                value: 'Direct Entry',
             },
             {
                 id: 38,
@@ -459,7 +459,7 @@ export default function storage() {
                 id: 61,
                 dataName: 'training-trust',
                 type: 'select-one',
-                value: 'Sheffield Training Hospitals Trust',
+                value: 'Sheffield Teaching Hospitals NHS Foundation Trust',
             },
             {
                 id: 62,
