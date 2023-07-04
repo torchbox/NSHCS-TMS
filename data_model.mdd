@@ -2,47 +2,63 @@
     Trainee Information System
 ---
     erDiagram
-        TraineeContact ||--|| ContactType: has
-        TraineeContact ||--|| Contact: has
-        Trainee }o--|| TraineeContact: has
-        Trainee ||--o| Title: has
+        TraineeContact }o--|| ContactType: has
+        TraineeContact }o--|| Contact: has
+
+        Trainee ||--o{ TraineeContact: has
+        Trainee }|--o| Title: has
         Trainee ||--o| TrainingRecord : has
-        Trainee ||--o| Gender: has
-        Trainee ||--o| Ethnicity: has
-        Trainee ||--o| DisabillityCategory: has
-        Trainee ||--o| FundingProvider: has
-        Trainee ||--o| Religion: has
-        Trainee ||--o| Nationality: has
-        Trainee ||--o| SexualOrientation: has
-        Trainee ||--o| MaritalStatus: has
+        Trainee }|--o| Gender: has
+        Trainee }|--o| Ethnicity: has
+        Trainee }|--o| DisabilityCategory: has
+        Trainee }|--o| FundingProvider: has
+        Trainee }|--o| Religion: has
+        Trainee }|--o| Nationality: has
+        Trainee }|--o| SexualOrientation: has
+        Trainee }|--o| MaritalStatus: has
         Trainee ||--o{ LeaveOfAbsenceRecord : has
         Trainee ||--o| PostTraining: has
-        Trainee ||--o| Specialism: has
-        Trainee ||--o| TrainingProgram: has
-        Trainee ||--|| TraineeStatus: has
-        Trainee ||--|| EmailPreference: has
+        Trainee }|--o| TrainingProgram: has
+        Trainee }o--o| EmailPreference: has
+
+        TraineeStatuses }o--|| TraineeStatus: has
+        TraineeStatuses }o--|| Trainee: has
+
         EmploymentRecord }o--|| Trainee: has
-        EmploymentRecord ||--|| Employer: has
-        EmploymentRecord ||--|| EmployerLocation: has
-        TrainingRecord ||--o{ AnualReviewProgression: has
-        TrainingRecord ||--o{ ExitAssementRecord: has
-        TrainingRecord ||--|| RecruitmentMethod: has
-        TrainingRecord ||--|| ProgramCertification: has
-        TrainingRecord ||--|| HSSTPathway: has
-        TrainingRecord ||--|| HEIAward: has
+        EmploymentRecord }o--|| Employer: has
+        %% specific location from the available Trust locations)
+        EmploymentRecord }o--o| EmployerLocation: has
+
+        EmployerLocations }o--|| Employer: has
+        EmployerLocations }o--|| EmployerLocation: has
+
+        TrainingRecord ||--o{ AnnualReviewProgression: has
+        TrainingRecord ||--o{ MidReviewProgression: has
+        TrainingRecord ||--o{ ExitAssessmentRecord: has
+        TrainingRecord }o--o| RecruitmentMethod: has
+        TrainingRecord }o--o| HSSTPathway: has
+        TrainingRecord }o--o| HEIAwardingInstitution: has
+        TrainingRecord }o--o| HEIOutcome: has
+        TrainingRecord }o--o| Specialism: has
+
         SupportRecord }o--|| Trainee: has
-        AnualReviewProgression ||--|{ Outcome: has
-        PostTraining ||--|| JobSector: has
-        PostTraining ||--|| NHSBand: has
-        PostTraining ||--|| ContractType: has
-        PostTraining ||--|| JobType: has
-        PostTraining ||--|| Salary: has
-        PostTraining ||--|| Employer: has
-        ExitAssementRecord ||--|| AssessmentType: has
-        ExitAssementRecord ||--|| Outcome: has
+
+        AnnualReviewProgression }o--o| Outcome: has
+        AnnualReviewProgression }o--o| Outcome: has
+
+        PostTraining }o--|| JobSector: has
+        PostTraining }o--o| NHSBand: has
+        PostTraining }o--o| ContractType: has
+        PostTraining }o--o| Salary: has
+        PostTraining }o--|| Employer: has
+
+        ExitAssessmentRecord }o--o| AssessmentType: has
+        ExitAssessmentRecord }o--o| Outcome: has
+
         TraineeStatus {
             int id PK
             string(100) title "Static Entity"
+            int order
         }
         EmailPreference {
             int id PK
@@ -50,22 +66,22 @@
         }
         Trainee {
         int id PK
-        int training_record FK "Null: True"
+        int training_record_id FK "Null: True"
         string(50) nshc_trainee_id "NSHCS Trainee ID"
-        int title FK "Null: True"
+        int title_id FK "Null: True"
         string(100) surname "Null: True"
         string(100) forename "Null: True"
         date date_of_birth "Null: True"
-        int ethnicity FK "Null: True"
+        int ethnicity_id FK "Null: True"
         string(150) ethnicity_other "Null: True"
         int disability_status "Yes, no, prefer not to say; Null: True"
-        int disable_category FK "Null: True"
+        int disable_category_id FK "Null: True"
         string(MAX) disability_details "Null: True"
-        int gender FK "Null: True"
-        int sexual_orientation FK "Null: True"
-        int religion FK "Null: True"
-        int nationality FK "Null: True"
-        int marital_status FK "Null: True"
+        int gender_id FK "Null: True"
+        int sexual_orientation_id FK "Null: True"
+        int religion_id FK "Null: True"
+        int nationality_id FK "Null: True"
+        int marital_status_id FK "Null: True"
         string(100) address_line_1 "Null: True"
         string(100) address_line_2 "Null: True"
         string(100) address_line_3 "Null: True"
@@ -74,19 +90,18 @@
         string(100) work_phone "Null: True"
         string(100) academic_email "Null: True"
         string(100) personal_email "Null: True"
-        int email_preference "Null: True"
+        int email_preference_id FK "Null: True"
         string(100) personal_phone "Null: True"
-        int funding_provider FK "Null: True"
+        int funding_provider_id FK "Null: True"
         string(100) funding_provider_comments "Null: True"
-        int training_program FK "Null: True"
+        int training_program_id FK "Null: True"
         int cohort_number "HSST Cohort Number, Null: True"
-        int status FK "Trainee Status (on programme), Null: True"
         decimal whole_time_equivilent "Whole-time equivalent (if part time), Null: True"
         int onefile_id "OneFile ID (if used OneFile), Null: True"
         string(100) ecc_reference "Null: True"
         bool deferred "Trainee on a programme deferral (Y/N), Null: True"
         string(MAX) deferral_comments "Null: True"
-        int post_training FK "Null: True"
+        int post_training_id FK "Null: True"
     }
     TrainingProgram {
         int id PK
@@ -94,13 +109,13 @@
     }
     PostTraining {
         int id PK
-        int job_sector FK "First Job Sector after training"
+        int job_sector_id FK "First Job Sector after training"
         string(255) description "First Job description (title)"
-        int nhs_employer FK "First Job after Training NHS Trust (if NHS) TODO add FK"
-        string(100) non_nhs_employer "First Job after training Employer name (if not NHS)"
-        int nhs_band FK "First Job after training NHS Band, Null: True"
-        int non_nhs_salary FK "First Job after training Salary for non-nhs salary, Null: True"
-        int contract_type FK "First Job after training contract type, Null: True"
+        int employer_id FK "First Job after Training, Null: True"
+        string(100) non_nhs_employer "First Job after training Employer name (if not NHS), Null: True"
+        int nhs_band_id FK "First Job after training NHS Band, Null: True"
+        int non_nhs_salary_id FK "First Job after training Salary for non-nhs salary, Null: True"
+        int contract_type_id FK "First Job after training contract type, Null: True"
         date start_date "First Job after the training start date, Null: True"
         string(MAX) comments "Null: True"
     }
@@ -124,19 +139,15 @@
         int id PK "Title ID"
         string(25) title "Static Entity"
     }
-    JobType {
-        int id PK "JobType ID"
-        string(100) name "Static entity"
-    }
     Gender {
         int id PK "Gender ID"
         string(100) title "Static entity"
-    }   
+    }
     Ethnicity {
         int id PK "Ethnicity ID"
-        string(100) title "Static entity" 
+        string(100) title "Static entity"
     }
-    DisabillityCategory {
+    DisabilityCategory {
         int id PK "Disability ID"
         String category "Static entity"
     }
@@ -159,20 +170,28 @@
     FundingProvider {
         int id PK "Funding Provider ID"
         string title "Static Entity"
+        string(50) abbreviation
     }
     TrainingRecord {
         int id PK
         bool hei_qualification_completed "HEI Qualification complete (Y/N), Null: True"
         date hei_qualification_date "HEI Qualification date, Null: True"
-        int hei_qualification_outcome FK "HEI Qualification outcome, Null: True"
+        int hei_qualification_outcome_id FK "HEI Qualification outcome, Null: True"
+        int hei_awarding_institution_id FK "HEI Awarding Qualification, Null: True"
         bool hei_extension "HEI Extension"
         date hei_extension_date "HEI Extension date, Null: True"
         string(MAX) hei_extension_comments "HEI Extension detail, Null: True"
-        int program_certification "Programme certification (Y/N), Null: True"
+
+        bool program_certification "Programme certification (Y/N), Null: True"
         date program_certification_date "Programme certification date, Null: True"
-        int hsst_pathway FK "HSST Pathway, Null: True"
+        date program_leaving_date "Programme leaving date (if 'Left'), Null: True"
+        string(MAX) program_leaving_reason "Programme leaving reason, Null: True"
+        string(MAX) program_leaving_comments "Programme leaving comments, Null: True"
+
+        int hsst_pathway_id FK "HSST Pathway, Null: True"
         bool hsst_portfolio_completed "HSST Portfolio Complete (Y/N), Null: True"
         date hsst_portfolio_completion_date "HSST Portfolio Completion Date, Null: True"
+        date hsst_expected_exit_date "HSST Expected EXIT Date, Null: True"
         bool hsst_arp_completed "HSST ARP Complete (Y/N), Null: True"
         date hsst_arp_completion_date "HSST ARP Completion Date, Null: True"
         bool hsst_d_clin_part_a_completed "HSST DClinSci Part A Complete (Y/N), Null: True"
@@ -193,41 +212,46 @@
         date hsst_ceng_completion_date "HSST CEng Completion Date, Null: True"
         bool hsst_portfolio_signed "HSST Supervisor Portfolio Signoff (Y/N), Null: True"
         date hsst_portfolio_signed_date "HSST Supervisor Portfolio Signoff Date, Null: True"
-        date program_leaving_date "Programme leaving date (if 'Left'), Null: True"
-        string(MAX) program_leaving_reason "Programme leaving reason, Null: True"
-        string(MAX) program_leaving_comments "Programme leaving comments, Null: True"
+        int hsst_start_month "Null: True"
+        int hsst_start_year "Null: True"
+        int hsst_expected_completion_month "HSST Expected Completion Month, Null: True"
+        int hsst_expected_completion_year "HSST Expected Completion Year, Null: True"
+
         bool reasonable_adjustments "Reasonable adjustments for final assessments (Y/N), Null: True"
         string(MAX) reasonable_adjustments_comments "Reasonable adjustments for final assessments detail, Null: True"
-        string(20) hpcp_registration "Trainee HCPC Registration Number, Null: True"
-        date hpcp_registration_date "Trainee HCPC Registration Date, Null: True"
-        int start_month "Null: True"
-        int start_year "Null: True"
-        int expected_completion_month "STP Expected Completion Month, Null: True"
-        int expected_completion_year "STP Expected Completion Year, Null: True"
-        date hsst_expected_exit "HSST Expected EXIT Date, Null: True"
-        int specalism FK "Specialism, Null: True"
-        int recruitment_method FK "Recruitment Method, Null: True"
-        int hei_awards FK "HEI Awarding Qualification, Null: True"
+
+        int stp_start_month "Null: True"
+        int stp_start_year "Null: True"
+        int stp_expected_completion_month "STP Expected Completion Month, Null: True"
+        int stp_expected_completion_year "STP Expected Completion Year, Null: True"
+
+        int specialism_id FK "Specialism, Null: True"
+        int recruitment_method_id FK "Recruitment Method, Null: True"
         date portfolio_expected_completion_date "Portfolio expected completion date, Null: True"
         date portfolio_actual_completion_date "Actual portfolio completion date, Null: True"
+        string(20) hpcp_registration "Trainee HCPC Registration Number, Null: True"
+
+        date hpcp_registration_date "Trainee HCPC Registration Date, Null: True"
         bool hcpc_signoff_required "HCPC Signoff Required (Y/N), Null: True"
         bool hcpc_counter_signoff_required "HCPC Countersignoff Required (Y/N), Null: True"
         string(200) hcpc_signoff_name "HCPC Signoff Name, Null: True"
         string(50) hcpc_signoff_number "HCPC Signoff Number, Null: True"
+
         int ahcs_registration "Trainee AHCS Registration Number, Null: True"
         bool portfolio_extended "Portfolio Extension In place (Y/N), Null: True"
     }
-    HEIAward {
+    HEIAwardingInstitution {
         int id PK
         string(255) title "Static entity"
+    }
+    HEIOutcome {
+        int id PK
+        string(20) title "Static entity"
     }
     HSSTPathway {
         int id PK
         string(255) title "Static entity"
-    }
-    ProgramCertification {
-        int id PK
-        string(255) title "Static entity"
+        string(50) code
     }
     Specialism {
         int id PK
@@ -239,12 +263,17 @@
     }
     Contact {
         int id PK
-        string title "Undefined, further refinement needed relates to contact ID"
+        string(50) forename "Null: True"
+        string(50) surname "Null: True"
+        string(150) email "Null: True"
+        string(50) phone "Null: True"
+        string(50) onefile_username "Null: True"
+        int onefile_id "Null: True"
     }
     TraineeContact {
         int id PK "Contact Primary Key"
-        int trainee FK 
-        int type FK "Type of Contact, Null: True"
+        int trainee_id FK
+        int type_id FK "Type of Contact, Null: True"
         int contact_id FK "Contact, Null: True"
         date start_date "Start Date (as a contact), Null: True"
         date end_date "End Date (as a contact), Null: True"
@@ -254,12 +283,12 @@
         int id PK "Contact Type ID"
         string(100) title "Static entity"
     }
-    AnualReviewProgression {
+    AnnualReviewProgression {
         int id PK
-        int training_record FK
+        int training_record_id FK
         date date_of_review "Review of Progression Date, Null: True"
-        int outcome FK "Review of Progression Outcome, pass/fail?"
-        int revised_outcome FK "Review of Progression Revised Outcome, Null: True"
+        int outcome_id FK "Review of Progression Outcome, pass/fail?, Null: True"
+        int revised_outcome_id FK "Review of Progression Revised Outcome, Null: True"
         string(MAX) comments "Review of Progression Comments, Null: True"
     }
     Outcome {
@@ -269,28 +298,27 @@
     EmploymentRecord {
         int ID PK
         int trainee_id FK
-        int employer FK "Employer/Trust"
-        int specific_site FK "Specific Site, Null: True"
+        int employer_id FK "Employer/Trust"
+        int specific_site_id FK "Specific Site, Null: True"
         date start_date "Start Date"
         date finish_date "Finish Date, Null: True"
         string(MAX) comments "Comments, Null: True"
     }
     Employer {
         int id PK
-        bool is_nhs "Defines private vs NHS employer" 
+        bool is_nhs "Defines private vs NHS employer"
         string(255) title "Static Entity"
     }
     EmployerLocation {
         int id PK
-        int employer FK "Employer/Trust, multiple records can relate to a single employer Null: True"
         string(255) title "Static Entity"
     }
-    ExitAssementRecord {
+    ExitAssessmentRecord {
         int id
-        int training_id FK
+        int training_record_id FK
         date date "Assessment Date, Null: True"
-        int type "Assessment Type, Null: True"
-        int result FK "Assessment Result, Null: True"
+        int type_id FK "Assessment Type, Null: True"
+        int result_id FK "Assessment Result, Null: True"
         string(MAX) comments "Assessment Comments, Null: True"
     }
     AssessmentType {
@@ -299,7 +327,7 @@
     }
     LeaveOfAbsenceRecord {
         int id PK
-        int trainee_id FK 
+        int trainee_id FK
         date start_date
         date end_date "Null: True"
         string(MAX) reason "Leave Reason, Null: True"
@@ -308,8 +336,17 @@
     }
     SupportRecord {
         int id
-        int trainee_id FK 
+        int trainee_id FK
         date date "Support Record Date Entered onto DB, Null: True"
         string(MAX) comments "Support Description, Null: True"
     }
-
+    TraineeStatuses {
+        int id
+        int trainee_id FK
+        int trainee_status_id FK
+    }
+    EmployerLocations {
+        int id PK
+        int employer_id FK
+        int employer_location_id FK
+    }
