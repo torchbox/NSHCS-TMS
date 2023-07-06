@@ -662,6 +662,8 @@ def transfer_training_record_separate(path, id, hei_qualification_completed, hei
         )
 
     with pd.ExcelWriter(
-        path, mode="a", engine="openpyxl", if_sheet_exists="overlay"
+        path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
+                      date_format='YYYY-MM-DD',
+                      datetime_format='YYYY-MM-DD HH:MM:SS'
     ) as writer:
         pts.to_excel(writer, sheet_name=SHEET_NAME, index=False, startrow=0 if id == None or id == 1 else id, header=id==1)
