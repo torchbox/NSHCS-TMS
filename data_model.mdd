@@ -26,7 +26,7 @@
         EmploymentRecord ||--|| EmployerLocation: has
         TrainingRecord ||--o{ AnnualReviewProgression: has
         TrainingRecord ||--o{ MidReviewProgression: has
-        TrainingRecord ||--o{ ExitAssementRecord: has
+        TrainingRecord ||--o{ ExitAssessmentRecord: has
         TrainingRecord ||--|| RecruitmentMethod: has
         TrainingRecord ||--|| ProgramCertification: has
         TrainingRecord ||--|| HSSTPathway: has
@@ -39,8 +39,8 @@
         PostTraining ||--|| ContractType: has
         PostTraining ||--|| Salary: has
         PostTraining ||--|| Employer: has
-        ExitAssementRecord ||--|| AssessmentType: has
-        ExitAssementRecord ||--|| ExitAssessmentOutcome: has
+        ExitAssessmentRecord ||--|| AssessmentType: has
+        ExitAssessmentRecord ||--|| ExitAssessmentOutcome: has
         TraineeStatus {
             int id PK
             string(100) title "Static Entity"
@@ -299,7 +299,7 @@
         int employer FK "Employer/Trust, multiple records can relate to a single employer Null: True"
         string(255) title "Static Entity"
     }
-    ExitAssementRecord {
+    ExitAssessmentRecord {
         int id
         int training_id FK
         date date "Assessment Date, Null: True"
