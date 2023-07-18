@@ -55,7 +55,7 @@
         PostTraining }o--|| Employer: has
 
         ExitAssessmentRecord }o--o| AssessmentType: has
-        ExitAssessmentRecord }o--o| Outcome: has
+        ExitAssessmentRecord }o--o| ExitAssessmentOutcome: has
         TraineeStatus {
             int id PK
             string(100) title "Static Entity"
