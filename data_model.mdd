@@ -24,7 +24,7 @@
         EmploymentRecord }o--|| Trainee: has
         EmploymentRecord ||--|| Employer: has
         EmploymentRecord ||--|| EmployerLocation: has
-        TrainingRecord ||--o{ AnualReviewProgression: has
+        TrainingRecord ||--o{ AnnualReviewProgression: has
         TrainingRecord ||--o{ MidReviewProgression: has
         TrainingRecord ||--o{ ExitAssementRecord: has
         TrainingRecord ||--|| RecruitmentMethod: has
@@ -32,7 +32,7 @@
         TrainingRecord ||--|| HSSTPathway: has
         TrainingRecord ||--|| HEIAward: has
         SupportRecord }o--|| Trainee: has
-        AnualReviewProgression ||--|{ Outcome: has
+        AnnualReviewProgression ||--|{ Outcome: has
         MidReviewProgression ||--|{ Outcome: has
         PostTraining ||--|| JobSector: has
         PostTraining ||--|| NHSBand: has
@@ -256,7 +256,7 @@
         int id PK "Contact Type ID"
         string(100) title "Static entity"
     }
-    AnualReviewProgression {
+    AnnualReviewProgression {
         int id PK
         int training_record FK
         date date_of_review "Review of Progression Date, Null: True"
