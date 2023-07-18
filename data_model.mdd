@@ -9,7 +9,7 @@
         Trainee ||--o| TrainingRecord : has
         Trainee ||--o| Gender: has
         Trainee ||--o| Ethnicity: has
-        Trainee ||--o| DisabillityCategory: has
+        Trainee ||--o| DisabilityCategory: has
         Trainee ||--o| FundingProvider: has
         Trainee ||--o| Religion: has
         Trainee ||--o| Nationality: has
@@ -133,7 +133,7 @@
         int id PK "Ethnicity ID"
         string(100) title "Static entity" 
     }
-    DisabillityCategory {
+    DisabilityCategory {
         int id PK "Disability ID"
         String category "Static entity"
     }
