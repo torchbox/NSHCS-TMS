@@ -25,7 +25,7 @@
         EmploymentRecord ||--|| Employer: has
         EmploymentRecord ||--|| EmployerLocation: has
         TrainingRecord ||--o{ AnualReviewProgression: has
-        TrainingRecord ||--o{ MidtermReviewProgression: has
+        TrainingRecord ||--o{ MidReviewProgression: has
         TrainingRecord ||--o{ ExitAssementRecord: has
         TrainingRecord ||--|| RecruitmentMethod: has
         TrainingRecord ||--|| ProgramCertification: has
@@ -33,7 +33,7 @@
         TrainingRecord ||--|| HEIAward: has
         SupportRecord }o--|| Trainee: has
         AnualReviewProgression ||--|{ Outcome: has
-        MidtermReviewProgression ||--|{ Outcome: has
+        MidReviewProgression ||--|{ Outcome: has
         PostTraining ||--|| JobSector: has
         PostTraining ||--|| NHSBand: has
         PostTraining ||--|| ContractType: has
