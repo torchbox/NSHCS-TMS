@@ -6,19 +6,19 @@
         TraineeContact }o--|| Contact: has
 
         Trainee ||--o{ TraineeContact: has
-        Trainee }|--o| Title: has
+        Trainee }o--o| Title: has
         Trainee ||--o| TrainingRecord : has
-        Trainee }|--o| Gender: has
-        Trainee }|--o| Ethnicity: has
-        Trainee }|--o| DisabilityCategory: has
-        Trainee }|--o| FundingProvider: has
-        Trainee }|--o| Religion: has
-        Trainee }|--o| Nationality: has
-        Trainee }|--o| SexualOrientation: has
-        Trainee }|--o| MaritalStatus: has
+        Trainee }o--o| Gender: has
+        Trainee }o--o| Ethnicity: has
+        Trainee }o--o| DisabilityCategory: has
+        Trainee }o--o| FundingProvider: has
+        Trainee }o--o| Religion: has
+        Trainee }o--o| Nationality: has
+        Trainee }o--o| SexualOrientation: has
+        Trainee }o--o| MaritalStatus: has
         Trainee ||--o{ LeaveOfAbsenceRecord : has
         Trainee ||--o| PostTraining: has
-        Trainee }|--o| TrainingProgram: has
+        Trainee }o--o| TrainingProgram: has
         Trainee }o--o| EmailPreference: has
 
         TraineeStatuses }o--|| TraineeStatus: has
@@ -26,7 +26,7 @@
 
         EmploymentRecord }o--|| Trainee: has
         EmploymentRecord }o--|| Employer: has
-        %% specific location from the available Trust locations)
+        %% specific location from the available Trust locations
         EmploymentRecord }o--o| EmployerLocation: has
 
         EmployerLocations }o--|| Employer: has
@@ -43,19 +43,22 @@
 
         SupportRecord }o--|| Trainee: has
 
-        AnnualReviewProgression }o--|| Outcome: has
-        AnnualReviewProgression }o--o| Outcome: has
+        AnnualReviewProgression }o--|| Outcome: hasOutcome
+        AnnualReviewProgression }o--o| Outcome: hasRevisedOutcome
 
-        MidReviewProgression }o--o| Outcome: has
+        MidReviewProgression }o--|| Outcome: hasOutcome
+        MidReviewProgression }o--o| Outcome: hasRevisedOutcome
 
         PostTraining }o--|| JobSector: has
         PostTraining }o--o| NHSBand: has
         PostTraining }o--o| ContractType: has
         PostTraining }o--o| Salary: has
-        PostTraining }o--|| Employer: has
+        PostTraining }o--o| Employer: has
 
         ExitAssessmentRecord }o--o| AssessmentType: has
         ExitAssessmentRecord }o--o| ExitAssessmentOutcome: has
+
+        
         TraineeStatus {
             int id PK
             string(100) title "Static Entity"
