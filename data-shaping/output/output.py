@@ -355,8 +355,14 @@ def transfer_trainees(path, sheets):
     next_post_training_cnt = 1
     next_training_record_id = 1
     next_training_record_cnt = 1
+    next_trainee_statuses_id = 1
+    next_trainee_statuses_cnt = 1
+    next_employer_locations_id = 1
+    next_employer_locations_cnt = 1
 
     for i, row in  sheets[OLD_REGISTRATION_SHEET_NAME].iterrows():
+        if i == 10:
+            break
         ids.append(row['RGID'])
         nshc_trainee_ids.append(row['RGSCID'])
         titles.append(row['RGTITLE'])
@@ -543,6 +549,18 @@ def transfer_trainees(path, sheets):
         else: 
             next_training_record_id = None
 
+        if pd.notna(row['RGSTAT']):
+            next_trainee_statuses_id = next_trainee_statuses_cnt
+            transfer_trainee_statuses(
+                path=path,
+                id=next_trainee_statuses_id,
+                trainee_id=[row['RGID']],
+                status_id=[row['RGSTAT']]
+            )
+            next_trainee_statuses_cnt = next_trainee_statuses_cnt + 1
+        else:
+            next_trainee_statuses_id = None
+
         training_records.append(next_training_record_id)
         post_trainings.append(next_post_training_id)
     
@@ -667,3 +685,39 @@ def transfer_training_record_separate(path, id, hei_qualification_completed, hei
                       datetime_format='YYYY-MM-DD HH:MM:SS'
     ) as writer:
         pts.to_excel(writer, sheet_name=SHEET_NAME, index=False, startrow=0 if id == None or id == 1 else id, header=id==1)
+
+
+def transfer_trainee_statuses(path, id, trainee_id, status_id):
+    SHEET_NAME = "TraineeStatuses"
+    pts = pd.DataFrame(
+        data= {
+                "id": id,
+                "trainee_id": trainee_id,
+                "trainee_status_id": status_id,
+            }
+        )
+
+    with pd.ExcelWriter(
+        path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
+                      date_format='YYYY-MM-DD',
+                      datetime_format='YYYY-MM-DD HH:MM:SS'
+    ) as writer:
+        pts.to_excel(writer, sheet_name=SHEET_NAME, index=False, startrow=0 if id == None or id == 1 else id, header=id==1)
+
+
+# def transfer_locationses(path, id, employer_id, employer_location_id):
+#     SHEET_NAME = "EmployerLocations"
+#     pts = pd.DataFrame(
+#         data= {
+#                 "id": id,
+#                 "employer_id": employer_id,
+#                 "employer_location_id": employer_location_id,
+#             }
+#         )
+
+#     with pd.ExcelWriter(
+#         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
+#                       date_format='YYYY-MM-DD',
+#                       datetime_format='YYYY-MM-DD HH:MM:SS'
+#     ) as writer:
+#         pts.to_excel(writer, sheet_name=SHEET_NAME, index=False, startrow=0 if id == None or id == 1 else id, header=id==1)

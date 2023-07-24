@@ -118,14 +118,8 @@ SIMPLE_REFERENCE_MAPPING = {
         "is_nhs": {"sheet": "tlkpTrusts", "column": "TSNHS"},
         "title": {"sheet": "tlkpTrusts", "column": "TSTRUST"},
     },
-    "TraineeStatuses": {
-        "id": {},
-        "trainee_id": {},
-        "trainee_status_id": {},
-    },
-    "EmployerLocations": {
-        "id": {},
-        "employer_id": {},
-        "employer_location_id": {},
+    "EmployerLocation": {
+        "id": {"sheet": "tlkpHospital", "column": "HSID"},
+        "title": {"sheet": "tlkpHospital", "column": "HSNAME"},
     }
 }
