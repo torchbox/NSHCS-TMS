@@ -357,12 +357,8 @@ def transfer_trainees(path, sheets):
     next_training_record_cnt = 1
     next_trainee_statuses_id = 1
     next_trainee_statuses_cnt = 1
-    next_employer_locations_id = 1
-    next_employer_locations_cnt = 1
 
     for i, row in  sheets[OLD_REGISTRATION_SHEET_NAME].iterrows():
-        if i == 10:
-            break
         ids.append(row['RGID'])
         nshc_trainee_ids.append(row['RGSCID'])
         titles.append(row['RGTITLE'])
@@ -705,19 +701,44 @@ def transfer_trainee_statuses(path, id, trainee_id, status_id):
         pts.to_excel(writer, sheet_name=SHEET_NAME, index=False, startrow=0 if id == None or id == 1 else id, header=id==1)
 
 
-# def transfer_locationses(path, id, employer_id, employer_location_id):
-#     SHEET_NAME = "EmployerLocations"
-#     pts = pd.DataFrame(
-#         data= {
-#                 "id": id,
-#                 "employer_id": employer_id,
-#                 "employer_location_id": employer_location_id,
-#             }
-#         )
+def transfer_locations(path, sheets):
+    LOCATION_SHEET_NAME = "EmployerLocation"
+    LOCATION_OLD_ASSESSMENT_RECORDS_SHEETS = 'tlkpHospital'
+    LOOKUP_SHEET_NAME = "EmployerLocations"
 
-#     with pd.ExcelWriter(
-#         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
-#                       date_format='YYYY-MM-DD',
-#                       datetime_format='YYYY-MM-DD HH:MM:SS'
-#     ) as writer:
-#         pts.to_excel(writer, sheet_name=SHEET_NAME, index=False, startrow=0 if id == None or id == 1 else id, header=id==1)
+    with pd.ExcelWriter(
+        path, mode="a", engine="openpyxl", if_sheet_exists="overlay"
+    ) as writer:
+
+        ids = []
+        titles = []
+
+        lookup_ids = []
+        location_ids = []
+        employer_ids = []
+        next_lookup_cnt = 1
+        next_lookup_id = 1
+
+        for _, row in sheets[LOCATION_OLD_ASSESSMENT_RECORDS_SHEETS].iterrows():
+            ids.append(row['HSID'])
+            titles.append(row['HSNAME'])
+
+
+            if pd.notna(row['HSTRUST']):
+                next_lookup_id = next_lookup_cnt
+                lookup_ids.append(next_lookup_id)
+                location_ids.append(row['HSID'])
+                employer_ids.append(row['HSTRUST'])
+                next_lookup_cnt = next_lookup_cnt + 1
+            else: 
+                next_lookup_id = None
+                
+
+        employer_locations = pd.DataFrame(
+            data={"id": ids, "title": titles}
+        )
+        employer_locations_lookup = pd.DataFrame(
+            data={"id": lookup_ids, "location_id": location_ids, "employer_id": employer_ids}
+        )
+        employer_locations.to_excel(writer, sheet_name=LOCATION_SHEET_NAME, index=False)
+        employer_locations_lookup.to_excel(writer, sheet_name=LOOKUP_SHEET_NAME, index=False)
