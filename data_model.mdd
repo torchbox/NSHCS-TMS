@@ -40,6 +40,7 @@
         TrainingRecord }o--o| HEIAwardingInstitution: has
         TrainingRecord }o--o| HEIOutcome: has
         TrainingRecord }o--o| Specialism: has
+        TrainingRecord ||--o{ ModuleProgression: has
 
         SupportRecord }o--|| Trainee: has
 
@@ -243,6 +244,9 @@
 
         int ahcs_registration "Trainee AHCS Registration Number, Null: True"
         bool portfolio_extended "Portfolio Extension In place (Y/N), Null: True"
+
+        int progress "Overall trainee progress"
+        date progress_updated_at "Last time progress was synced with OneFile"
     }
     HEIAwardingInstitution {
         int id PK
@@ -365,4 +369,14 @@
         int id PK
         int employer_id FK
         int employer_location_id FK
+    }
+    ModuleProgression {
+        int id PK
+        int training_record_id FK
+        string(200) title "OneFile Unit title (module title)"
+        string(100) onefile_id "OneFile Unit ID (module code)"
+        int onefile_summary_id "OneFile Unit Summary ID "
+        string(200) display "OneFile Unit display field"
+        string(50) ndaq_code "OneFile Unit NDAQ_CODE field"
+        int progress
     }
