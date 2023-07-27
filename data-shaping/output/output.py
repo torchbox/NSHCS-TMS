@@ -379,8 +379,6 @@ def transfer_trainees(path, sheets):
     next_trainee_statuses_cnt = 1
 
     for i, row in  sheets[OLD_REGISTRATION_SHEET_NAME].iterrows():
-        if i == 10:
-            break
         ids.append(row['RGID'])
         nshc_trainee_ids.append(row['RGSCID'])
         titles.append(row['RGTITLE'])
