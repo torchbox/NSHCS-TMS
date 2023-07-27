@@ -2,7 +2,7 @@ SIMPLE_REFERENCE_MAPPING = {
     "TraineeStatus": {
         "id": {"sheet": "tlkpStatus", "column": "STID"},
         "title": {"sheet": "tlkpStatus", "column": "STSTAT"},
-        "order": {},
+        "order": {"sheet": "tlkpStatus", "column": "STORDER"},
     },
     "EmailPreference": {
         "id": {"sheet": "tlkpEmailPref", "column": "ETID"},
