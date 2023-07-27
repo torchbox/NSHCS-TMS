@@ -2,6 +2,7 @@ SIMPLE_REFERENCE_MAPPING = {
     "TraineeStatus": {
         "id": {"sheet": "tlkpStatus", "column": "STID"},
         "title": {"sheet": "tlkpStatus", "column": "STSTAT"},
+        "order": {"sheet": "tlkpStatus", "column": "STORDER"},
     },
     "EmailPreference": {
         "id": {"sheet": "tlkpEmailPref", "column": "ETID"},
@@ -75,6 +76,7 @@ SIMPLE_REFERENCE_MAPPING = {
     "HSSTPathway": {
         "id": {"sheet": "tlkpHSSTPathway", "column": "PTID"},
         "title": {"sheet": "tlkpHSSTPathway", "column": "PTDESC"},
+        "code": {"sheet": "tlkpHSSTPathway", "column": "PTCODE"},
     },
     "Specialism": {
         "id": {"sheet": "tlkpSpecialism", "column": "SPID"},
