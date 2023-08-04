@@ -100,13 +100,13 @@ def transfer_support_record(path, sheets):
         trainee_ids = []
         dates = []
         comments = []
-        
+
         for i, row in sheets[OLD_SUPPORT_SHEET_NAME].iterrows():
             ids.append(row['PSID'])
             trainee_ids.append(row['RGID'])
             dates.append(row['PSDT'])
             comments.append(row['PSDESC'])
-        
+
 
         srs = pd.DataFrame(data={"id": ids, "trainee_id": trainee_ids, "date": dates, "comments": comments})
 
@@ -121,7 +121,7 @@ def transfer_trainee_contact(path, sheets):
                       date_format='YYYY-MM-DD',
                       datetime_format='YYYY-MM-DD'
     ) as writer:
-        
+
         id = []
         trainee = []
         type = []
@@ -295,7 +295,7 @@ def transfer_exit_assessment_record(path, sheets):
             comments.append(row['OSCMNT'])
 
         ears = pd.DataFrame(
-            data={"id": ids, "training_record_id": training_ids, "date": dates, "type_id": types, "result_id": results, "comments": comments}
+            data={"id": ids, "training_record_id": training_ids, "date": dates, "type_id": types, "outcome_id": results, "comments": comments}
         )
         ears.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
@@ -495,8 +495,8 @@ def transfer_trainees(path, sheets):
             pd.notna(row['RGHCNM']) or \
             pd.notna(row['RGHCNUM']) or \
             pd.notna(row['RGAHCS']) or \
-            pd.notna(row['RGOLEXT']): 
-        
+            pd.notna(row['RGOLEXT']):
+
             next_training_record_id = next_training_record_cnt
             transfer_training_record_separate(
                 path=path,
@@ -506,7 +506,7 @@ def transfer_trainees(path, sheets):
                 hei_qualification_outcome=row['RGMScOTCM'],
                 hei_extension=row['RGMScEX'],
                 hei_extension_date=row['RGMScEXDT'],
-                hei_extension_date_comments=row['RGMSCEXDTL'],
+                hei_extension_comments=row['RGMSCEXDTL'],
                 program_certification=row['RGCERTIS'],
                 program_certification_date=row['RGCERTDT'],
                 hsst_pathway=row['RGHCPATH'],
@@ -562,7 +562,7 @@ def transfer_trainees(path, sheets):
                 )
 
             next_training_record_cnt = next_training_record_cnt + 1
-        else: 
+        else:
             next_training_record_id = None
 
         if pd.notna(row['RGSTAT']):
@@ -579,7 +579,7 @@ def transfer_trainees(path, sheets):
 
         training_records.append(next_training_record_id)
         post_trainings.append(next_post_training_id)
-    
+
     ts =  pd.DataFrame(
         data= {
             "id": ids,
@@ -631,7 +631,7 @@ def transfer_trainees(path, sheets):
         ts.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
 
-def transfer_training_record_separate(path, id, hei_qualification_completed, hei_qualification_date, hei_qualification_outcome, hei_extension, hei_extension_date, hei_extension_date_comments, program_certification, program_certification_date, hsst_pathway, hsst_portfolio_completed, hsst_portfolio_completion_date, hsst_arp_completed, hsst_arp_completion_date, hsst_d_clin_part_a_completed, hsst_d_clin_part_a_completion_date, hsst_d_clin_part_b_completed, hsst_d_clin_part_b_completion_date, hsst_d_clin_part_c1_completed, hsst_d_clin_part_c1_completion_date, hsst_d_clin_part_c2_completed, hsst_d_clin_part_c2_completion_date, hsst_fcrpath_completed, hsst_fcrpath_completion_date, hsst_iaps_completed, hsst_iaps_completion_date, hsst_phd_completed, hsst_phd_completion_date, hsst_ceng_completed, hsst_ceng_completion_date, hsst_portfolio_signed, hsst_portfolio_signed_date, program_leaving_date, program_leaving_reason, program_leaving_comments, reasonable_adjustments, reasonable_adjustments_comments, hpcp_registration, hpcp_registration_date, hsst_expected_exit, specalism, recruitment_method, hei_awards, portfolio_expected_completion_date, portfolio_actual_completion_date, hcpc_signoff_required, hcpc_counter_signoff_required, hcpc_signoff_name, hcpc_signoff_number, ahcs_registration, portfolio_extended, hsst_start_month, hsst_start_year, hsst_expected_completion_month, hsst_expected_completion_year, stp_start_month, stp_start_year, stp_expected_completion_month, stp_expected_completion_year):
+def transfer_training_record_separate(path, id, hei_qualification_completed, hei_qualification_date, hei_qualification_outcome, hei_extension, hei_extension_date, hei_extension_comments, program_certification, program_certification_date, hsst_pathway, hsst_portfolio_completed, hsst_portfolio_completion_date, hsst_arp_completed, hsst_arp_completion_date, hsst_d_clin_part_a_completed, hsst_d_clin_part_a_completion_date, hsst_d_clin_part_b_completed, hsst_d_clin_part_b_completion_date, hsst_d_clin_part_c1_completed, hsst_d_clin_part_c1_completion_date, hsst_d_clin_part_c2_completed, hsst_d_clin_part_c2_completion_date, hsst_fcrpath_completed, hsst_fcrpath_completion_date, hsst_iaps_completed, hsst_iaps_completion_date, hsst_phd_completed, hsst_phd_completion_date, hsst_ceng_completed, hsst_ceng_completion_date, hsst_portfolio_signed, hsst_portfolio_signed_date, program_leaving_date, program_leaving_reason, program_leaving_comments, reasonable_adjustments, reasonable_adjustments_comments, hpcp_registration, hpcp_registration_date, hsst_expected_exit, specalism, recruitment_method, hei_awards, portfolio_expected_completion_date, portfolio_actual_completion_date, hcpc_signoff_required, hcpc_counter_signoff_required, hcpc_signoff_name, hcpc_signoff_number, ahcs_registration, portfolio_extended, hsst_start_month, hsst_start_year, hsst_expected_completion_month, hsst_expected_completion_year, stp_start_month, stp_start_year, stp_expected_completion_month, stp_expected_completion_year):
     SHEET_NAME = "TrainingRecord"
     pts = pd.DataFrame(
         data= {
@@ -642,7 +642,7 @@ def transfer_training_record_separate(path, id, hei_qualification_completed, hei
                 "hei_awarding_institution_id": hei_awards,
                 "hei_extension": hei_extension,
                 "hei_extension_date": hei_extension_date,
-                "hei_extension_date_comments": hei_extension_date_comments,
+                "hei_extension_comments": hei_extension_comments,
                 "program_certification": program_certification,
                 "program_certification_date": program_certification_date,
                 "program_leaving_date": program_leaving_date,
@@ -650,18 +650,18 @@ def transfer_training_record_separate(path, id, hei_qualification_completed, hei
                 "program_leaving_comments": program_leaving_comments,
                 "hsst_pathway_id": hsst_pathway,
                 "hsst_portfolio_completed": hsst_portfolio_completed,
-                "hsst_portfolio_completion_date": hsst_portfolio_completion_date,
+                "hsst_portfolio_compl_date": hsst_portfolio_completion_date,
                 "hsst_expected_exit_date": hsst_expected_exit,
                 "hsst_arp_completed": hsst_arp_completed,
                 "hsst_arp_completion_date": hsst_arp_completion_date,
-                "hsst_d_clin_part_a_completed": hsst_d_clin_part_a_completed,
-                "hsst_d_clin_part_a_completion_date": hsst_d_clin_part_a_completion_date,
-                "hsst_d_clin_part_b_completed": hsst_d_clin_part_b_completed,
-                "hsst_d_clin_part_b_completion_date": hsst_d_clin_part_b_completion_date,
-                "hsst_d_clin_part_c1_completed": hsst_d_clin_part_c1_completed,
-                "hsst_d_clin_part_c1_completion_date": hsst_d_clin_part_c1_completion_date,
-                "hsst_d_clin_part_c2_completed": hsst_d_clin_part_c2_completed,
-                "hsst_d_clin_part_c2_completion_date": hsst_d_clin_part_c2_completion_date,
+                "hsst_dclin_part_a_completed": hsst_d_clin_part_a_completed,
+                "hsst_dclin_part_a_comp_date": hsst_d_clin_part_a_completion_date,
+                "hsst_dclin_part_b_completed": hsst_d_clin_part_b_completed,
+                "hsst_dclin_part_b_comp_date": hsst_d_clin_part_b_completion_date,
+                "hsst_dclin_part_c1_completed": hsst_d_clin_part_c1_completed,
+                "hsst_dclin_part_c1_comp_date": hsst_d_clin_part_c1_completion_date,
+                "hsst_dclin_part_c2_completed": hsst_d_clin_part_c2_completed,
+                "hsst_dclin_part_c2_comp_date": hsst_d_clin_part_c2_completion_date,
                 "hsst_fcrpath_completed": hsst_fcrpath_completed,
                 "hsst_fcrpath_completion_date": hsst_fcrpath_completion_date,
                 "hsst_iaps_completed": hsst_iaps_completed,
@@ -674,22 +674,22 @@ def transfer_training_record_separate(path, id, hei_qualification_completed, hei
                 "hsst_portfolio_signed_date": hsst_portfolio_signed_date,
                 "hsst_start_month": [hsst_start_month],
                 "hsst_start_year": [hsst_start_year],
-                "hsst_expected_completion_month": [hsst_expected_completion_month],
-                "hsst_expected_completion_year": [hsst_expected_completion_year],
+                "hsst_expected_compl_month": [hsst_expected_completion_month],
+                "hsst_expected_compl_year": [hsst_expected_completion_year],
                 "reasonable_adjustments": reasonable_adjustments,
-                "reasonable_adjustments_comments": reasonable_adjustments_comments,
+                "reasonable_adj_comments": reasonable_adjustments_comments,
                 "stp_start_month": [stp_start_month],
                 "stp_start_year": [stp_start_year],
-                "stp_expected_completion_month": [stp_expected_completion_month],
+                "stp_expected_compl_month": [stp_expected_completion_month],
                 "stp_expected_completion_year": [stp_expected_completion_year],
-                "specalism_id": specalism,
+                "specialism_id": specalism,
                 "recruitment_method_id": recruitment_method,
-                "portfolio_expected_completion_date": portfolio_expected_completion_date,
-                "portfolio_actual_completion_date": portfolio_actual_completion_date,
-                "hpcp_registration": hpcp_registration,
-                "hpcp_registration_date": hpcp_registration_date,
+                "portf_exp_completion_date": portfolio_expected_completion_date,
+                "portf_act_completion_date": portfolio_actual_completion_date,
+                "hcpc_registration": hpcp_registration,
+                "hcpc_registration_date": hpcp_registration_date,
                 "hcpc_signoff_required": hcpc_signoff_required,
-                "hcpc_counter_signoff_required": hcpc_counter_signoff_required,
+                "hcpc_counter_signoff_require": hcpc_counter_signoff_required,
                 "hcpc_signoff_name": hcpc_signoff_name,
                 "hcpc_signoff_number": hcpc_signoff_number,
                 "ahcs_registration": ahcs_registration,
@@ -754,9 +754,9 @@ def transfer_locations(path, sheets):
                 location_ids.append(row['HSID'])
                 employer_ids.append(row['HSTRUST'])
                 next_lookup_cnt = next_lookup_cnt + 1
-            else: 
+            else:
                 next_lookup_id = None
-                
+
 
         employer_locations = pd.DataFrame(
             data={"id": ids, "title": titles}
