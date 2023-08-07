@@ -111,10 +111,6 @@ SIMPLE_REFERENCE_MAPPING = {
         "id": {"sheet": "tlkpOSFAResult", "column": "RSID"},
         "title": {"sheet": "tlkpOSFAResult", "column": "RSLT"},
     },
-    "AssessmentType": {
-        "id": {"sheet": "tlkpOSFAType", "column": "OTID"},
-        "title": {"sheet": "tlkpOSFAType", "column": "OTTYPE"},
-    },
     "Employer": {
         "id": {"sheet": "tlkpTrusts", "column": "TSID"},
         "is_nhs": {"sheet": "tlkpTrusts", "column": "TSNHS"},
