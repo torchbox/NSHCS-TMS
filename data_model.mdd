@@ -43,6 +43,9 @@
         TrainingRecord ||--o{ ModuleProgression: has
 
         SupportRecord }o--|| Trainee: has
+        SupportRecord }o--o| TraineeStatus: has
+        SupportRecord }o--o| SupportIssueType: has
+        SupportRecord ||--o{ SupportRecordLog: has
 
         AnnualReviewProgression }o--|| Outcome: hasOutcome
         AnnualReviewProgression }o--o| Outcome: hasRevisedOutcome
@@ -355,13 +358,27 @@
         bool enable_notification "Parental leave or career breaks require notifications if they are within 30days"
     }
     SupportRecord {
-        int id
+        int id PK
         int trainee_id FK
-        date date "Support Record Date Entered onto DB, Null: True"
+        int case_type_id FK "Support Issue Type, Null: True"
+        date open_date "Support Record Date Entered onto DB"
         string(MAX) comments "Support Description, Null: True"
+        int support_status_id FK "Support Status"
+        date close_date "Support Record Date Closed, Null: True"
+        int case_manager_id FK "Support Case Manager, Null: True"
+    }
+    SupportRecordLog {
+        int id PK
+        int support_record_id FK "Support Record ID"
+        entry_date date "Support Record Log Entry Date"
+        comments string(MAX) "Support Record Log Entry details"
+    }
+    SupportIssueType {
+        int id PK
+        string(100) title "Static Entity"
     }
     TraineeStatuses {
-        int id
+        int id PK
         int trainee_id FK
         int trainee_status_id FK
     }
