@@ -44,8 +44,10 @@
 
         SupportRecord }o--|| Trainee: has
         SupportRecord }o--o| TraineeStatus: has
-        SupportRecord }o--o| SupportIssueType: has
         SupportRecord ||--o{ SupportRecordLog: has
+
+        SupportRecordIssues }o--|| SupportRecord: has
+        SupportRecordIssues }o--|| SupportIssueType: has
 
         AnnualReviewProgression }o--|| Outcome: hasOutcome
         AnnualReviewProgression }o--o| Outcome: hasRevisedOutcome
@@ -67,6 +69,7 @@
             int id PK
             string(100) title "Static Entity"
             int order
+            bool is_support
         }
         EmailPreference {
             int id PK
@@ -360,7 +363,6 @@
     SupportRecord {
         int id PK
         int trainee_id FK
-        int case_type_id FK "Support Issue Type, Null: True"
         date open_date "Support Record Date Entered onto DB"
         string(MAX) comments "Support Description, Null: True"
         int support_status_id FK "Support Status"
@@ -370,8 +372,13 @@
     SupportRecordLog {
         int id PK
         int support_record_id FK "Support Record ID"
-        entry_date date "Support Record Log Entry Date"
-        comments string(MAX) "Support Record Log Entry details"
+        date entry_date "Support Record Log Entry Date"
+        string(MAX) comments "Support Record Log Entry details"
+    }
+    SupportRecordIssues {
+        int id PK
+        int support_record_id FK
+        int issue_type_id FK
     }
     SupportIssueType {
         int id PK
@@ -381,6 +388,7 @@
         int id PK
         int trainee_id FK
         int trainee_status_id FK
+        int support_record_id FK "Support Record ID, Null: True"
     }
     EmployerLocations {
         int id PK
