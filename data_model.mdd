@@ -41,6 +41,7 @@
         TrainingRecord }o--o| HEIOutcome: has
         TrainingRecord }o--o| Specialism: has
         TrainingRecord ||--o{ ModuleProgression: has
+        TrainingRecord }o--o| Season: has
 
         SupportRecord }o--|| Trainee: has
         SupportRecord }o--o| TraineeStatus: has
@@ -101,6 +102,7 @@
         int email_preference_id FK "Null: True"
         string(100) personal_phone "Null: True"
         int funding_provider_id FK "Null: True"
+        int legacy_funding_provider_id FK "Null: True"
         string(100) funding_provider_comments "Null: True"
         int training_program_id FK "Null: True"
         int cohort_number "HSST Cohort Number, Null: True"
@@ -250,6 +252,9 @@
 
         int progress "Overall trainee progress"
         date progress_updated_at "Last time progress was synced with OneFile"
+
+        int next_exit_assess_year "Year for next expected exit assessment, Null: True"
+        int next_exit_assess_season_id FK "Season for next expected exit assessment, Null: True"
     }
     HEIAwardingInstitution {
         int id PK
@@ -396,4 +401,8 @@
         string(200) display "OneFile Unit display field"
         string(50) ndaq_code "OneFile Unit NDAQ_CODE field"
         int progress
+    }
+    Season {
+        int id PK
+        string(50) title "Static Entity"
     }

@@ -115,5 +115,9 @@ SIMPLE_REFERENCE_MAPPING = {
         "id": {"sheet": "tlkpTrusts", "column": "TSID"},
         "is_nhs": {"sheet": "tlkpTrusts", "column": "TSNHS"},
         "title": {"sheet": "tlkpTrusts", "column": "TSTRUST"},
+    },
+    "Season": {
+        "id": {"sheet": "tlkpSeason", "column": "SNID"},
+        "title": {"sheet": "tlkpSeason", "column": "SNSSN"},
     }
 }
