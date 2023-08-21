@@ -108,7 +108,7 @@ def transfer_support_record(path, sheets):
             comments.append(row['PSDESC'])
 
 
-        srs = pd.DataFrame(data={"id": ids, "trainee_id": trainee_ids, "date": dates, "comments": comments})
+        srs = pd.DataFrame(data={"id": ids, "trainee_id": trainee_ids, "open_date": dates, "comments": comments})
 
         srs.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
