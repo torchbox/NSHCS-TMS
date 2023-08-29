@@ -10,6 +10,7 @@
         Trainee ||--o| TrainingRecord : has
         Trainee }o--o| Gender: has
         Trainee }o--o| Ethnicity: has
+        Trainee }o--o| DisabilityStatus: has
         Trainee }o--o| DisabilityCategory: has
         Trainee }o--o| FundingProvider: has
         Trainee }o--o| Religion: has
@@ -83,7 +84,7 @@
         date date_of_birth "Null: True"
         int ethnicity_id FK "Null: True"
         string(150) ethnicity_other "Null: True"
-        int disability_status "Yes, no, prefer not to say; Null: True"
+        int disability_status_id FK "Null: True"
         int disable_category_id FK "Null: True"
         string(MAX) disability_details "Null: True"
         int gender_id FK "Null: True"
@@ -158,8 +159,12 @@
         string(100) title "Static entity"
     }
     DisabilityCategory {
-        int id PK "Disability ID"
-        String category "Static entity"
+        int id PK "Disability category ID"
+        String title "Static entity"
+    }
+    DisabilityStatus {
+        int id PK "Disability status ID"
+        String title "Static entity"
     }
     Religion {
         int id PK "Religion ID"
