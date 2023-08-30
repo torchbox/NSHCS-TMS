@@ -530,7 +530,7 @@ def transfer_trainees(path, sheets):
                 hsst_fcrpath_completion_date=row['RGHCFRCDT'],
                 hsst_iaps_completed=row['RGHCIAPS'],
                 hsst_iaps_completion_date=row['RGHCIAPSDT'],
-                hsst_phd_completed=row['RGHCIAPSDT'],
+                hsst_phd_completed=row['RGHCPHD'],
                 hsst_phd_completion_date=row['RGHCPHDDT'],
                 hsst_ceng_completed=row['RGHCCENG'],
                 hsst_ceng_completion_date=row['RGHCCENGDT'],
