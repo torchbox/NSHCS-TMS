@@ -83,6 +83,7 @@
         string(100) surname "Null: True"
         string(100) forename "Null: True"
         date date_of_birth "Null: True"
+        string(100) pronouns "Nell: True"
         int ethnicity_id FK "Null: True"
         string(150) ethnicity_other "Null: True"
         int disability_status "Yes, no, prefer not to say; Null: True"
