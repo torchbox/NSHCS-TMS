@@ -561,7 +561,7 @@ def transfer_trainees(path, sheets):
                 hcpc_counter_signoff_required=row['RGHCSREQ'],
                 hcpc_signoff_name=row['RGHCNM'],
                 hcpc_signoff_number=row['RGHCNUM'],
-                ahcs_registration=row['RGHCNUM'],
+                ahcs_registration=row['RGAHCS'],
                 portfolio_extended=row['RGOLEXT'],
                 next_exit_assessment_year=row['RGEXICYR'],
                 next_exit_assessment_season_id=row['RGEXICSN'],
