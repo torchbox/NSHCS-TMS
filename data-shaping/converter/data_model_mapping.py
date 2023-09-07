@@ -105,7 +105,11 @@ SIMPLE_REFERENCE_MAPPING = {
     },
     "Outcome": {
         "id": {"sheet": "tlkpReviewOutcomes", "column": "AOID"},
-        "title": {"sheet": "tlkpReviewOutcomes", "column": "AOCODE"},
+        "program_id": {"sheet": "tlkpReviewOutcomes", "column": "AOPRGM"},
+        "outcome_code": {"sheet": "tlkpReviewOutcomes", "column": "AOCODE"},
+        "outcome_code_display": {"sheet": "tlkpReviewOutcomes", "column": "AOOTCODE"},
+        "short_description": {"sheet": "tlkpReviewOutcomes", "column": "AOSTM"},
+        "long_description": {"sheet": "tlkpReviewOutcomes", "column": "AODESC"},
     },
     "ExitAssessmentOutcome": {
         "id": {"sheet": "tlkpOSFAResult", "column": "RSID"},

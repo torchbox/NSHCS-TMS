@@ -302,6 +302,7 @@
     AnnualReviewProgression {
         int id PK
         int training_record_id FK
+        int training_program_id FK "Null: True"
         date date_of_review "Review of Progression Date, Null: True"
         int outcome_id FK "Review of Progression Outcome, pass/fail?, Null: True"
         int revised_outcome_id FK "Review of Progression Revised Outcome, Null: True"
