@@ -10,6 +10,7 @@
         Trainee ||--o| TrainingRecord : has
         Trainee }o--o| Gender: has
         Trainee }o--o| Ethnicity: has
+        Trainee }o--o| DisabilityStatus: has
         Trainee }o--o| DisabilityCategory: has
         Trainee }o--o| FundingProvider: has
         Trainee }o--o| Religion: has
@@ -44,12 +45,13 @@
 
         SupportRecord }o--|| Trainee: has
         SupportRecord }o--o| TraineeStatus: has
-        SupportRecord }o--o| SupportIssueType: has
         SupportRecord ||--o{ SupportRecordLog: has
+
+        SupportRecordIssues }o--|| SupportRecord: has
+        SupportRecordIssues }o--|| SupportIssueType: has
 
         ReviewProgression }o--|| Outcome: hasOutcome
         ReviewProgression }o--o| Outcome: hasRevisedOutcome
-        ReviewProgression }o--o| TrainingProgram: has
 
         PostTraining }o--|| JobSector: has
         PostTraining }o--o| NHSBand: has
@@ -66,6 +68,7 @@
             int id PK
             string(100) title "Static Entity"
             int order
+            bool is_support
         }
         EmailPreference {
             int id PK
@@ -79,9 +82,10 @@
         string(100) surname "Null: True"
         string(100) forename "Null: True"
         date date_of_birth "Null: True"
+        string(100) pronouns "Nell: True"
         int ethnicity_id FK "Null: True"
         string(150) ethnicity_other "Null: True"
-        int disability_status "Yes, no, prefer not to say; Null: True"
+        int disability_status_id FK "Null: True"
         int disable_category_id FK "Null: True"
         string(MAX) disability_details "Null: True"
         int gender_id FK "Null: True"
@@ -118,7 +122,7 @@
     PostTraining {
         int id PK
         int job_sector_id FK "First Job Sector after training"
-        string(255) description "First Job description (title)"
+        string(255) description "First Job description (title), Null: True"
         int employer_id FK "First Job after Training, Null: True"
         string(100) non_nhs_employer "First Job after training Employer name (if not NHS), Null: True"
         int nhs_band_id FK "First Job after training NHS Band, Null: True"
@@ -156,8 +160,12 @@
         string(100) title "Static entity"
     }
     DisabilityCategory {
-        int id PK "Disability ID"
-        String category "Static entity"
+        int id PK "Disability category ID"
+        String title "Static entity"
+    }
+    DisabilityStatus {
+        int id PK "Disability status ID"
+        String title "Static entity"
     }
     Religion {
         int id PK "Religion ID"
@@ -359,7 +367,6 @@
     SupportRecord {
         int id PK
         int trainee_id FK
-        int case_type_id FK "Support Issue Type, Null: True"
         date open_date "Support Record Date Entered onto DB"
         string(MAX) comments "Support Description, Null: True"
         int support_status_id FK "Support Status"
@@ -369,8 +376,13 @@
     SupportRecordLog {
         int id PK
         int support_record_id FK "Support Record ID"
-        entry_date date "Support Record Log Entry Date"
-        comments string(MAX) "Support Record Log Entry details"
+        date entry_date "Support Record Log Entry Date"
+        string(MAX) comments "Support Record Log Entry details"
+    }
+    SupportRecordIssues {
+        int id PK
+        int support_record_id FK
+        int issue_type_id FK
     }
     SupportIssueType {
         int id PK
@@ -380,6 +392,7 @@
         int id PK
         int trainee_id FK
         int trainee_status_id FK
+        int support_record_id FK "Support Record ID, Null: True"
     }
     EmployerLocations {
         int id PK

@@ -44,6 +44,10 @@ SIMPLE_REFERENCE_MAPPING = {
         "id": {"sheet": "tlkpDisabilityCategory", "column": "DCID"},
         "title": {"sheet": "tlkpDisabilityCategory", "column": "DCDESC"},
     },
+    "DisabilityStatus": {
+        "id": {"sheet": "tlkpDisabilityAnswer", "column": "DSID"},
+        "title": {"sheet": "tlkpDisabilityCategory", "column": "DSDESC"},
+    },
     "Religion": {
         "id": {"sheet": "tlkpReligion", "column": "RLID"},
         "title": {"sheet": "tlkpReligion", "column": "RLREL"},
