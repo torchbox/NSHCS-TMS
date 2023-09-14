@@ -89,7 +89,7 @@
         int ethnicity_id FK "Null: True"
         string(150) ethnicity_other "Null: True"
         int disability_status_id FK "Null: True"
-        int disable_category_id FK "Null: True"
+        int disability_category_id FK "Null: True"
         string(MAX) disability_details "Null: True"
         int gender_id FK "Null: True"
         int sexual_orientation_id FK "Null: True"
@@ -111,7 +111,7 @@
         string(100) funding_provider_comments "Null: True"
         int training_program_id FK "Null: True"
         int cohort_number "HSST Cohort Number, Null: True"
-        decimal whole_time_equivilent "Whole-time equivalent (if part time), Null: True"
+        decimal whole_time_equivalent "Whole-time equivalent (if part time), Null: True"
         int onefile_id "OneFile ID (if used OneFile), Null: True"
         string(100) ecc_reference "Null: True"
         bool deferred "Trainee on a programme deferral (Y/N), Null: True"
@@ -333,7 +333,7 @@
         string title "Static entity"
     }
     EmploymentRecord {
-        int ID PK
+        int id PK
         int trainee_id FK
         int employer_id FK "Employer/Trust"
         int specific_site_id FK "Specific Site, Null: True"
@@ -404,7 +404,7 @@
     EmployerLocations {
         int id PK
         int employer_id FK
-        int employer_location_id FK
+        int location_id FK
     }
     ModuleProgression {
         int id PK
