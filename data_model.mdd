@@ -33,8 +33,7 @@
         EmployerLocations }o--|| Employer: has
         EmployerLocations }o--|| EmployerLocation: has
 
-        TrainingRecord ||--o{ AnnualReviewProgression: has
-        TrainingRecord ||--o{ MidReviewProgression: has
+        TrainingRecord ||--o{ ReviewProgression: has
         TrainingRecord ||--o{ ExitAssessmentRecord: has
         TrainingRecord }o--o| RecruitmentMethod: has
         TrainingRecord }o--o| HSSTPathway: has
@@ -51,11 +50,8 @@
         SupportRecordIssues }o--|| SupportRecord: has
         SupportRecordIssues }o--|| SupportIssueType: has
 
-        AnnualReviewProgression }o--|| Outcome: hasOutcome
-        AnnualReviewProgression }o--o| Outcome: hasRevisedOutcome
-
-        MidReviewProgression }o--|| Outcome: hasOutcome
-        MidReviewProgression }o--o| Outcome: hasRevisedOutcome
+        ReviewProgression }o--|| Outcome: hasOutcome
+        ReviewProgression }o--o| Outcome: hasRevisedOutcome
 
         PostTraining }o--|| JobSector: has
         PostTraining }o--o| NHSBand: has
@@ -66,6 +62,7 @@
         ExitAssessmentRecord }o--o| AssessmentType: has
         ExitAssessmentRecord }o--o| ExitAssessmentOutcome: has
 
+        Outcome }o--|| TrainingProgram: has
 
         TraineeStatus {
             int id PK
@@ -111,7 +108,7 @@
         string(100) funding_provider_comments "Null: True"
         int training_program_id FK "Null: True"
         int cohort_number "HSST Cohort Number, Null: True"
-        decimal whole_time_equivilent "Whole-time equivalent (if part time), Null: True"
+        decimal whole_time_equivalent "Whole-time equivalent (if part time), Null: True"
         int onefile_id "OneFile ID (if used OneFile), Null: True"
         string(100) ecc_reference "Null: True"
         bool deferred "Trainee on a programme deferral (Y/N), Null: True"
@@ -308,25 +305,21 @@
         int id PK "Contact Type ID"
         string(100) title "Static entity"
     }
-    AnnualReviewProgression {
+    ReviewProgression {
         int id PK
         int training_record_id FK
         date date_of_review "Review of Progression Date, Null: True"
-        int outcome_id FK "Review of Progression Outcome, pass/fail?, Null: True"
+        int outcome_id FK "Review of Progression Outcome, pass/fail?"
         int revised_outcome_id FK "Review of Progression Revised Outcome, Null: True"
-        string(MAX) comments "Review of Progression Comments, Null: True"
-    }
-    MidReviewProgression {
-        int id PK
-        int training_record FK
-        date date_of_review "Review of Progression Date, Null: True"
-        int outcome FK "Review of Progression Outcome, pass/fail?"
-        int revised_outcome FK "Review of Progression Revised Outcome, Null: True"
         string(MAX) comments "Review of Progression Comments, Null: True"
     }
     Outcome {
         int id PK
-        string title "Static entity"
+        int program_id FK "Training program"
+        int outcome_code "Outcome Code (backend)"
+        string(10) outcome_code_display "Outcome Code Displayed on Screen"
+        string(255) short_description "Outcome Short Description"
+        string(MAX) long_description "Outcome Long Description"
     }
     ExitAssessmentOutcome {
         int id PK
