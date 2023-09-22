@@ -220,10 +220,10 @@ def transfer_mid_review_progression(path, sheets):
         arps = pd.DataFrame(
             data={
                 "id": ids,
-                "training_record": training_records,
+                "training_record_id": training_records,
                 "date_of_review": date_of_reviews,
-                "outcome": outcomes,
-                "revised_outcome": revised_outcomes,
+                "outcome_id": outcomes,
+                "revised_outcome_id": revised_outcomes,
                 "comments": comments,
             }
         )
@@ -561,7 +561,7 @@ def transfer_trainees(path, sheets):
                 hcpc_counter_signoff_required=row['RGHCSREQ'],
                 hcpc_signoff_name=row['RGHCNM'],
                 hcpc_signoff_number=row['RGHCNUM'],
-                ahcs_registration=row['RGAHCS'],
+                ahcs_registration=row.get('RGAHCS', 0),
                 portfolio_extended=row['RGOLEXT'],
                 next_exit_assessment_year=row['RGEXICYR'],
                 next_exit_assessment_season_id=row['RGEXICSN'],
@@ -597,8 +597,8 @@ def transfer_trainees(path, sheets):
             "date_of_birth": date_of_births,
             "ethnicity_id": ethnicities,
             "ethnicity_other": ethnicity_others,
-            "disability_status": disability_statuses,
-            "disable_category_id": disable_categories,
+            "disability_status_id": disability_statuses,
+            "disability_category_id": disable_categories,
             "disability_details": disability_details,
             "gender_id": genders,
             "sexual_orientation_id": sexual_orientations,
@@ -621,7 +621,7 @@ def transfer_trainees(path, sheets):
             "training_program_id": training_programs,
             "cohort_number": cohort_numbers,
             "status": statuses,
-            "whole_time_equivilent": whole_time_equivilents,
+            "whole_time_equivalent": whole_time_equivilents,
             "onefile_id": onefile_ids,
             "ecc_reference": ecc_references,
             "deferred": deferreds,

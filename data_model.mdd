@@ -86,7 +86,7 @@
         int ethnicity_id FK "Null: True"
         string(150) ethnicity_other "Null: True"
         int disability_status_id FK "Null: True"
-        int disable_category_id FK "Null: True"
+        int disability_category_id FK "Null: True"
         string(MAX) disability_details "Null: True"
         int gender_id FK "Null: True"
         int sexual_orientation_id FK "Null: True"
@@ -326,7 +326,7 @@
         string title "Static entity"
     }
     EmploymentRecord {
-        int ID PK
+        int id PK
         int trainee_id FK
         int employer_id FK "Employer/Trust"
         int specific_site_id FK "Specific Site, Null: True"
@@ -397,7 +397,7 @@
     EmployerLocations {
         int id PK
         int employer_id FK
-        int employer_location_id FK
+        int location_id FK
     }
     ModuleProgression {
         int id PK
