@@ -44,8 +44,11 @@
         TrainingRecord }o--o| Season: has
 
         SupportRecord }o--|| Trainee: has
-        SupportRecord }o--o| TraineeStatus: has
+        SupportRecord }o--|| TraineeStatus: has
         SupportRecord ||--o{ SupportRecordLog: has
+        SupportRecord ||--o| User: has
+
+        SupportRecordLog ||--o| User: has
 
         SupportRecordIssues }o--|| SupportRecord: has
         SupportRecordIssues }o--|| SupportIssueType: has
@@ -378,6 +381,8 @@
         int support_record_id FK "Support Record ID"
         date entry_date "Support Record Log Entry Date"
         string(MAX) comments "Support Record Log Entry details"
+        date last_edit_at "Support Record Log Entry Last Edited Date, Null: True"
+        int last_edit_by_id FK "Support Record Log Entry Last Edited By, Null: True"
     }
     SupportRecordIssues {
         int id PK
