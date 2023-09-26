@@ -46,8 +46,9 @@
         SupportRecord }o--|| Trainee: has
         SupportRecord }o--|| TraineeStatus: has
         SupportRecord ||--o{ SupportRecordLog: has
-        SupportRecord ||--o| User: has
+        SupportRecord ||--o{ SupportRecordManager: has
 
+        SupportRecordManager }o--|| User: has
         SupportRecordLog ||--o| User: has
 
         SupportRecordIssues }o--|| SupportRecord: has
@@ -374,7 +375,6 @@
         string(MAX) comments "Support Description, Null: True"
         int support_status_id FK "Support Status"
         date close_date "Support Record Date Closed, Null: True"
-        int case_manager_id FK "Support Case Manager, Null: True"
     }
     SupportRecordLog {
         int id PK
@@ -383,6 +383,12 @@
         string(MAX) comments "Support Record Log Entry details"
         date last_edit_at "Support Record Log Entry Last Edited Date, Null: True"
         int last_edit_by_id FK "Support Record Log Entry Last Edited By, Null: True"
+    }
+    SupportRecordManager {
+        int id PK
+        int support_record_id FK
+        int case_manager_id FK
+        bool is_active "Is Active Case Manager (Y/N)"
     }
     SupportRecordIssues {
         int id PK
