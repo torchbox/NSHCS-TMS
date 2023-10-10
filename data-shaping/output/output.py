@@ -299,7 +299,7 @@ def transfer_exit_assessment_record(path, sheets):
         )
         ears.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
-def transfer_post_training(path, id, job_sector, description, job, non_nhs_employer, nhs_band, salary, contract_type, start_date, comments):
+def transfer_post_training(path, id, job_sector, description, job, non_nhs_employer, nhs_band, salary, other_educational_pursuits, contract_type, start_date, comments):
     SHEET_NAME = "PostTraining"
 
     pts = pd.DataFrame(
@@ -311,6 +311,7 @@ def transfer_post_training(path, id, job_sector, description, job, non_nhs_emplo
             "non_nhs_employer": [non_nhs_employer],
             "nhs_band_id": [nhs_band],
             "non_nhs_salary_id": [salary],
+            "other_educational_pursuits": [other_educational_pursuits],
             "contract_type_id": [contract_type],
             "start_date": [start_date],
             "comments": [comments],
@@ -440,6 +441,7 @@ def transfer_trainees(path, sheets):
                 non_nhs_employer=row['RGFREM'],
                 nhs_band=row['RGFJBAND'],
                 salary=row['RGFJSAL'],
+                other_educational_pursuits=row['RGFJOED'],
                 contract_type=row['RGFRCNT'],
                 start_date=row['RGFRSTDT'],
                 comments=row['RGFRCMT']

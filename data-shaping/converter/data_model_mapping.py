@@ -29,8 +29,8 @@ SIMPLE_REFERENCE_MAPPING = {
         "title": {"sheet": "tlkpContractType", "column": "COTYPE"},
     },
     "Title": {
-        "id": {"sheet": "tlkpTitle", "column": "id"},
-        "title": {"sheet": "tlkpTitle", "column": "title"},
+        "id": {"sheet": "tlkpTitle", "column": "TTID"},
+        "title": {"sheet": "tlkpTitle", "column": "TTTITLE"},
     },
     "Gender": {
         "id": {"sheet": "tlkpGender", "column": "GNID"},

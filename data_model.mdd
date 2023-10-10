@@ -131,6 +131,7 @@
         string(100) non_nhs_employer "First Job after training Employer name (if not NHS), Null: True"
         int nhs_band_id FK "First Job after training NHS Band, Null: True"
         int non_nhs_salary_id FK "First Job after training Salary for non-nhs salary, Null: True"
+        string(500) other_educational_pursuits "The field is when trainees inform us that their post training plans are 'Other Educational Pursuits', Null: True"
         int contract_type_id FK "First Job after training contract type, Null: True"
         date start_date "First Job after the training start date, Null: True"
         string(MAX) comments "Null: True"
@@ -141,7 +142,7 @@
     }
     JobSector {
         int id PK
-        string(25) title "Static Entity"
+        string(50) title "Static Entity"
     }
     NHSBand {
         int id PK
