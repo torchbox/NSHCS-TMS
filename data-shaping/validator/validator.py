@@ -1,12 +1,15 @@
 from .schema import VALIDATION_SCHEMA
 import pandera as pa
-import pandas as ps
+import pandas as pd
+
+# Remove the limit when printing rows to be able to see all validation issues
+pd.set_option('display.max_rows', None)
 
 
-def validate_dfs(dataframes: dict[str, ps.DataFrame]) -> bool:
+def validate_dfs(dataframes: dict[str, pd.DataFrame]) -> bool:
     validated_data = {}
     validation_success = True
-    
+
     for k, v in dataframes.items():
         if k in VALIDATION_SCHEMA:
             try:    
