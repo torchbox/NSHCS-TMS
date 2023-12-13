@@ -322,8 +322,8 @@
         int id PK
         int program_id FK "Training program"
         int outcome_code "Outcome Code (backend)"
-        string(10) outcome_code_display "Outcome Code Displayed on Screen"
-        string(255) short_description "Outcome Short Description"
+        string(10) outcome_code_display "Outcome Code Displayed on Screen, Null: True"
+        string(255) short_description "Outcome Short Description, Null: True"
         string(MAX) long_description "Outcome Long Description"
     }
     ExitAssessmentOutcome {

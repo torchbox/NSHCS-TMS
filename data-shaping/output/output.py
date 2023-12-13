@@ -41,7 +41,7 @@ def transfer_data(path: str, sheets: Dict[str, pd.DataFrame]):
 
 def transfer_leave_of_absence_record(path, sheets):
     SHEET_NAME = "LeaveOfAbsenceRecord"
-    SICK_LEAVE_SHEEt_NAME = "tblSickLeave"
+    SICK_LEAVE_SHEET_NAME = "tblSickLeave"
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
                       date_format='YYYY-MM-DD',
@@ -59,7 +59,7 @@ def transfer_leave_of_absence_record(path, sheets):
             ]
         )
 
-        df: pd.DataFrame = sheets[SICK_LEAVE_SHEEt_NAME]
+        df: pd.DataFrame = sheets[SICK_LEAVE_SHEET_NAME]
 
         for i, row in df.iterrows():
             id = row["SLID"]
