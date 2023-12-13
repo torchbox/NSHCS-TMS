@@ -16,8 +16,7 @@ reference_tables_validation_success = validate_dfs(reference_tables)
 data_tables_validation_success = validate_dfs(data_tables)
 
 if not (reference_tables_validation_success and data_tables_validation_success):
-    # exit()
-    pass
+    exit()
 
 if os.path.exists(OUTPUT_DATABASE_PATH):
     os.remove(OUTPUT_DATABASE_PATH)
