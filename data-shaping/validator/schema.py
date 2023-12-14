@@ -196,11 +196,15 @@ VALIDATION_SCHEMA = {
         "ARREVOTCM": pa.Column("Int64", nullable=True, coerce=True),
         "ARCMNTS": pa.Column(str, nullable=True),
     }),
-    # # MidReviewProgression
-    # "tblMRP": pa.DataFrameSchema({
-    #     "SNID": pa.Column(int),
-    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
-    # }),
+    # MidReviewProgression
+    "tblMRP": pa.DataFrameSchema({
+        "MRID": pa.Column(int),
+        "RGID": pa.Column(int),
+        "MRDT": pa.Column(date, nullable=True, coerce=True),
+        "MROTCM": pa.Column("Int64", coerce=True),
+        "MRREVOTCM": pa.Column("Int64", nullable=True, coerce=True),
+        "MRCMNTS": pa.Column(str, nullable=True),
+    }),
     # # EmploymentRecord
     # "tblEmployers": pa.DataFrameSchema({
     #     "SNID": pa.Column(int),
