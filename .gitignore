@@ -165,3 +165,5 @@ node_modules
 # Data Shaping data
 **/data-shaping/data/new_model/*.xlsx
 **/data-shaping/data/old_model/*.xlsx
+# ignore lockfiles
+**/data-shaping/data/old_model/*lock* 
