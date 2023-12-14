@@ -300,6 +300,7 @@ VALIDATION_SCHEMA = {
         "RGHCPHD": pa.Column(bool, coerce=True, nullable=True),
         "RGHCPHDDT": pa.Column(date, coerce=True, nullable=True),
         "RGHCCENG": pa.Column(bool, coerce=True, nullable=True),
+        # Pandera fails if entire column is empty and we try to coerce it to a date (unsure about other datatypes)
         "RGHCCENGDT": pa.Column(date, nullable=True),
         "RGHCSUP": pa.Column(bool, coerce=True, nullable=True),
         "RHCSUPDT": pa.Column(date, coerce=True, nullable=True),
