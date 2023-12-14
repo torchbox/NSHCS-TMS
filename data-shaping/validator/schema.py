@@ -187,11 +187,15 @@ VALIDATION_SCHEMA = {
         "CNENDT": pa.Column(date, nullable=True, coerce=True),
         "CNCURTO": pa.Column(bool, coerce=True),
     }),
-    # # AnnualReviewProgression
-    # "tblARP": pa.DataFrameSchema({
-    #     "SNID": pa.Column(int),
-    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
-    # }),
+    # AnnualReviewProgression
+    "tblARP": pa.DataFrameSchema({
+        "ARID": pa.Column(int),
+        "RGID": pa.Column(int),
+        "ARDT": pa.Column(date, nullable=True, coerce=True),
+        "AROTCM": pa.Column(int),
+        "ARREVOTCM": pa.Column("Int64", nullable=True, coerce=True),
+        "ARCMNTS": pa.Column(str, nullable=True),
+    }),
     # # MidReviewProgression
     # "tblMRP": pa.DataFrameSchema({
     #     "SNID": pa.Column(int),
