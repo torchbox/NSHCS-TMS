@@ -229,9 +229,12 @@ VALIDATION_SCHEMA = {
     #     "SNID": pa.Column(int),
     #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
     # }),
-    # # EmployerLocation
-    # "tlkpHospital": pa.DataFrameSchema({
-    #     "SNID": pa.Column(int),
-    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
-    # })
+    # EmployerLocations a bit of a freestyle validation as direct description not present in model
+    "tlkpHospital": pa.DataFrameSchema({
+        "HSID": pa.Column(int),
+        "HSNAME": pa.Column(str),
+        "HSTRUST": pa.Column("Int64", coerce=True, nullable=True),
+        "HSLETB": pa.Column("Int64", coerce=True, nullable=True),
+    })
+    # EmployerLocation only validated on output
 }
