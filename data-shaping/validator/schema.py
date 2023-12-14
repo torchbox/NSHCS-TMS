@@ -178,15 +178,15 @@ VALIDATION_SCHEMA = {
         "PSDESC": pa.Column(str, nullable=True),
     }),
     # TraineeContact
-    # "tblTraineeContacts": pa.DataFrameSchema({
-    #     "CNID": pa.Column(int),
-    #     "RGID": pa.Column(int),
-    #     "CNTYPE": pa.Column(int, nullable=True),
-    #     "CNCTCT": pa.Column(int, nullable=True),
-    #     "CNSTDT": pa.Column(date, nullable=True, coerce=True),
-    #     "CNENDT": pa.Column(date, nullable=True, coerce=True),
-    #     "CNCURTO": pa.Column(bool, coerce=True),
-    # }),
+    "tblTraineeContacts": pa.DataFrameSchema({
+        "CNID": pa.Column(int),
+        "RGID": pa.Column("Int64", coerce=True),
+        "CNTYPE": pa.Column("Int64", nullable=True, coerce=True),
+        "CNCTCT": pa.Column("Int64", nullable=True, coerce=True),
+        "CNSTDT": pa.Column(date, nullable=True, coerce=True),
+        "CNENDT": pa.Column(date, nullable=True, coerce=True),
+        "CNCURTO": pa.Column(bool, coerce=True),
+    }),
     # # AnnualReviewProgression
     # "tblARP": pa.DataFrameSchema({
     #     "SNID": pa.Column(int),
