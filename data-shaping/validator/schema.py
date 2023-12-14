@@ -1,4 +1,5 @@
 import pandera as pa
+from datetime import date
 
 VALIDATION_SCHEMA = {
     # TraineeStatus
@@ -159,5 +160,54 @@ VALIDATION_SCHEMA = {
     "tlkpSeason": pa.DataFrameSchema({
         "SNID": pa.Column(int),
         "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
-    })
+    }),
+    # LeaveOfAbsenceRecord
+    "tblSickLeave": pa.DataFrameSchema({
+        "SLID": pa.Column(int),
+        "RGID": pa.Column(int),
+        "SLSTDT": pa.Column(date, coerce=True),
+        "SLRTDT": pa.Column(date, nullable=True, coerce=True),
+        "SLRSN": pa.Column(str, nullable=True),
+        "SLCMNTS": pa.Column(str, nullable=True),
+    }),
+    # # SupportRecord
+    # "tblSupport": pa.DataFrameSchema({
+    #     "SNID": pa.Column(int),
+    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+    # }),
+    # # TraineeContact
+    # "tblTraineeContacts": pa.DataFrameSchema({
+    #     "SNID": pa.Column(int),
+    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+    # }),
+    # # AnnualReviewProgression
+    # "tblARP": pa.DataFrameSchema({
+    #     "SNID": pa.Column(int),
+    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+    # }),
+    # # MidReviewProgression
+    # "tblMRP": pa.DataFrameSchema({
+    #     "SNID": pa.Column(int),
+    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+    # }),
+    # # EmploymentRecord
+    # "tblEmployers": pa.DataFrameSchema({
+    #     "SNID": pa.Column(int),
+    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+    # }),
+    # # ExitAssessmentRecord
+    # "tblOSFA": pa.DataFrameSchema({
+    #     "SNID": pa.Column(int),
+    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+    # }),
+    # # Trainee
+    # "tblRegistration": pa.DataFrameSchema({
+    #     "SNID": pa.Column(int),
+    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+    # }),
+    # # EmployerLocation
+    # "tlkpHospital": pa.DataFrameSchema({
+    #     "SNID": pa.Column(int),
+    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+    # })
 }
