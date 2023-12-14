@@ -170,11 +170,13 @@ VALIDATION_SCHEMA = {
         "SLRSN": pa.Column(str, nullable=True),
         "SLCMNTS": pa.Column(str, nullable=True),
     }),
-    # # SupportRecord
-    # "tblSupport": pa.DataFrameSchema({
-    #     "SNID": pa.Column(int),
-    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
-    # }),
+    # SupportRecord
+    "tblSupport": pa.DataFrameSchema({
+        "PSID": pa.Column(int),
+        "RGID": pa.Column(int),
+        "PSDT": pa.Column(date, coerce=True),
+        "PSDESC": pa.Column(str, nullable=True),
+    }),
     # # TraineeContact
     # "tblTraineeContacts": pa.DataFrameSchema({
     #     "SNID": pa.Column(int),
