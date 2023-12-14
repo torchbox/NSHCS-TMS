@@ -20,6 +20,7 @@ def read_spreadsheet(path: str) -> Dict[str, pd.DataFrame]:
             'EMSTDT': clean_date,
             'EMLVDT': clean_date,
             'OSDT': clean_date,
+            'RGDOB': clean_date,
         })
 
     return sheets
