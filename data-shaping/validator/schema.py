@@ -231,7 +231,7 @@ VALIDATION_SCHEMA = {
         "HSTRUST": pa.Column("Int64", coerce=True, nullable=True),
         "HSLETB": pa.Column("Int64", coerce=True, nullable=True),
     }),
-    # # Trainee and TrainingRecord
+    # Trainee and TrainingRecord and PostTraining
     "tblRegistration": pa.DataFrameSchema({
         "RGID": pa.Column(int),
         "RGSCID": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), coerce=True),
@@ -331,7 +331,19 @@ VALIDATION_SCHEMA = {
         "RGHCNUM": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True),
         "RGOLEXT": pa.Column(bool, coerce=True, nullable=True),
         "RGEXICYR": pa.Column("Int64", coerce=True, nullable=True),
-        "RGEXICSN": pa.Column("Int64", coerce=True, nullable=True)
+        "RGEXICSN": pa.Column("Int64", coerce=True, nullable=True),
+        
+        # Trainee and TrainingRecord and PostTraining
+        "RGFJTP": pa.Column("Int64", coerce=True, nullable=True), # Nullable in registration as it is only non nullable in the PostTraining model. That model will be populated by non-null fields from here.
+        "RGFRJB": pa.Column(str, coerce=True, checks=pa.Check.str_length(min_value=0, max_value=255), nullable=True),
+        "RGFJTRST": pa.Column("Int64", coerce=True, nullable=True),
+        "RGFREM": pa.Column(str, coerce=True, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True),
+        "RGFJBAND": pa.Column("Int64", coerce=True, nullable=True),
+        "RGFJSAL": pa.Column("Int64", coerce=True, nullable=True),
+        "RGFJOED": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=500), nullable=True),
+        "RGFRCNT": pa.Column("Int64", coerce=True, nullable=True),
+        "RGFRSTDT": pa.Column(date, nullable=True),
+        "RGFRCMT": pa.Column(str, coerce=True, nullable=True),
     }),
     # EmployerLocation only validated on output
 }
