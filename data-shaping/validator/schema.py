@@ -122,9 +122,9 @@ VALIDATION_SCHEMA = {
         "CTFNAME": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True),
         "CTSNAME": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True),
         "CTEML": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=150), nullable=True),
-        "CTPHONE": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True),
+        "CTPHONE": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True, coerce=True),
         "CTOFUN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True),
-        "CTOFUID": pa.Column(int, nullable=True),
+        "CTOFUID": pa.Column("Int64", nullable=True, coerce=True),
     }),
     # ContactType
     "tlkpContactType": pa.DataFrameSchema({
@@ -177,10 +177,15 @@ VALIDATION_SCHEMA = {
         "PSDT": pa.Column(date, coerce=True),
         "PSDESC": pa.Column(str, nullable=True),
     }),
-    # # TraineeContact
+    # TraineeContact
     # "tblTraineeContacts": pa.DataFrameSchema({
-    #     "SNID": pa.Column(int),
-    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+    #     "CNID": pa.Column(int),
+    #     "RGID": pa.Column(int),
+    #     "CNTYPE": pa.Column(int, nullable=True),
+    #     "CNCTCT": pa.Column(int, nullable=True),
+    #     "CNSTDT": pa.Column(date, nullable=True, coerce=True),
+    #     "CNENDT": pa.Column(date, nullable=True, coerce=True),
+    #     "CNCURTO": pa.Column(bool, coerce=True),
     # }),
     # # AnnualReviewProgression
     # "tblARP": pa.DataFrameSchema({
