@@ -215,11 +215,15 @@ VALIDATION_SCHEMA = {
         "EMLVDT": pa.Column(date, nullable=True),
         "EMCMT": pa.Column(str, nullable=True),
     }),
-    # # ExitAssessmentRecord
-    # "tblOSFA": pa.DataFrameSchema({
-    #     "SNID": pa.Column(int),
-    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
-    # }),
+    # ExitAssessmentRecord
+    "tblOSFA": pa.DataFrameSchema({
+        "OSID": pa.Column("Int64", coerce=True),
+        "RGID": pa.Column("Int64", coerce=True),
+        "OSDT": pa.Column(date, nullable=True),
+        "OSTYPE": pa.Column("Int64", coerce=True, nullable=True),
+        "OSRSLT": pa.Column("Int64", coerce=True, nullable=True),
+        "OSCMNT": pa.Column(str, nullable=True),
+    }),
     # # Trainee
     # "tblRegistration": pa.DataFrameSchema({
     #     "SNID": pa.Column(int),
