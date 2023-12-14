@@ -14,12 +14,13 @@ def validate_dfs(dataframes: dict[str, pd.DataFrame]) -> bool:
         if k in VALIDATION_SCHEMA:
             try:    
                 validated_data[k] = VALIDATION_SCHEMA[k](v, lazy=True)
+                print(f"✅ Validated table {k}")
             except pa.errors.SchemaErrors as err:
                 validation_success = False
-                print(f"\n\nCould not validate the table {k}:\n")
+                print(f"\n❌ Could not validate table {k}:")
                 print(err.failure_cases)  # dataframe of schema errors
         else:
-            print(f"{k} not checked as it is not present in the validation schema")
+            print(f"⚠️ {k} not checked as it is not present in the validation schema")
 
     return validation_success
         
