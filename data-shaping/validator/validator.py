@@ -19,7 +19,7 @@ def validate_dfs(dataframes: dict[str, pd.DataFrame]) -> bool:
                 validation_success = False
                 print(f"❌ Could not validate table {k}:")
                 print(err.failure_cases)  # dataframe of schema errors
-                print("\n")
+                print("")
         else:
             print(f"⚠️ {k} not checked as it is not present in the validation schema")
 
