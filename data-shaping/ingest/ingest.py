@@ -21,6 +21,8 @@ def read_spreadsheet(path: str) -> Dict[str, pd.DataFrame]:
         converters={
             'CNENDT': clean_date,
             'CNSTDT': clean_date,
+            'EMSTDT': clean_date,
+            'EMLVDT': clean_date,
         })
 
     return sheets

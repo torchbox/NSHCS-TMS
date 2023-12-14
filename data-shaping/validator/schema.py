@@ -205,11 +205,16 @@ VALIDATION_SCHEMA = {
         "MRREVOTCM": pa.Column("Int64", nullable=True, coerce=True),
         "MRCMNTS": pa.Column(str, nullable=True),
     }),
-    # # EmploymentRecord
-    # "tblEmployers": pa.DataFrameSchema({
-    #     "SNID": pa.Column(int),
-    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
-    # }),
+    # EmploymentRecord
+    "tblEmployers": pa.DataFrameSchema({
+        "EMID": pa.Column("Int64", coerce=True),
+        "RGID": pa.Column("Int64", coerce=True),
+        "EMEMP": pa.Column("Int64", coerce=True),
+        "EMSITE": pa.Column("Int64", coerce=True, nullable=True),
+        "EMSTDT": pa.Column(date),
+        "EMLVDT": pa.Column(date, nullable=True),
+        "EMCMT": pa.Column(str, nullable=True),
+    }),
     # # ExitAssessmentRecord
     # "tblOSFA": pa.DataFrameSchema({
     #     "SNID": pa.Column(int),
