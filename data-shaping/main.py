@@ -1,5 +1,5 @@
 from ingest.ingest import read_spreadsheet 
-from output.output import transfer_data, transfer_leave_of_absence_record, transfer_support_record, transfer_trainee_contact, transfer_annual_review_progression, transfer_employment_record, transfer_exit_assessment_record, transfer_trainees, transfer_mid_review_progression, transfer_locations
+from output.output import transfer_data, transfer_leave_of_absence_record, transfer_support_record, transfer_trainee_contact, transfer_annual_review_progression, transfer_employment_record, transfer_exit_assessment_record, transfer_trainees, transfer_trainees_new, transfer_mid_review_progression, transfer_locations
 from validator.validator import validate_dfs
 import os
 import sys
@@ -7,6 +7,7 @@ from argparse import ArgumentParser
 
 parser = ArgumentParser()
 parser.add_argument('--ignore-errors', dest='ignore_errors', action='store_true', default=False, help='Ignore the validation errors and continue the execution of the script.')  
+parser.add_argument('--rows', dest='rows', action='store', default=None, help='Specify the number of rows in the Registration table to process.')  
 args = parser.parse_args()
 
 INPUT_DATA_TABLES_PATH = 'data/old_model/SampleData_DataTables.xlsx'
@@ -35,5 +36,6 @@ transfer_annual_review_progression(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_mid_review_progression(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_employment_record(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_exit_assessment_record(path=OUTPUT_DATABASE_PATH, sheets=sheets)
-transfer_trainees(path=OUTPUT_DATABASE_PATH, sheets=sheets)
+# transfer_trainees(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_locations(path=OUTPUT_DATABASE_PATH, sheets=sheets)
+transfer_trainees_new(path=OUTPUT_DATABASE_PATH, sheets=sheets, rows=int(args.rows) if args.rows is not None else None)
