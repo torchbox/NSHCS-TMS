@@ -23,6 +23,7 @@ def blank_database(path: str):
 
 def transfer_data(path: str, sheets: Dict[str, pd.DataFrame]):
     blank_database(path)
+    print('Transferring simple mappings')
 
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
@@ -30,6 +31,8 @@ def transfer_data(path: str, sheets: Dict[str, pd.DataFrame]):
                       datetime_format='YYYY-MM-DD'
     ) as writer:
         for new_sheet_name, column_mappings in SIMPLE_REFERENCE_MAPPING.items():
+            print(f'Transferring {column_mappings["id"]["sheet"]} -> {new_sheet_name}')
+            
             data = pd.DataFrame(columns=column_mappings)
 
             for column_name, mapping in column_mappings.items():
@@ -43,6 +46,9 @@ def transfer_data(path: str, sheets: Dict[str, pd.DataFrame]):
 def transfer_leave_of_absence_record(path, sheets):
     SHEET_NAME = "LeaveOfAbsenceRecord"
     SICK_LEAVE_SHEET_NAME = "tblSickLeave"
+
+    print(f'Transferring {SICK_LEAVE_SHEET_NAME} -> {SHEET_NAME}')
+
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
                       date_format='YYYY-MM-DD',
@@ -91,6 +97,9 @@ def transfer_leave_of_absence_record(path, sheets):
 def transfer_support_record(path, sheets):
     SHEET_NAME = "SupportRecord"
     OLD_SUPPORT_SHEET_NAME = 'tblSupport'
+
+    print(f'Transferring {OLD_SUPPORT_SHEET_NAME} -> {SHEET_NAME}')
+
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
                       date_format='YYYY-MM-DD',
@@ -117,6 +126,9 @@ def transfer_support_record(path, sheets):
 def transfer_trainee_contact(path, sheets):
     SHEET_NAME = "TraineeContact"
     OLD_TRAINEE_CONTACT_SHEET_NAME = "tblTraineeContacts"
+
+    print(f'Transferring {OLD_TRAINEE_CONTACT_SHEET_NAME} -> {SHEET_NAME}')
+
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
                       date_format='YYYY-MM-DD',
@@ -158,6 +170,9 @@ def transfer_trainee_contact(path, sheets):
 def transfer_annual_review_progression(path, sheets):
     SHEET_NAME = "AnnualReviewProgression"
     OLD_ARP_SHEET_NAME = "tblARP"
+
+    print(f'Transferring {OLD_ARP_SHEET_NAME} -> {SHEET_NAME}')
+
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
                       date_format='YYYY-MM-DD',
@@ -196,6 +211,9 @@ def transfer_annual_review_progression(path, sheets):
 def transfer_mid_review_progression(path, sheets):
     SHEET_NAME = "MidReviewProgression"
     OLD_ARP_SHEET_NAME = "tblMRP"
+
+    print(f'Transferring {OLD_ARP_SHEET_NAME} -> {SHEET_NAME}')
+
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
                       date_format='YYYY-MM-DD',
@@ -234,6 +252,9 @@ def transfer_mid_review_progression(path, sheets):
 def transfer_employment_record(path, sheets):
     SHEET_NAME = "EmploymentRecord"
     OLD_EMPLOYMENT_RECORDS_SHEET = "tblEmployers"
+
+    print(f'Transferring {OLD_EMPLOYMENT_RECORDS_SHEET} -> {SHEET_NAME}')
+
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
                       date_format='YYYY-MM-DD',
@@ -274,6 +295,9 @@ def transfer_employment_record(path, sheets):
 def transfer_exit_assessment_record(path, sheets):
     SHEET_NAME = "ExitAssessmentRecord"
     OLD_ASSESSMENT_RECORDS_SHEETS = 'tblOSFA'
+
+    print(f'Transferring {OLD_ASSESSMENT_RECORDS_SHEETS} -> {SHEET_NAME}')
+
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
                       date_format='YYYY-MM-DD',
@@ -305,9 +329,10 @@ def transfer_trainees(path, sheets, rows = None):
     SHEET_NAME_POST_TRAINING = "PostTraining"
     SHEET_NAME_TRAINING_RECORD = "TrainingRecord"
     SHEET_NAME_TRAINEE_STATUSES = "TraineeStatuses"
-
-
     OLD_REGISTRATION_SHEET_NAME = "tblRegistration"
+
+
+    print(f'Transferring {OLD_REGISTRATION_SHEET_NAME} -> {SHEET_NAME}')
 
     post_training_df = pd.DataFrame()
     training_record_df = pd.DataFrame()
@@ -422,7 +447,6 @@ def transfer_trainees(path, sheets, rows = None):
 
             next_post_training_id = next_post_training_cnt
             df = transfer_post_training(
-                path=path,
                 id=next_post_training_id,
                 job_sector=row['RGFJTP'],
                 description=row['RGFRJB'],
@@ -632,9 +656,13 @@ def transfer_trainees(path, sheets, rows = None):
                       date_format='YYYY-MM-DD',
                       datetime_format='YYYY-MM-DD'
     ) as writer:
+        print(f'\nWriting out {SHEET_NAME}')
         ts.to_excel(writer, sheet_name=SHEET_NAME, index=False)
+        print(f'Writing out {SHEET_NAME_POST_TRAINING}')
         post_training_df.to_excel(writer, sheet_name=SHEET_NAME_POST_TRAINING, index=False)
+        print(f'Writing out {SHEET_NAME_TRAINING_RECORD}')
         training_record_df.to_excel(writer, sheet_name=SHEET_NAME_TRAINING_RECORD, index=False)
+        print(f'Writing out {SHEET_NAME_TRAINEE_STATUSES}')
         trainee_status_df.to_excel(writer, sheet_name=SHEET_NAME_TRAINEE_STATUSES, index=False)
 
 
@@ -740,6 +768,8 @@ def transfer_locations(path, sheets):
     LOCATION_SHEET_NAME = "EmployerLocation"
     LOCATION_OLD_ASSESSMENT_RECORDS_SHEETS = 'tlkpHospital'
     LOOKUP_SHEET_NAME = "EmployerLocations"
+
+    print(f'Transferring {LOCATION_OLD_ASSESSMENT_RECORDS_SHEETS} -> {LOCATION_SHEET_NAME} and {LOOKUP_SHEET_NAME}')
 
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
