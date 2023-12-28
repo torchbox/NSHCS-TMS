@@ -1,0 +1,349 @@
+import pandera as pa
+from datetime import date
+
+VALIDATION_SCHEMA_OUTPUT = {
+    # tlkpStatus
+    "TraineeStatus": pa.DataFrameSchema({
+        "id": pa.Column(int),
+        "title": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100)),
+        "order": pa.Column(int)
+        # TODO: is_support is missing
+    }),
+    # # tlkpEmailPref 
+    # "EmailPreference": pa.DataFrameSchema({
+    #     "ETID": pa.Column(int),
+    #     "ETPREF": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100)),
+    # }),
+    # # tlkpProgramType 
+    # "TrainingProgram": pa.DataFrameSchema({
+    #     "PRID": pa.Column(int),
+    #     "PRPRGM": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=25)),
+    # }),
+    # # tlkpSalary 
+    # "Salary": pa.DataFrameSchema({
+    #     "SRID": pa.Column(int),
+    #     "SRSALARY": pa.Column(str),
+    # }),
+    # # lkpFirstJobType, 
+    # "JobSector": pa.DataFrameSchema({
+    #     "FJID": pa.Column(int),
+    #     "FJTYPE": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+    # }),
+    # # tlkpAFCBand 
+    # "NHSBand": pa.DataFrameSchema({
+    #     "BDID": pa.Column(int),
+    #     "BDBAND": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=25)),
+    # }),
+    # # tlkpContractType 
+    # "ContractType": pa.DataFrameSchema({
+    #     "COID": pa.Column(int),
+    #     "COTYPE": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=25)),
+    # }),
+    # # tlkpTitle 
+    # "Title": pa.DataFrameSchema({
+    #     "TTID": pa.Column(int),
+    #     "TTTITLE": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=25)),
+    # }),
+    # # tlkpGender 
+    # "Gender": pa.DataFrameSchema({
+    #     "GNID": pa.Column(int),
+    #     "GNGNDR": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100)),
+    # }),
+    # # tlkpEthnic 
+    # "Ethnicity": pa.DataFrameSchema({
+    #     "ECID": pa.Column(int),
+    #     "ECDESC": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100)),
+    # }),
+    # # tlkpDisabilityCategory 
+    # "DisabilityCategory": pa.DataFrameSchema({
+    #     "DCID": pa.Column(int),
+    #     "DCDESC": pa.Column(str),
+    # }),
+    # # tlkpDisabilityAnswer 
+    # "DisabilityStatus": pa.DataFrameSchema({
+    #     "DSID": pa.Column(int),
+    #     "DSDESC": pa.Column(str),
+    # }),
+    # # tlkpReligion 
+    # "Religion": pa.DataFrameSchema({
+    #     "RLID": pa.Column(int),
+    #     "RLREL": pa.Column(str),
+    # }),
+    # # tlkpSexor 
+    # "SexualOrientation": pa.DataFrameSchema({
+    #     "SOID": pa.Column(int),
+    #     "SODESC": pa.Column(str),
+    # }),
+    # # tlkpCountries 
+    # "Nationality": pa.DataFrameSchema({
+    #     "CTID": pa.Column(int),
+    #     "CTCNTR": pa.Column(str),
+    # }),
+    # # tlkpMaritalStatus 
+    # "MaritalStatus": pa.DataFrameSchema({
+    #     "MRID": pa.Column(int),
+    #     "MRDESC": pa.Column(str),
+    # }),
+    # # tlkpLETB 
+    # "FundingProvider": pa.DataFrameSchema({
+    #     "REID": pa.Column(int),
+    #     "RELETB": pa.Column(str),
+    #     "REABBR": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+    # }),
+    # # tlkpHEI 
+    # "HEIAwardingInstitution": pa.DataFrameSchema({
+    #     "HEID": pa.Column(int),
+    #     "HENM": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=255)),
+    # }),
+    # # tlkpMScOutcome 
+    # "HEIOutcome": pa.DataFrameSchema({
+    #     "OCID": pa.Column(int),
+    #     "OCOTCM": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=20)),
+    # }),
+    # # tlkpHSSTPathway 
+    # "HSSTPathway": pa.DataFrameSchema({
+    #     "PTID": pa.Column(int),
+    #     "PTDESC": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=255)),
+    #     "PTCODE": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+    # }),
+    # # tlkpSpecialism 
+    # "Specialism": pa.DataFrameSchema({
+    #     "SPID": pa.Column(int),
+    #     "SPSPEC": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=255)),
+    # }),
+    # # tlkpEntryType 
+    # "RecruitmentMethod": pa.DataFrameSchema({
+    #     "ENID": pa.Column(int),
+    #     "ENENTR": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=255)),
+    # }),
+    # # tlkpContacts 
+    # "Contact": pa.DataFrameSchema({
+    #     "CTID": pa.Column(int),
+    #     "CTFNAME": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True),
+    #     "CTSNAME": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True),
+    #     "CTEML": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=150), nullable=True),
+    #     "CTPHONE": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True, coerce=True),
+    #     "CTOFUN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True),
+    #     "CTOFUID": pa.Column("Int64", nullable=True, coerce=True),
+    # }),
+    # # tlkpContactType 
+    # "ContactType": pa.DataFrameSchema({
+    #     "NTID": pa.Column(int),
+    #     "NTTYPE": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100)),
+    # }),
+    # # tlkpOSFAType 
+    # "AssessmentType": pa.DataFrameSchema({
+    #     "OTID": pa.Column(int),
+    #     "OTTYPE": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=255)),
+    # }),
+    # # tlkpReviewOutcomes 
+    # "Outcome": pa.DataFrameSchema({
+    #     "AOID": pa.Column(int),
+    #     "AOPRGM": pa.Column(int),
+    #     "AOCODE": pa.Column(int),
+    #     "AOOTCODE": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=10), coerce=True, nullable=True),
+    #     "AOSTM": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=255), nullable=True),
+    #     "AODESC": pa.Column(str),
+    # }),
+    # # tlkpOSFAResult 
+    # "ExitAssessmentOutcome": pa.DataFrameSchema({
+    #     "RSID": pa.Column(int),
+    #     "RSLT": pa.Column(str),
+    # }),
+    # # tlkpTrusts 
+    # "Employer": pa.DataFrameSchema({
+    #     "TSID": pa.Column(int),
+    #     "TSNHS": pa.Column(bool, coerce=True, checks=pa.Check.isin(allowed_values=[0, 1])), # Since coerce=True, the validator will first look to convert the column from 1 and zero to bool
+    #     "TSTRUST": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=255)),
+    # }),
+    # # tlkpSeason 
+    # "Season": pa.DataFrameSchema({
+    #     "SNID": pa.Column(int),
+    #     "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+    # }),
+    # # tblSickLeave 
+    # "LeaveOfAbsenceRecord": pa.DataFrameSchema({
+    #     "SLID": pa.Column(int),
+    #     "RGID": pa.Column(int),
+    #     "SLSTDT": pa.Column(date, coerce=True),
+    #     "SLRTDT": pa.Column(date, nullable=True, coerce=True),
+    #     "SLRSN": pa.Column(str, nullable=True),
+    #     "SLCMNTS": pa.Column(str, nullable=True),
+    # }),
+    # # tblSupport 
+    # "SupportRecord": pa.DataFrameSchema({
+    #     "PSID": pa.Column(int),
+    #     "RGID": pa.Column(int),
+    #     "PSDT": pa.Column(date, coerce=True),
+    #     "PSDESC": pa.Column(str, nullable=True),
+    # }),
+    # # tblTraineeContacts 
+    # "TraineeContact": pa.DataFrameSchema({
+    #     "CNID": pa.Column(int),
+    #     "RGID": pa.Column("Int64", coerce=True),
+    #     "CNTYPE": pa.Column("Int64", nullable=True, coerce=True),
+    #     "CNCTCT": pa.Column("Int64", nullable=True, coerce=True),
+    #     "CNSTDT": pa.Column(date, nullable=True, coerce=True),
+    #     "CNENDT": pa.Column(date, nullable=True, coerce=True),
+    #     "CNCURTO": pa.Column(bool, coerce=True),
+    # }),
+    # # tblARP 
+    # "AnnualReviewProgression": pa.DataFrameSchema({
+    #     "ARID": pa.Column(int),
+    #     "RGID": pa.Column(int),
+    #     "ARDT": pa.Column(date, nullable=True, coerce=True),
+    #     "AROTCM": pa.Column(int),
+    #     "ARREVOTCM": pa.Column("Int64", nullable=True, coerce=True),
+    #     "ARCMNTS": pa.Column(str, nullable=True),
+    # }),
+    # # tblMRP 
+    # "MidReviewProgression": pa.DataFrameSchema({
+    #     "MRID": pa.Column(int),
+    #     "RGID": pa.Column(int),
+    #     "MRDT": pa.Column(date, nullable=True, coerce=True),
+    #     "MROTCM": pa.Column("Int64", coerce=True),
+    #     "MRREVOTCM": pa.Column("Int64", nullable=True, coerce=True),
+    #     "MRCMNTS": pa.Column(str, nullable=True),
+    # }),
+    # # tblEmployers 
+    # "EmploymentRecord": pa.DataFrameSchema({
+    #     "EMID": pa.Column("Int64", coerce=True),
+    #     "RGID": pa.Column("Int64", coerce=True),
+    #     "EMEMP": pa.Column("Int64", coerce=True),
+    #     "EMSITE": pa.Column("Int64", coerce=True, nullable=True),
+    #     "EMSTDT": pa.Column(date),
+    #     "EMLVDT": pa.Column(date, nullable=True),
+    #     "EMCMT": pa.Column(str, nullable=True),
+    # }),
+    # # tblOSFA 
+    # "ExitAssessmentRecord": pa.DataFrameSchema({
+    #     "OSID": pa.Column("Int64", coerce=True),
+    #     "RGID": pa.Column("Int64", coerce=True),
+    #     "OSDT": pa.Column(date, nullable=True),
+    #     "OSTYPE": pa.Column("Int64", coerce=True, nullable=True),
+    #     "OSRSLT": pa.Column("Int64", coerce=True, nullable=True),
+    #     "OSCMNT": pa.Column(str, nullable=True),
+    # }),
+    # # tlkpHospital  a bit of a freestyle validation as direct description not present in model
+    # "EmployerLocations": pa.DataFrameSchema({
+    #     "HSID": pa.Column(int),
+    #     "HSNAME": pa.Column(str),
+    #     "HSTRUST": pa.Column("Int64", coerce=True, nullable=True),
+    #     "HSLETB": pa.Column("Int64", coerce=True, nullable=True),
+    # }),
+    # # Trainee and TrainingRecord and PostTraining
+    # "tblRegistration": pa.DataFrameSchema({
+    #     "RGID": pa.Column(int),
+    #     "RGSCID": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), coerce=True),
+    #     "RGTITLE": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGSNAME": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True),
+    #     "RGFNAME": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True),
+    #     "RGDOB": pa.Column(date, nullable=True),
+    #     "RGETH": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGETHO": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=150), nullable=True),
+    #     "RGDISABL": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGDISCAT": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGDSDET": pa.Column(str, nullable=True),
+    #     "RGGEN": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGSEOR": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGREL": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGNAT": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGMAR": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGADD1": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), coerce=True, nullable=True),
+    #     "RGADD2": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), coerce=True, nullable=True),
+    #     "RGADD3": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), coerce=True, nullable=True),
+    #     "RGPCODE": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=20), coerce=True, nullable=True),
+    #     "RGWKEML": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True),
+    #     "RGWKPHN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), coerce=True, nullable=True),
+    #     "RGACEML": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True),
+    #     "RGPSEML": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True),
+    #     "RGEMPR": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGPSPHN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), coerce=True, nullable=True),
+    #     "RGLETB": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGOLDLETB": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGFUND": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True),
+    #     "RGPRGM": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGHCHRT": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGSTAT": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGWTE": pa.Column(float, nullable=True),
+    #     "RGOFID": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGOLEECREF": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True),
+    #     "RGDEF": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGDEFCM": pa.Column(str, nullable=True),
+
+    #     # TrainingRecord
+    #     "RGMScCMP": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGMScDT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGMScOTCM": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGMScEX": pa.Column(bool, coerce=True),
+    #     "RGMScEXDT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGMSCEXDTL": pa.Column(str, nullable=True),
+    #     "RGCERTIS": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGCERTDT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGHCPATH": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGHCPORT": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGHCPORTDT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGHCARP": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGHCARPDT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGHCDCSA": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGHCDCSADT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGHCDCSB": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGHCDCSBDT": pa.Column(date, nullable=True),
+    #     "RGHCDCSC1": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGHCDCSC1DT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGHCDCSC2": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGHCDCSC2DT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGHCFRC": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGHCFRCDT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGHCIAPS": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGHCIAPSDT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGHCPHD": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGHCPHDDT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGHCCENG": pa.Column(bool, coerce=True, nullable=True),
+    #     # Pandera fails if entire column is empty and we try to coerce it to a date (unsure about other datatypes)
+    #     "RGHCCENGDT": pa.Column(date, nullable=True),
+    #     "RGHCSUP": pa.Column(bool, coerce=True, nullable=True),
+    #     "RHCSUPDT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGLVDT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGLVRS": pa.Column(str, coerce=True, nullable=True),
+    #     "RGLVCM": pa.Column(str, nullable=True),
+    #     "RGOSRA": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGOSRADTL": pa.Column(str, nullable=True),
+    #     "RGHCPC": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=20), nullable=True),
+    #     "RGHCPCDT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGHCMTH": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGHCYR": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGHEMTH": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGHEYR": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGSSMTH": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGCHRT": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGSEMTH": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGANEX": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGHEXCM": pa.Column(date, coerce=True, nullable=True),
+    #     "RGSPEC": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGENTRY": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGHEI": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGOLEXCMDT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGOLCMPDT": pa.Column(date, coerce=True, nullable=True),
+    #     "RGHCREQ": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGHCSREQ": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGHCNM": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=200), nullable=True),
+    #     "RGHCNUM": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True),
+    #     "RGOLEXT": pa.Column(bool, coerce=True, nullable=True),
+    #     "RGEXICYR": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGEXICSN": pa.Column("Int64", coerce=True, nullable=True),
+        
+    #     # Trainee and TrainingRecord and PostTraining
+    #     "RGFJTP": pa.Column("Int64", coerce=True, nullable=True), # Nullable in registration as it is only non nullable in the PostTraining model. That model will be populated by non-null fields from here.
+    #     "RGFRJB": pa.Column(str, coerce=True, checks=pa.Check.str_length(min_value=0, max_value=255), nullable=True),
+    #     "RGFJTRST": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGFREM": pa.Column(str, coerce=True, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True),
+    #     "RGFJBAND": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGFJSAL": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGFJOED": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=500), nullable=True),
+    #     "RGFRCNT": pa.Column("Int64", coerce=True, nullable=True),
+    #     "RGFRSTDT": pa.Column(date, nullable=True),
+    #     "RGFRCMT": pa.Column(str, coerce=True, nullable=True),
+    # }),
+    # # EmployerLocation only validated on output
+}

@@ -5,6 +5,9 @@ import os
 import sys
 from argparse import ArgumentParser
 
+from validator.schema import VALIDATION_SCHEMA
+from validator.schema_output import VALIDATION_SCHEMA_OUTPUT
+
 parser = ArgumentParser()
 parser.add_argument('--ignore-errors', dest='ignore_errors', action='store_true', default=False, help='Ignore the validation errors and continue the execution of the script.')  
 parser.add_argument('--rows', dest='rows', action='store', default=None, help='Specify the number of rows in the Registration table to process.')  
@@ -18,8 +21,8 @@ OUTPUT_DATABASE_PATH = './data/new_model/Database.xlsx'
 data_tables = read_spreadsheet(INPUT_DATA_TABLES_PATH)
 reference_tables = read_spreadsheet(INPUT_REFERENCE_TABLES_PATH)
 
-reference_tables_validation_success = validate_dfs(reference_tables)
-data_tables_validation_success = validate_dfs(data_tables)
+reference_tables_validation_success = validate_dfs(reference_tables, VALIDATION_SCHEMA)
+data_tables_validation_success = validate_dfs(data_tables, VALIDATION_SCHEMA)
 
 if (not (reference_tables_validation_success and data_tables_validation_success)) and not args.ignore_errors:
     exit()
@@ -38,3 +41,6 @@ transfer_employment_record(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_exit_assessment_record(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_locations(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_trainees(path=OUTPUT_DATABASE_PATH, sheets=sheets, rows=int(args.rows) if args.rows is not None else None)
+
+output_tables = read_spreadsheet(OUTPUT_DATABASE_PATH)
+output_validation_success = validate_dfs(output_tables, VALIDATION_SCHEMA_OUTPUT)

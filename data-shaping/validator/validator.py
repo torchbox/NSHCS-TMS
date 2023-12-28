@@ -1,4 +1,3 @@
-from .schema import VALIDATION_SCHEMA
 import pandera as pa
 import pandas as pd
 
@@ -6,14 +5,14 @@ import pandas as pd
 # pd.set_option('display.max_rows', None)
 
 
-def validate_dfs(dataframes: dict[str, pd.DataFrame]) -> bool:
+def validate_dfs(dataframes: dict[str, pd.DataFrame], schema: dict[str, pa.DataFrameSchema]) -> bool:
     validated_data = {}
     validation_success = True
 
     for k, v in dataframes.items():
-        if k in VALIDATION_SCHEMA:
+        if k in schema:
             try:    
-                validated_data[k] = VALIDATION_SCHEMA[k](v, lazy=True)
+                validated_data[k] = schema[k](v, lazy=True)
                 print(f"✅ Validated table \u001b[32m{k}\u001b[37m")
             except pa.errors.SchemaErrors as err:
                 validation_success = False
