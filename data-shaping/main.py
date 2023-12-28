@@ -43,4 +43,4 @@ transfer_locations(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_trainees(path=OUTPUT_DATABASE_PATH, sheets=sheets, rows=int(args.rows) if args.rows is not None else None)
 
 output_tables = read_spreadsheet(OUTPUT_DATABASE_PATH)
-output_validation_success = validate_dfs(output_tables, VALIDATION_SCHEMA_OUTPUT)
+output_validation_success = validate_dfs(output_tables, VALIDATION_SCHEMA_OUTPUT, check_all_tables_in_dataframes=True)

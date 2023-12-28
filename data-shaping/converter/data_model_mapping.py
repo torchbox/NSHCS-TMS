@@ -14,11 +14,11 @@ SIMPLE_REFERENCE_MAPPING = {
     },
     "Salary": {
         "id": {"sheet": "tlkpSalary", "column": "SRID"},
-        "title": {"sheet": "tlkpSalary", "column": "SRSALARY"},
+        "value": {"sheet": "tlkpSalary", "column": "SRSALARY"},
     },
     "JobSector": {
         "id": {"sheet": "tlkpFirstJobType", "column": "FJID"},
-        "name": {"sheet": "tlkpFirstJobType", "column": "FJTYPE"},
+        "title": {"sheet": "tlkpFirstJobType", "column": "FJTYPE"},
     },
     "NHSBand": {
         "id": {"sheet": "tlkpAFCBand", "column": "BDID"},
