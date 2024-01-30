@@ -296,6 +296,12 @@
         string(50) phone "Null: True"
         string(50) onefile_username "Null: True"
         int onefile_id "Null: True"
+        bool stp_accredited_officer "tickbox confirming whether the contact is an accredited STP Training Officer, Null: True"
+        date next_stp_accreditation_date "date of next STP accreditation due, Null: True"
+        bool hsst_accredited_officer "tickbox confirming whether the contact is an accredited HSST Training Officer, Null: True"
+        date next_hsst_accreditation_date "date of next HSST accreditation due, Null: True"
+        bool etp_accredited_officer "tickbox confirming whether the contact is an accredited ETP Training Officer, Null: True"
+        date next_etp_accreditation_date "date of next ETP accreditation due, Null: True"
     }
     TraineeContact {
         int id PK "Contact Primary Key"
