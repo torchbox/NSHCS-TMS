@@ -167,3 +167,6 @@ node_modules
 **/data-shaping/data/old_model/*.xlsx
 # ignore lockfiles
 **/data-shaping/data/old_model/*lock* 
+
+
+**/.vscode/settings.json
