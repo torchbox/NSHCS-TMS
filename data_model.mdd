@@ -94,7 +94,9 @@
         string(MAX) disability_details "Null: True"
         int gender_id FK "Null: True"
         int sexual_orientation_id FK "Null: True"
+        string(150) sexual_orientation_other "Null: True"
         int religion_id FK "Null: True"
+        string(150) religion_other "Null: True"
         int nationality_id FK "Null: True"
         int marital_status_id FK "Null: True"
         string(100) address_line_1 "Null: True"
@@ -104,7 +106,9 @@
         string(100) work_email "Null: True"
         string(100) work_phone "Null: True"
         string(100) academic_email "Null: True"
+        bool academic_email_preferred
         string(100) personal_email "Null: True"
+        bool personal_email_preferred
         int email_preference_id FK "Null: True"
         string(100) personal_phone "Null: True"
         int funding_provider_id FK "Null: True"
