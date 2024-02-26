@@ -287,7 +287,7 @@ VALIDATION_SCHEMA_OUTPUT = {
         "hsst_dclin_part_a_comp": pa.Column(bool, coerce=True, nullable=True),
         "hsst_dclin_part_a_comp_date": pa.Column(date, coerce=True, nullable=True),
         "hsst_dclin_part_b_comp": pa.Column(bool, coerce=True, nullable=True),
-        "hsst_dclin_part_b_comp_date": pa.Column(date, nullable=True),
+        "hsst_dclin_part_b_comp_date": pa.Column(date, coerce=True, nullable=True),
         "hsst_dclin_part_c1_comp": pa.Column(bool, coerce=True, nullable=True),
         "hsst_dclin_part_c1_comp_date": pa.Column(date, coerce=True, nullable=True),
         "hsst_dclin_part_c2_comp": pa.Column(bool, coerce=True, nullable=True),
@@ -300,7 +300,7 @@ VALIDATION_SCHEMA_OUTPUT = {
         "hsst_phd_comp_date": pa.Column(date, coerce=True, nullable=True),
         "hsst_ceng_comp": pa.Column(bool, coerce=True, nullable=True),
         # Pandera fails if entire column is empty and we try to coerce it to a date (unsure about other datatypes)
-        "hsst_ceng_comp_date": pa.Column(date, nullable=True),
+        "hsst_ceng_comp_date": pa.Column(date, coerce=True, nullable=True),
         "hsst_portfolio_signed": pa.Column(bool, coerce=True, nullable=True),
         "hsst_portfolio_signed_date": pa.Column(date, coerce=True, nullable=True),
         
@@ -322,8 +322,6 @@ VALIDATION_SCHEMA_OUTPUT = {
         "portf_actual_comp_date": pa.Column(date, coerce=True, nullable=True),
         "specialism_id": pa.Column("Int64", coerce=True, nullable=True),
         "recruitment_method_id": pa.Column("Int64", coerce=True, nullable=True),
-        "RGHEI": pa.Column("Int64", coerce=True, nullable=True),
-        "RGOLEXCMDT": pa.Column(date, coerce=True, nullable=True),
         "hcpc_registration_date": pa.Column(date, coerce=True, nullable=True),
         "hcpc_signoff_required": pa.Column(bool, coerce=True, nullable=True),
         "hcpc_counter_signoff_require": pa.Column(bool, coerce=True, nullable=True),
@@ -333,8 +331,6 @@ VALIDATION_SCHEMA_OUTPUT = {
         "next_exit_assess_year": pa.Column("Int64", coerce=True, nullable=True),
         "next_exit_assess_season_id": pa.Column("Int64", coerce=True, nullable=True),
         "ahcs_registration": pa.Column("Int64", coerce=True, nullable=True),
-        "progress": pa.Column("Int64", coerce=True),
-        "progress_updated_at": pa.Column(date, coerce=True),
     }),
     # tblRegistration
     "PostTraining": pa.DataFrameSchema({
