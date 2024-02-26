@@ -174,7 +174,7 @@ VALIDATION_SCHEMA = {
     "tblSupport": pa.DataFrameSchema({
         "PSID": pa.Column(int),
         "RGID": pa.Column(int),
-        "PSDT": pa.Column(date, coerce=True),
+        "PSDT": pa.Column(date, nullable=True),
         "PSDESC": pa.Column(str, nullable=True),
     }),
     # TraineeContact
