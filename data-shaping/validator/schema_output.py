@@ -7,7 +7,6 @@ VALIDATION_SCHEMA_OUTPUT = {
         "id": pa.Column(int),
         "title": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100)),
         "order": pa.Column(int),
-        "is_support": pa.Column(bool, coerce=True, checks=pa.Check.isin(allowed_values=[0, 1])), # Since coerce=True, the validator will first look to convert the column from 1 and zero to bool
     }),
     # tlkpEmailPref 
     "EmailPreference": pa.DataFrameSchema({
