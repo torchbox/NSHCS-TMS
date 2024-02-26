@@ -165,7 +165,7 @@ VALIDATION_SCHEMA = {
     "tblSickLeave": pa.DataFrameSchema({
         "SLID": pa.Column(int),
         "RGID": pa.Column(int),
-        "SLSTDT": pa.Column(date, coerce=True, nullable=True),
+        "SLSTDT": pa.Column(date, coerce=True),
         "SLRTDT": pa.Column(date, nullable=True, coerce=True),
         "SLRSN": pa.Column(str, nullable=True),
         "SLCMNTS": pa.Column(str, nullable=True),
@@ -174,7 +174,7 @@ VALIDATION_SCHEMA = {
     "tblSupport": pa.DataFrameSchema({
         "PSID": pa.Column(int),
         "RGID": pa.Column(int),
-        "PSDT": pa.Column(date, nullable=True),
+        "PSDT": pa.Column(date),
         "PSDESC": pa.Column(str, nullable=True),
     }),
     # TraineeContact
@@ -335,7 +335,7 @@ VALIDATION_SCHEMA = {
         
         # Trainee and TrainingRecord and PostTraining
         "RGFJTP": pa.Column("Int64", coerce=True, nullable=True), # Nullable in registration as it is only non nullable in the PostTraining model. That model will be populated by non-null fields from here.
-        "RGFRJB": pa.Column(str, coerce=True, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=255), nullable=True),
+        "RGFRJB": pa.Column(str, coerce=True, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=255)),
         "RGFJTRST": pa.Column("Int64", coerce=True, nullable=True),
         "RGFREM": pa.Column(str, coerce=True, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True),
         "RGFJBAND": pa.Column("Int64", coerce=True, nullable=True),
