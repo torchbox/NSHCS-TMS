@@ -2,7 +2,15 @@ import pandas as pd
 import sys
 from typing import Dict
 from converter.data_model_mapping import SIMPLE_REFERENCE_MAPPING
+from datetime import datetime, date
 
+def clean_date(date_to_clean):
+    if isinstance(date_to_clean, datetime):
+        return date_to_clean.date()
+    elif isinstance(date_to_clean, date):
+        return date_to_clean
+    else:
+        return None
 
 def write_spreadsheet(path: str, data_frames: Dict[str, pd.DataFrame]):
     with pd.ExcelWriter(path,
@@ -345,6 +353,7 @@ def transfer_trainees(path, sheets, rows = None):
     surnames = []
     forenames = []
     date_of_births = []
+    pronouns = []
     ethnicities = []
     ethnicity_others = []
     disability_statuses = []
@@ -397,7 +406,8 @@ def transfer_trainees(path, sheets, rows = None):
         titles.append(row['RGTITLE'])
         surnames.append(row['RGSNAME'])
         forenames.append(row['RGFNAME'])
-        date_of_births.append(row['RGDOB'])
+        date_of_births.append(clean_date(row['RGDOB']))
+        pronouns.append(None)
         ethnicities.append(row['RGETH'])
         ethnicity_others.append(row['RGETHO'])
         disability_statuses.append(row['RGDISABL'])
@@ -456,7 +466,7 @@ def transfer_trainees(path, sheets, rows = None):
                 salary=row['RGFJSAL'],
                 other_educational_pursuits=row['RGFJOED'],
                 contract_type=row['RGFRCNT'],
-                start_date=row['RGFRSTDT'],
+                start_date=clean_date(row['RGFRSTDT']),
                 comments=row['RGFRCMT']
             )
 
@@ -616,6 +626,7 @@ def transfer_trainees(path, sheets, rows = None):
             "surname": surnames,
             "forename": forenames,
             "date_of_birth": date_of_births,
+            "pronouns": pronouns,
             "ethnicity_id": ethnicities,
             "ethnicity_other": ethnicity_others,
             "disability_status_id": disability_statuses,

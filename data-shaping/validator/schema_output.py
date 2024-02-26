@@ -201,8 +201,8 @@ VALIDATION_SCHEMA_OUTPUT = {
         "trainee_id": pa.Column("Int64", coerce=True),
         "employer_id": pa.Column("Int64", coerce=True),
         "specific_site_id": pa.Column("Int64", coerce=True, nullable=True),
-        "start_date": pa.Column(date, nullable=True),
-        "finish_date": pa.Column(date, nullable=True),
+        "start_date": pa.Column(date, coerce=True, nullable=True),
+        "finish_date": pa.Column(date, coerce=True, nullable=True),
         "comments": pa.Column(str, nullable=True),
     }),
     # tblOSFA 
@@ -232,7 +232,7 @@ VALIDATION_SCHEMA_OUTPUT = {
         "title_id": pa.Column("Int64", coerce=True, nullable=True),
         "surname": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True),
         "forename": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True),
-        "date_of_birth": pa.Column(date, nullable=True),
+        "date_of_birth": pa.Column(date, coerce=True, nullable=True),
         "pronouns": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True),
         "ethnicity_id": pa.Column("Int64", coerce=True, nullable=True),
         "ethnicity_other": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=150), nullable=True),
@@ -347,7 +347,7 @@ VALIDATION_SCHEMA_OUTPUT = {
         "non_nhs_salary_id": pa.Column("Int64", coerce=True, nullable=True),
         "other_educational_pursuits": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=500), nullable=True),
         "contract_type_id": pa.Column("Int64", coerce=True, nullable=True),
-        "start_date": pa.Column(date, nullable=True),
+        "start_date": pa.Column(date, coerce=True, nullable=True),
         "comments": pa.Column(str, coerce=True, nullable=True),
     }),
     "TraineeStatuses": pa.DataFrameSchema({
