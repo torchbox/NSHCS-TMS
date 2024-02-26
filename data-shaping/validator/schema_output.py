@@ -202,7 +202,7 @@ VALIDATION_SCHEMA_OUTPUT = {
         "trainee_id": pa.Column("Int64", coerce=True),
         "employer_id": pa.Column("Int64", coerce=True),
         "specific_site_id": pa.Column("Int64", coerce=True, nullable=True),
-        "start_date": pa.Column(date),
+        "start_date": pa.Column(date, nullable=True),
         "finish_date": pa.Column(date, nullable=True),
         "comments": pa.Column(str, nullable=True),
     }),
