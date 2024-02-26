@@ -169,7 +169,6 @@ VALIDATION_SCHEMA_OUTPUT = {
         "end_date": pa.Column(date, nullable=True, coerce=True),
         "reason": pa.Column(str, nullable=True),
         "comments": pa.Column(str, nullable=True),
-        "enable_notifications": pa.Column(bool, coerce=True, checks=pa.Check.isin(allowed_values=[0, 1])), # Since coerce=True, the validator will first look to convert the column from 1 and zero to bool
     }),
     # tblSupport 
     "SupportRecord": pa.DataFrameSchema({
