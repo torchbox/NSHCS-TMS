@@ -211,7 +211,7 @@ VALIDATION_SCHEMA = {
         "RGID": pa.Column("Int64", coerce=True),
         "EMEMP": pa.Column("Int64", coerce=True),
         "EMSITE": pa.Column("Int64", coerce=True, nullable=True),
-        "EMSTDT": pa.Column(date),
+        "EMSTDT": pa.Column(date, nullable=True),
         "EMLVDT": pa.Column(date, nullable=True),
         "EMCMT": pa.Column(str, nullable=True),
     }),
