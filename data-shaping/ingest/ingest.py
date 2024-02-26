@@ -14,6 +14,11 @@ def add_null_date(excel_date: Optional[Union[datetime, date]]):
         return excel_date.date()
     return excel_date
 
+def drop_if_not_a_number(value):
+    if type(value) == int or type(value) == float:
+        return value
+    return None
+
 def read_spreadsheet(path: str) -> Dict[str, pd.DataFrame]:
     xls = pd.ExcelFile(path)
     sheet_names = xls.sheet_names
@@ -34,6 +39,9 @@ def read_spreadsheet(path: str) -> Dict[str, pd.DataFrame]:
             'RGFRSTDT': clean_date,
             'SLSTDT': add_null_date,
             'PSDT': add_null_date,
+            'RGHEMTH': drop_if_not_a_number,
+            'RGHCPATH': drop_if_not_a_number,
+
         })
 
     return sheets
