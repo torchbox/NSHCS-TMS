@@ -164,7 +164,7 @@ VALIDATION_SCHEMA_OUTPUT = {
     "LeaveOfAbsenceRecord": pa.DataFrameSchema({
         "id": pa.Column(int),
         "trainee_id": pa.Column(int),
-        "start_date": pa.Column(date, coerce=True),
+        "start_date": pa.Column(date, coerce=True, nullable=True),
         "end_date": pa.Column(date, nullable=True, coerce=True),
         "reason": pa.Column(str, nullable=True),
         "comments": pa.Column(str, nullable=True),
