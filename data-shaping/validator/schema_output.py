@@ -355,6 +355,5 @@ VALIDATION_SCHEMA_OUTPUT = {
         "id": pa.Column("Int64", coerce=True),
         "trainee_id": pa.Column("Int64", coerce=True),
         "trainee_status_id": pa.Column("Int64", coerce=True),
-        "support_record_id": pa.Column("Int64", coerce=True, nullable=True)
     }),
 }
