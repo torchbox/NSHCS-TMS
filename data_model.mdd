@@ -335,7 +335,7 @@
         int trainee_id FK
         int employer_id FK "Employer/Trust"
         int specific_site_id FK "Specific Site, Null: True"
-        date start_date "Start Date"
+        date start_date "Start Date, Null: True"
         date finish_date "Finish Date, Null: True"
         string(MAX) comments "Comments, Null: True"
     }
