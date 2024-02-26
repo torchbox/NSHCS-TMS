@@ -176,7 +176,6 @@ VALIDATION_SCHEMA_OUTPUT = {
         "trainee_id": pa.Column(int),
         "open_date": pa.Column(date, coerce=True),
         "comments": pa.Column(str, nullable=True),
-        "close_date": pa.Column(date, coerce=True, nullable=True),
     }),
     # tblTraineeContacts 
     "TraineeContact": pa.DataFrameSchema({
