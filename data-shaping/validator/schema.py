@@ -274,7 +274,7 @@ VALIDATION_SCHEMA = {
         # TrainingRecord
         "RGMScCMP": pa.Column(bool, coerce=True, nullable=True),
         "RGMScDT": pa.Column(date, coerce=True, nullable=True),
-        "RGMScOTCM": pa.Column("Int64", coerce=True, nullable=True),
+        "RGMScOTCM": pa.Column("Int64", nullable=True, coerce=True),
         "RGMScEX": pa.Column(bool, coerce=True),
         "RGMScEXDT": pa.Column(date, coerce=True, nullable=True),
         "RGMSCEXDTL": pa.Column(str, nullable=True),

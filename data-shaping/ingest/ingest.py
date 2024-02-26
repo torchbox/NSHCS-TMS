@@ -37,10 +37,13 @@ def read_spreadsheet(path: str) -> Dict[str, pd.DataFrame]:
             'RGHCDCSBDT': clean_date,
             'RGHCCENGDT': clean_date,
             'RGFRSTDT': clean_date,
+            'RGCERTDT': clean_date,
             'SLSTDT': add_null_date,
             'PSDT': add_null_date,
             'RGHEMTH': drop_if_not_a_number,
             'RGHCPATH': drop_if_not_a_number,
+            'RGMScOTCM': drop_if_not_a_number,
+            'RGNAT': drop_if_not_a_number,
 
         })
 
