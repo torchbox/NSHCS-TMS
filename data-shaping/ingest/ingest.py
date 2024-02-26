@@ -1,11 +1,21 @@
 import pandas as pd
-from typing import Dict
-from datetime import datetime
+from typing import Dict, Optional, Union
+from datetime import datetime, date
+
+NULL_DATE = date(1900, 1, 2)
+
 
 def clean_date(excel_date: datetime):
     if not excel_date:
         return None
     return excel_date.date()
+
+def add_null_date(excel_date: Optional[Union[datetime, date]]):
+    if not excel_date:
+        return NULL_DATE
+    elif isinstance(excel_date, datetime):
+        return excel_date.date()
+    return excel_date
 
 def read_spreadsheet(path: str) -> Dict[str, pd.DataFrame]:
     xls = pd.ExcelFile(path)
@@ -25,6 +35,7 @@ def read_spreadsheet(path: str) -> Dict[str, pd.DataFrame]:
             'RGHCDCSBDT': clean_date,
             'RGHCCENGDT': clean_date,
             'RGFRSTDT': clean_date,
+            'SLSTDT': add_null_date,
         })
 
     return sheets

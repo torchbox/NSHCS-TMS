@@ -165,7 +165,7 @@ VALIDATION_SCHEMA = {
     "tblSickLeave": pa.DataFrameSchema({
         "SLID": pa.Column(int),
         "RGID": pa.Column(int),
-        "SLSTDT": pa.Column(date, coerce=True),
+        "SLSTDT": pa.Column(date, coerce=True, nullable=True),
         "SLRTDT": pa.Column(date, nullable=True, coerce=True),
         "SLRSN": pa.Column(str, nullable=True),
         "SLCMNTS": pa.Column(str, nullable=True),
