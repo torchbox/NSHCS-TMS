@@ -445,15 +445,15 @@ def transfer_trainees(path, sheets, rows = None):
         sys.stdout.write(f'Processing registration: {i} / {nr_of_rows_to_process}')
         sys.stdout.flush()
 
-        if pd.notna(row['RGFJTP']) or \
-            pd.notna(row['RGFRJB']) or \
+        if pd.notna(row['RGFJTP']) and \
+            (pd.notna(row['RGFRJB']) or \
             pd.notna(row['RGFJTRST']) or \
             pd.notna(row['RGFREM']) or \
             pd.notna(row['RGFJBAND']) or \
             pd.notna(row['RGFJSAL']) or \
             pd.notna(row['RGFRCNT']) or \
             pd.notna(row['RGFRSTDT']) or \
-            pd.notna(row['RGFRCMT']):
+            pd.notna(row['RGFRCMT'])):
 
             next_post_training_id = next_post_training_cnt
             df = transfer_post_training(

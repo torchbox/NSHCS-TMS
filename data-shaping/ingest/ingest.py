@@ -19,6 +19,11 @@ def drop_if_not_a_number(value):
         return value
     return None
 
+def clean_date_nans(value):
+    if pd.isna(value):
+        return None
+    return value
+
 def read_spreadsheet(path: str) -> Dict[str, pd.DataFrame]:
     xls = pd.ExcelFile(path)
     sheet_names = xls.sheet_names
@@ -44,7 +49,25 @@ def read_spreadsheet(path: str) -> Dict[str, pd.DataFrame]:
             'RGHCPATH': drop_if_not_a_number,
             'RGMScOTCM': drop_if_not_a_number,
             'RGNAT': drop_if_not_a_number,
-
+            'hei_qualification_date': clean_date_nans,
+            'hei_extension_date': clean_date_nans,
+            'program_certification_date': clean_date_nans,
+            'hsst_portfolio_comp_date': clean_date_nans,
+            'hsst_expected_exit_date': clean_date_nans,
+            'hsst_arp_comp_date': clean_date_nans,
+            'hsst_dclin_part_a_comp_date': clean_date_nans,
+            'hsst_dclin_part_b_comp_date': clean_date_nans,
+            'hsst_dclin_part_c1_comp_date': clean_date_nans,
+            'hsst_dclin_part_c2_comp_date': clean_date_nans,
+            'hsst_fcrpath_comp_date': clean_date_nans,
+            'hsst_iaps_comp_date': clean_date_nans,
+            'hsst_phd_comp_date': clean_date_nans,
+            'hsst_ceng_comp_date': clean_date_nans,
+            'hsst_portfolio_signed_date': clean_date_nans,
+            'program_leaving_date': clean_date_nans,
+            'portf_expected_comp_date': clean_date_nans,
+            'portf_actual_comp_date': clean_date_nans,
+            'hcpc_registration_date': clean_date_nans
         })
 
     return sheets

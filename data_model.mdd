@@ -125,7 +125,7 @@
     }
     PostTraining {
         int id PK
-        int job_sector_id FK "First Job Sector after training"
+        int job_sector_id FK "First Job Sector after training, Null: True"
         string(255) description "First Job description (title), Null: True"
         int employer_id FK "First Job after Training, Null: True"
         string(100) non_nhs_employer "First Job after training Employer name (if not NHS), Null: True"

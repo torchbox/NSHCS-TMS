@@ -244,7 +244,7 @@ VALIDATION_SCHEMA_OUTPUT = {
         "date_of_birth": pa.Column(date, coerce=True, nullable=True),
         "pronouns": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True, coerce=True),
         "ethnicity_id": pa.Column("Int64", coerce=True, nullable=True),
-        "ethnicity_other": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=150), nullable=True),
+        "ethnicity_other": pa.Column(str, coerce=True, checks=pa.Check.str_length(min_value=0, max_value=150), nullable=True),
         "disability_status_id": pa.Column("Int64", coerce=True, nullable=True),
         "disability_category_id": pa.Column("Int64", coerce=True, nullable=True),
         "disability_details": pa.Column(str, nullable=True),
@@ -296,7 +296,7 @@ VALIDATION_SCHEMA_OUTPUT = {
         "hsst_dclin_part_a_comp": pa.Column(bool, coerce=True, nullable=True),
         "hsst_dclin_part_a_comp_date": pa.Column(date, coerce=True, nullable=True),
         "hsst_dclin_part_b_comp": pa.Column(bool, coerce=True, nullable=True),
-        "hsst_dclin_part_b_comp_date": pa.Column(date, coerce=True, nullable=True),
+        "hsst_dclin_part_b_comp_date": pa.Column(date, nullable=True),
         "hsst_dclin_part_c1_comp": pa.Column(bool, coerce=True, nullable=True),
         "hsst_dclin_part_c1_comp_date": pa.Column(date, coerce=True, nullable=True),
         "hsst_dclin_part_c2_comp": pa.Column(bool, coerce=True, nullable=True),
@@ -309,7 +309,7 @@ VALIDATION_SCHEMA_OUTPUT = {
         "hsst_phd_comp_date": pa.Column(date, coerce=True, nullable=True),
         "hsst_ceng_comp": pa.Column(bool, coerce=True, nullable=True),
         # Pandera fails if entire column is empty and we try to coerce it to a date (unsure about other datatypes)
-        "hsst_ceng_comp_date": pa.Column(date, coerce=True, nullable=True),
+        "hsst_ceng_comp_date": pa.Column(date, nullable=True),
         "hsst_portfolio_signed": pa.Column(bool, coerce=True, nullable=True),
         "hsst_portfolio_signed_date": pa.Column(date, coerce=True, nullable=True),
         
@@ -344,7 +344,7 @@ VALIDATION_SCHEMA_OUTPUT = {
     # tblRegistration
     "PostTraining": pa.DataFrameSchema({
         "id": pa.Column("Int64", coerce=True),
-        "job_sector_id": pa.Column("Int64", coerce=True),
+        "job_sector_id": pa.Column("Int64", coerce=True, nullable=True),
         "description": pa.Column(str, coerce=True, checks=pa.Check.str_length(min_value=0, max_value=255), nullable=True),
         "employer_id": pa.Column("Int64", coerce=True, nullable=True),
         "non_nhs_employer": pa.Column(str, coerce=True, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True),
