@@ -40,7 +40,7 @@ def transfer_data(path: str, sheets: Dict[str, pd.DataFrame]):
     ) as writer:
         for new_sheet_name, column_mappings in SIMPLE_REFERENCE_MAPPING.items():
             print(f'Transferring {column_mappings["id"]["sheet"]} -> {new_sheet_name}')
-            
+
             data = pd.DataFrame(columns=column_mappings)
 
             for column_name, mapping in column_mappings.items():
@@ -572,13 +572,13 @@ def transfer_trainees(path, sheets, rows = None):
                 hpcp_registration_date=row['RGHCPCDT'],
                 hsst_start_month=row['RGHCMTH'],
                 hsst_start_year=row['RGHCYR'],
-                hsst_expected_completion_month=row['RGHEMTH'],
-                hsst_expected_completion_year=row['RGHEYR'],
+                hsst_expected_exit_month=row['RGHEMTH'],
+                hsst_expected_exit_year=row['RGHEYR'],
                 stp_start_month=row['RGSSMTH'],
                 stp_start_year=row['RGCHRT'],
                 stp_expected_completion_month=row['RGSEMTH'],
                 stp_expected_completion_year=row['RGANEX'],
-                hsst_expected_exit=row['RGHEXCM'],
+                hsst_expected_comp=row['RGHEXCM'],
                 specalism=row['RGSPEC'],
                 recruitment_method=row['RGENTRY'],
                 hei_awards=row['RGHEI'],
@@ -596,7 +596,7 @@ def transfer_trainees(path, sheets, rows = None):
 
             new_df = pd.concat([training_record_df, df])
             training_record_df = new_df
-            
+
             next_training_record_cnt = next_training_record_cnt + 1
         else:
             next_training_record_id = None
@@ -677,7 +677,7 @@ def transfer_trainees(path, sheets, rows = None):
         trainee_status_df.to_excel(writer, sheet_name=SHEET_NAME_TRAINEE_STATUSES, index=False)
 
 
-def transfer_training_record_separate(id, hei_qualification_completed, hei_qualification_date, hei_qualification_outcome, hei_extension, hei_extension_date, hei_extension_comments, program_certification, program_certification_date, hsst_pathway, hsst_portfolio_completed, hsst_portfolio_completion_date, hsst_arp_completed, hsst_arp_completion_date, hsst_d_clin_part_a_completed, hsst_d_clin_part_a_completion_date, hsst_d_clin_part_b_completed, hsst_d_clin_part_b_completion_date, hsst_d_clin_part_c1_completed, hsst_d_clin_part_c1_completion_date, hsst_d_clin_part_c2_completed, hsst_d_clin_part_c2_completion_date, hsst_fcrpath_completed, hsst_fcrpath_completion_date, hsst_iaps_completed, hsst_iaps_completion_date, hsst_phd_completed, hsst_phd_completion_date, hsst_ceng_completed, hsst_ceng_completion_date, hsst_portfolio_signed, hsst_portfolio_signed_date, program_leaving_date, program_leaving_reason, program_leaving_comments, reasonable_adjustments, reasonable_adjustments_comments, hpcp_registration, hpcp_registration_date, hsst_expected_exit, specalism, recruitment_method, hei_awards, portfolio_expected_completion_date, portfolio_actual_completion_date, hcpc_signoff_required, hcpc_counter_signoff_required, hcpc_signoff_name, hcpc_signoff_number, ahcs_registration, portfolio_extended, hsst_start_month, hsst_start_year, hsst_expected_completion_month, hsst_expected_completion_year, stp_start_month, stp_start_year, stp_expected_completion_month, stp_expected_completion_year, next_exit_assessment_year, next_exit_assessment_season_id):
+def transfer_training_record_separate(id, hei_qualification_completed, hei_qualification_date, hei_qualification_outcome, hei_extension, hei_extension_date, hei_extension_comments, program_certification, program_certification_date, hsst_pathway, hsst_portfolio_completed, hsst_portfolio_completion_date, hsst_arp_completed, hsst_arp_completion_date, hsst_d_clin_part_a_completed, hsst_d_clin_part_a_completion_date, hsst_d_clin_part_b_completed, hsst_d_clin_part_b_completion_date, hsst_d_clin_part_c1_completed, hsst_d_clin_part_c1_completion_date, hsst_d_clin_part_c2_completed, hsst_d_clin_part_c2_completion_date, hsst_fcrpath_completed, hsst_fcrpath_completion_date, hsst_iaps_completed, hsst_iaps_completion_date, hsst_phd_completed, hsst_phd_completion_date, hsst_ceng_completed, hsst_ceng_completion_date, hsst_portfolio_signed, hsst_portfolio_signed_date, program_leaving_date, program_leaving_reason, program_leaving_comments, reasonable_adjustments, reasonable_adjustments_comments, hpcp_registration, hpcp_registration_date, hsst_expected_comp, specalism, recruitment_method, hei_awards, portfolio_expected_completion_date, portfolio_actual_completion_date, hcpc_signoff_required, hcpc_counter_signoff_required, hcpc_signoff_name, hcpc_signoff_number, ahcs_registration, portfolio_extended, hsst_start_month, hsst_start_year, hsst_expected_exit_month, hsst_expected_exit_year, stp_start_month, stp_start_year, stp_expected_completion_month, stp_expected_completion_year, next_exit_assessment_year, next_exit_assessment_season_id):
     return pd.DataFrame(
         data= {
                 "id": id,
@@ -696,7 +696,7 @@ def transfer_training_record_separate(id, hei_qualification_completed, hei_quali
                 "hsst_pathway_id": hsst_pathway,
                 "hsst_portfolio_comp": hsst_portfolio_completed,
                 "hsst_portfolio_comp_date": hsst_portfolio_completion_date,
-                "hsst_expected_exit_date": hsst_expected_exit,
+                "hsst_expected_comp_date": hsst_expected_comp,
                 "hsst_arp_comp": hsst_arp_completed,
                 "hsst_arp_comp_date": hsst_arp_completion_date,
                 "hsst_dclin_part_a_comp": hsst_d_clin_part_a_completed,
@@ -719,8 +719,8 @@ def transfer_training_record_separate(id, hei_qualification_completed, hei_quali
                 "hsst_portfolio_signed_date": hsst_portfolio_signed_date,
                 "hsst_start_month": [hsst_start_month],
                 "hsst_start_year": [hsst_start_year],
-                "hsst_expected_comp_month": [hsst_expected_completion_month],
-                "hsst_expected_comp_year": [hsst_expected_completion_year],
+                "hsst_expected_exit_month": [hsst_expected_exit_month],
+                "hsst_expected_exit_year": [hsst_expected_exit_year],
                 "reasonable_adjustments": reasonable_adjustments,
                 "reasonable_adj_comments": reasonable_adjustments_comments,
                 "stp_start_month": [stp_start_month],
@@ -743,7 +743,7 @@ def transfer_training_record_separate(id, hei_qualification_completed, hei_quali
                 "next_exit_assess_season_id": next_exit_assessment_season_id
             }
         )
-    
+
 
 def transfer_post_training(id, job_sector, description, job, non_nhs_employer, nhs_band, salary, other_educational_pursuits, contract_type, start_date, comments):
 
@@ -762,7 +762,7 @@ def transfer_post_training(id, job_sector, description, job, non_nhs_employer, n
             "comments": [comments],
             }
     )
-        
+
 
 
 def transfer_trainee_statuses(id, trainee_id, status_id):
@@ -773,7 +773,7 @@ def transfer_trainee_statuses(id, trainee_id, status_id):
                 "trainee_status_id": status_id,
             }
         )
-    
+
 
 def transfer_locations(path, sheets):
     LOCATION_SHEET_NAME = "EmployerLocation"
