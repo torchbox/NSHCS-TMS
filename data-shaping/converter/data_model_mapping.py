@@ -68,6 +68,8 @@ SIMPLE_REFERENCE_MAPPING = {
         "id": {"sheet": "tlkpLETB", "column": "REID"},
         "title": {"sheet": "tlkpLETB", "column": "RELETB"},
         "abbreviation": {"sheet": "tlkpLETB", "column": "REABBR"},
+        "country": {"sheet": "tlkpLETB", "column": "RENTN"},
+        "is_legacy": {"sheet": "tlkpLETB", "column": "RELEG"},
     },
     "HEIAwardingInstitution": {
         "id": {"sheet": "tlkpHEI", "column": "HEID"},
@@ -123,9 +125,22 @@ SIMPLE_REFERENCE_MAPPING = {
         "id": {"sheet": "tlkpTrusts", "column": "TSID"},
         "is_nhs": {"sheet": "tlkpTrusts", "column": "TSNHS"},
         "title": {"sheet": "tlkpTrusts", "column": "TSTRUST"},
+        "icb_id": {"sheet": "tlkpTrusts", "column": "TSICB"},
+    },
+    "EmployerLocation": {
+        "id": {"sheet": "tlkpHospital", "column": "HSID"},
+        "title": {"sheet": "tlkpHospital", "column": "HSNAME"},
+        "employer_id": {"sheet": "tlkpHospital", "column": "HSTRUST"},
+        "funding_provider_id": {"sheet": "tlkpHospital", "column": "HSLETB"},
+    },
+    "ICB": {
+        "id": {"sheet": "tlkpICB", "column": "ICID"},
+        "title": {"sheet": "tlkpICB", "column": "ICNAME"},
+        "funding_provider_id": {"sheet": "tlkpICB", "column": "ICLETB"},
     },
     "Season": {
         "id": {"sheet": "tlkpSeason", "column": "SNID"},
         "title": {"sheet": "tlkpSeason", "column": "SNSSN"},
     }
+
 }

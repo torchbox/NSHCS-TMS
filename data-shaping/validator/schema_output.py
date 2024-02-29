@@ -232,11 +232,11 @@ VALIDATION_SCHEMA_OUTPUT = {
         "title": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=255), coerce=True),
         "funding_provider_id": pa.Column("Int64", coerce=True, nullable=False),
     }),
-    "EmployerLocations": pa.DataFrameSchema({
-        "id": pa.Column(int),
-        "employer_id": pa.Column("Int64", coerce=True),
-        "location_id": pa.Column("Int64", coerce=True),
-    }),
+    # "EmployerLocations": pa.DataFrameSchema({
+    #     "id": pa.Column(int),
+    #     "employer_id": pa.Column("Int64", coerce=True),
+    #     "location_id": pa.Column("Int64", coerce=True),
+    # }),
     # tlkpHospital
     "EmployerLocation": pa.DataFrameSchema({
         "id": pa.Column(int),
@@ -301,7 +301,7 @@ VALIDATION_SCHEMA_OUTPUT = {
         "hsst_pathway_id": pa.Column("Int64", coerce=True, nullable=True),
         "hsst_portfolio_comp": pa.Column(bool, coerce=True, nullable=True),
         "hsst_portfolio_comp_date": pa.Column(date, coerce=True, nullable=True),
-        "hsst_expected_exit_date": pa.Column(date, coerce=True, nullable=True),
+        "hsst_expected_comp_date": pa.Column(date, coerce=True, nullable=True),
         "hsst_arp_comp": pa.Column(bool, coerce=True, nullable=True),
         "hsst_arp_comp_date": pa.Column(date, coerce=True, nullable=True),
         "hsst_dclin_part_a_comp": pa.Column(bool, coerce=True, nullable=True),
@@ -333,8 +333,8 @@ VALIDATION_SCHEMA_OUTPUT = {
         "portf_expected_comp_date": pa.Column(date, coerce=True, nullable=True),
         "hsst_start_month": pa.Column("Int64", coerce=True, nullable=True),
         "hsst_start_year": pa.Column("Int64", coerce=True, nullable=True),
-        "hsst_expected_comp_month": pa.Column("Int64", coerce=True, nullable=True),
-        "hsst_expected_comp_year": pa.Column("Int64", coerce=True, nullable=True),
+        "hsst_expected_exit_month": pa.Column("Int64", coerce=True, nullable=True),
+        "hsst_expected_exit_year": pa.Column("Int64", coerce=True, nullable=True),
         "stp_start_month": pa.Column("Int64", coerce=True, nullable=True),
         "stp_start_year": pa.Column("Int64", coerce=True, nullable=True),
         "stp_expected_comp_month": pa.Column("Int64", coerce=True, nullable=True),

@@ -89,8 +89,8 @@ VALIDATION_SCHEMA = {
         "REID": pa.Column(int),
         "RELETB": pa.Column(str),
         "REABBR": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
-        "RENTN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
-        "RELEG": pa.Column(bool, coerce=True, checks=pa.Check.isin(allowed_values=[0, 1])),
+        "RENTN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True),
+        "RELEG": pa.Column(bool, coerce=True, checks=pa.Check.isin(allowed_values=[0, 1]), nullable=True),
     }),
     # HEIAwardingInstitution
     "tlkpHEI": pa.DataFrameSchema({
