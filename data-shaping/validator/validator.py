@@ -55,23 +55,26 @@ def validate_foreign_keys(tables: dict[str, pd.DataFrame], schema: dict[str, FkC
             
             # Only check the fk checks for which both the corresponding fk table and column exists
             if origin_table_name in tables and origin_column_name in tables[origin_table_name].columns:
-                # Get unique values to reduce the number of checks
+                # Get the foreign key values
                 fk_values = [v for v in tables[fk_table_name][fk_column_name].values if is_fk_value_valid(v)]
                 # Extract the fk column values
                 origin_values = tables[origin_table_name][origin_column_name].values
 
+                # For all fk values standardise them and store if not present
                 absent_values = []
                 for fk in fk_values:
                     clean_fk = standardise_value(fk)
                     if clean_fk not in absent_values and clean_fk not in origin_values:
                         absent_values.append(clean_fk)
                 
+                # Check if there are any absent values and report accordingly
                 if len(absent_values) == 0:
                     print_check_passed(fk_table_name, fk_column_name, origin_table_name, origin_column_name)
                 else:
                     for absent_value in absent_values:
                         occurrence_indices = find_indexes_for_value(tables[fk_table_name], fk_column_name, absent_value)
                         print_indices_for_missing_value(missing_value=absent_value, occurrence_indices=occurrence_indices, show_all_indices=show_all_indices)
+            
             else:
                 print(f"\n❌ Could not validate column \u001b[31m{origin_column_name}\u001b[37m in table \u001b[31m{origin_table_name}\u001b[37m as it is not present in the origin table.")
                 pass
@@ -84,12 +87,21 @@ def is_fk_value_valid(value):
     return value is not None and not pd.isna(value) and not pd.isnull(value)
 
 
-def print_check_passed(fk_table_name, fk_column_name, origin_table_name, origin_column_name):
-    print(f'\t✅ All elements of \u001b[32m{fk_table_name}.{fk_column_name}\u001b[37m are in \u001b[32m{origin_table_name}.{origin_column_name}\u001b[37m foreign key column.')
+# Clean out the NaN, NA, None, and convert floats to ints
+def standardise_value(value):
+    if is_fk_value_valid(value) and isinstance(value, float):
+        return int(value) 
+    else:
+        return value
 
 
+# Find the indexes where the values appear
 def find_indexes_for_value(table: pd.DataFrame, column_name: str, value: any) -> list[int]:
     return table.index[table[column_name]==value].tolist()
+
+
+def print_check_passed(fk_table_name, fk_column_name, origin_table_name, origin_column_name):
+    print(f'\t✅ All elements of \u001b[32m{fk_table_name}.{fk_column_name}\u001b[37m are in \u001b[32m{origin_table_name}.{origin_column_name}\u001b[37m foreign key column.')
 
 
 def print_indices_for_missing_value(missing_value: any, occurrence_indices: list[int], show_all_indices):
@@ -98,12 +110,6 @@ def print_indices_for_missing_value(missing_value: any, occurrence_indices: list
     else:    
         print(f"\t❌ \033[0;31m{missing_value}\u001b[37m at indices \033[0;33m[{occurrence_indices[0]}, {occurrence_indices[1]}, {occurrence_indices[2]} ... {occurrence_indices[-3]}, {occurrence_indices[-2]}, {occurrence_indices[-1]}]\u001b[37m")
 
-
-def standardise_value(value):
-    if is_fk_value_valid(value) and isinstance(value, float):
-        return int(value) 
-    else:
-        return value
 
 def print_current_check(fk_table_name, fk_column_name, origin_table_name, origin_column_name):
     print("\n🔍 Table: \033[0;36m" + fk_table_name + "." + fk_column_name + '\u001b[37m - Origin Table: \033[0;36m' + origin_table_name + '.' + origin_column_name + "\u001b[37m")
