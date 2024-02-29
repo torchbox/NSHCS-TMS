@@ -361,7 +361,9 @@ def transfer_trainees(path, sheets, rows = None):
     disability_details = []
     genders = []
     sexual_orientations = []
+    sexual_orientation_others = []
     religions = []
+    religion_others = []
     nationalities = []
     marital_statuses = []
     address_line_1s = []
@@ -415,7 +417,9 @@ def transfer_trainees(path, sheets, rows = None):
         disability_details.append(row['RGDSDET'])
         genders.append(row['RGGEN'])
         sexual_orientations.append(row['RGSEOR'])
+        sexual_orientation_others.append(row['RGSEORO'])
         religions.append(row['RGREL'])
+        religion_others.append(row['RGRELO'])
         nationalities.append(row['RGNAT'])
         marital_statuses.append(row['RGMAR'])
         address_line_1s.append(row['RGADD1'])
@@ -634,7 +638,9 @@ def transfer_trainees(path, sheets, rows = None):
             "disability_details": disability_details,
             "gender_id": genders,
             "sexual_orientation_id": sexual_orientations,
+            "sexual_orientation_other": sexual_orientation_others,
             "religion_id": religions,
+            "religion_other": religion_others,
             "nationality_id": nationalities,
             "marital_status_id": marital_statuses,
             "address_line_1": address_line_1s,

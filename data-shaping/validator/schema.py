@@ -89,6 +89,8 @@ VALIDATION_SCHEMA = {
         "REID": pa.Column(int),
         "RELETB": pa.Column(str),
         "REABBR": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+        "RENTN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+        "RELEG": pa.Column(bool, coerce=True, checks=pa.Check.isin(allowed_values=[0, 1])),
     }),
     # HEIAwardingInstitution
     "tlkpHEI": pa.DataFrameSchema({
@@ -155,6 +157,14 @@ VALIDATION_SCHEMA = {
         "TSID": pa.Column(int),
         "TSNHS": pa.Column(bool, coerce=True, checks=pa.Check.isin(allowed_values=[0, 1])), # Since coerce=True, the validator will first look to convert the column from 1 and zero to bool
         "TSTRUST": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=255)),
+        "TSICB": pa.Column("Int64", nullable=True, coerce=True),
+    }),
+    # ICB
+    "tlkpICB": pa.DataFrameSchema({
+        "ICID": pa.Column(int),
+        # Since coerce=True, the validator will first look to convert the column from 1 and zero to bool
+        "ICNAME": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=255)),
+        "ICLETB": pa.Column("Int64", nullable=False, coerce=True),
     }),
     # Season
     "tlkpSeason": pa.DataFrameSchema({
@@ -246,7 +256,9 @@ VALIDATION_SCHEMA = {
         "RGDSDET": pa.Column(str, nullable=True),
         "RGGEN": pa.Column("Int64", coerce=True, nullable=True),
         "RGSEOR": pa.Column("Int64", coerce=True, nullable=True),
+        "RGSEORO": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=150), coerce=True, nullable=True),
         "RGREL": pa.Column("Int64", coerce=True, nullable=True),
+        "RGRELO": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=150), coerce=True, nullable=True),
         "RGNAT": pa.Column("Int64", coerce=True, nullable=True),
         "RGMAR": pa.Column("Int64", coerce=True, nullable=True),
         "RGADD1": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), coerce=True, nullable=True),
@@ -332,7 +344,7 @@ VALIDATION_SCHEMA = {
         "RGOLEXT": pa.Column(bool, coerce=True, nullable=True),
         "RGEXICYR": pa.Column("Int64", coerce=True, nullable=True),
         "RGEXICSN": pa.Column("Int64", coerce=True, nullable=True),
-        
+
         # Trainee and TrainingRecord and PostTraining
         "RGFJTP": pa.Column("Int64", coerce=True, nullable=True), # Nullable in registration as it is only non nullable in the PostTraining model. That model will be populated by non-null fields from here.
         "RGFRJB": pa.Column(str, coerce=True, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=255)),
