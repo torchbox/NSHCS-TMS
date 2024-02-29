@@ -34,7 +34,7 @@ print_separator("Foreign Key Validation")
 fk_validation_success = validate_foreign_keys(data_tables | reference_tables, FOREIGN_KEY_SCHEMA_INPUT, show_all_indices=args.show_all_indices)
 
 if (not (shape_validation_success and fk_validation_success)) and not args.ignore_errors:
-    print_separator("Validation Failed")
+    print_separator("Input Validation Failed")
     print("Schema validation: " + ("Passed ✅" if shape_validation_success else "Failed ❌"))
     print("Foreign keys validation: " + ("Passed ✅" if fk_validation_success else "Failed ❌"))
     exit()
@@ -62,3 +62,7 @@ output_validation_success = validate_dfs(output_tables, VALIDATION_SCHEMA_OUTPUT
 
 print_separator("Foreign Key Validation")
 fk_validation_success = validate_foreign_keys(output_tables, FOREIGN_KEY_SCHEMA_OUTPUT, show_all_indices=args.show_all_indices)
+    
+print_separator("Output Validation " + ("Passed" if output_validation_success and fk_validation_success else "Failed"))
+print("Schema validation: " + ("Passed ✅" if shape_validation_success else "Failed ❌"))
+print("Foreign keys validation: " + ("Passed ✅" if fk_validation_success else "Failed ❌"))
