@@ -6,11 +6,13 @@ from output.output import transfer_data, transfer_leave_of_absence_record, trans
     transfer_employment_record, transfer_exit_assessment_record, transfer_trainees, transfer_mid_review_progression
 from validator.schema import VALIDATION_SCHEMA
 from validator.schema_output import VALIDATION_SCHEMA_OUTPUT
-from validator.validator import validate_dfs
+from validator.foreign_key_schema import FOREIGN_KEY_SCHEMA
+from validator.validator import validate_dfs, validate_foreign_keys
 
 parser = ArgumentParser()
 parser.add_argument('--ignore-errors', dest='ignore_errors', action='store_true', default=False, help='Ignore the validation errors and continue the execution of the script.')
 parser.add_argument('--rows', dest='rows', action='store', default=None, help='Specify the number of rows in the Registration table to process.')
+parser.add_argument('--show-all-indices', dest='show_all_indices', action='store_true', default=False, help='Show all indices of fk columns that are not present in the fk (reference) table.')
 args = parser.parse_args()
 
 INPUT_DATA_TABLES_PATH = 'data/old_model/SampleData_DataTables.xlsx'
@@ -44,3 +46,4 @@ transfer_trainees(path=OUTPUT_DATABASE_PATH, sheets=sheets, rows=int(args.rows) 
 
 output_tables = read_spreadsheet(OUTPUT_DATABASE_PATH)
 output_validation_success = validate_dfs(output_tables, VALIDATION_SCHEMA_OUTPUT, check_all_tables_in_dataframes=True)
+fk_validation_success = validate_foreign_keys(output_tables, FOREIGN_KEY_SCHEMA, show_all_indices=args.show_all_indices)
