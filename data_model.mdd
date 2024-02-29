@@ -94,7 +94,9 @@
         string(MAX) disability_details "Null: True"
         int gender_id FK "Null: True"
         int sexual_orientation_id FK "Null: True"
+        string(150) sexual_orientation_other "Null: True"
         int religion_id FK "Null: True"
+        string(150) religion_other "Null: True"
         int nationality_id FK "Null: True"
         int marital_status_id FK "Null: True"
         string(100) address_line_1 "Null: True"
@@ -104,7 +106,9 @@
         string(100) work_email "Null: True"
         string(100) work_phone "Null: True"
         string(100) academic_email "Null: True"
+        bool academic_email_preferred
         string(100) personal_email "Null: True"
+        bool personal_email_preferred
         int email_preference_id FK "Null: True"
         string(100) personal_phone "Null: True"
         int funding_provider_id FK "Null: True"
@@ -298,6 +302,12 @@
         string(50) phone "Null: True"
         string(50) onefile_username "Null: True"
         int onefile_id "Null: True"
+        bool stp_accredited_officer "tickbox confirming whether the contact is an accredited STP Training Officer, Null: True"
+        date next_stp_accreditation_date "date of next STP accreditation due, Null: True"
+        bool hsst_accredited_officer "tickbox confirming whether the contact is an accredited HSST Training Officer, Null: True"
+        date next_hsst_accreditation_date "date of next HSST accreditation due, Null: True"
+        bool etp_accredited_officer "tickbox confirming whether the contact is an accredited ETP Training Officer, Null: True"
+        date next_etp_accreditation_date "date of next ETP accreditation due, Null: True"
     }
     TraineeContact {
         int id PK "Contact Primary Key"
