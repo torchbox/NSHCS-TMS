@@ -1,6 +1,6 @@
 import pandera as pa
 import pandas as pd
-from .foreign_key_schema import FkCheck
+from .validation_models import FkCheck
 
 # Remove the limit when printing rows to be able to see all validation issues
 # pd.set_option('display.max_rows', None)
@@ -71,6 +71,7 @@ def validate_foreign_keys(tables: dict[str, pd.DataFrame], schema: dict[str, FkC
                 if len(absent_values) == 0:
                     print_check_passed(fk_table_name, fk_column_name, origin_table_name, origin_column_name)
                 else:
+                    validation_success = False
                     for absent_value in absent_values:
                         occurrence_indices = find_indexes_for_value(tables[fk_table_name], fk_column_name, absent_value)
                         print_indices_for_missing_value(missing_value=absent_value, occurrence_indices=occurrence_indices, show_all_indices=show_all_indices)

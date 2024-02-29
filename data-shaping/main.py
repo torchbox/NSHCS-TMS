@@ -6,7 +6,8 @@ from output.output import transfer_data, transfer_leave_of_absence_record, trans
     transfer_employment_record, transfer_exit_assessment_record, transfer_trainees, transfer_mid_review_progression
 from validator.schema import VALIDATION_SCHEMA
 from validator.schema_output import VALIDATION_SCHEMA_OUTPUT
-from validator.foreign_key_schema import FOREIGN_KEY_SCHEMA
+from validator.foreign_key_schema_output import FOREIGN_KEY_SCHEMA as FOREIGN_KEY_SCHEMA_OUTPUT
+from validator.foreign_key_schema_input import FOREIGN_KEY_SCHEMA as FOREIGN_KEY_SCHEMA_INPUT
 from validator.validator import validate_dfs, validate_foreign_keys
 
 parser = ArgumentParser()
@@ -23,15 +24,25 @@ OUTPUT_DATABASE_PATH = './data/new_model/Database.xlsx'
 data_tables = read_spreadsheet(INPUT_DATA_TABLES_PATH)
 reference_tables = read_spreadsheet(INPUT_REFERENCE_TABLES_PATH)
 
-reference_tables_validation_success = validate_dfs(reference_tables, VALIDATION_SCHEMA)
-data_tables_validation_success = validate_dfs(data_tables, VALIDATION_SCHEMA)
+def print_separator(message: str) -> None:
+    print(f"\n\n{message}\n" + ("".join(x for x in ["="]*80)) + "\n")
 
-if (not (reference_tables_validation_success and data_tables_validation_success)) and not args.ignore_errors:
+print_separator("Shape Validation")
+shape_validation_success = validate_dfs(reference_tables | data_tables, VALIDATION_SCHEMA)
+
+print_separator("Foreign Key Validation")
+fk_validation_success = validate_foreign_keys(data_tables | reference_tables, FOREIGN_KEY_SCHEMA_INPUT, show_all_indices=args.show_all_indices)
+
+if (not (shape_validation_success and fk_validation_success)) and not args.ignore_errors:
+    print_separator("Validation Failed")
+    print("Schema validation: " + ("Passed ✅" if shape_validation_success else "Failed ❌"))
+    print("Foreign keys validation: " + ("Passed ✅" if fk_validation_success else "Failed ❌"))
     exit()
 
 if os.path.exists(OUTPUT_DATABASE_PATH):
     os.remove(OUTPUT_DATABASE_PATH)
 
+print_separator("Transferring Data")
 sheets = {**reference_tables, **data_tables}
 transfer_data(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_leave_of_absence_record(path=OUTPUT_DATABASE_PATH, sheets=sheets)
@@ -45,5 +56,9 @@ transfer_exit_assessment_record(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_trainees(path=OUTPUT_DATABASE_PATH, sheets=sheets, rows=int(args.rows) if args.rows is not None else None)
 
 output_tables = read_spreadsheet(OUTPUT_DATABASE_PATH)
+
+print_separator("Shape Validation")
 output_validation_success = validate_dfs(output_tables, VALIDATION_SCHEMA_OUTPUT, check_all_tables_in_dataframes=True)
-fk_validation_success = validate_foreign_keys(output_tables, FOREIGN_KEY_SCHEMA, show_all_indices=args.show_all_indices)
+
+print_separator("Foreign Key Validation")
+fk_validation_success = validate_foreign_keys(output_tables, FOREIGN_KEY_SCHEMA_OUTPUT, show_all_indices=args.show_all_indices)

@@ -1,9 +1,4 @@
-from typing import TypedDict
-
-class FkCheck(TypedDict):
-    fk: str
-    origin_table: str
-    origin_column: str
+from .validation_models import FkCheck
 
 FOREIGN_KEY_SCHEMA: dict[str, list[FkCheck]] = {
     "EmploymentRecord": [
