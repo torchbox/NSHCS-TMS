@@ -73,6 +73,11 @@ FOREIGN_KEY_SCHEMA: dict[str, list[FkCheck]] = {
                 'origin_column': "ECID"
             },
             {
+                'fk': "RGHCHRT",
+                'origin_table': "tlkpHSSTCohort",
+                'origin_column': "HCID"
+            },
+            {
                 'fk': "RGDISABL",
                 'origin_table': "tlkpDisabilityAnswer",
                 'origin_column': "DSID"
@@ -177,11 +182,11 @@ FOREIGN_KEY_SCHEMA: dict[str, list[FkCheck]] = {
                 'origin_table': "tlkpSeason",
                 'origin_column': "SNID"
             },
-            # {
-            #     'fk': "hei_qualification_outcome_id",
-            #     'origin_table': "tlkpMScOutcome",
-            #     'origin_column': "OCID"
-            # }
+            {
+                'fk': "RGMScOTCM",
+                'origin_table': "tlkpMScOutcome",
+                'origin_column': "OCID"
+            }
         ],
     "tlkpTrusts": [
         {

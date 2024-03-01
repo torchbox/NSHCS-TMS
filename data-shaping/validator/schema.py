@@ -108,10 +108,24 @@ VALIDATION_SCHEMA = {
         "PTDESC": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=255)),
         "PTCODE": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
     }),
+    # HSSTCohort
+    "tlkpHSSTCohort": pa.DataFrameSchema({
+        "HCID": pa.Column(int),
+        "HCCOHORT": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100))
+    }),
     # Specialism
     "tlkpSpecialism": pa.DataFrameSchema({
         "SPID": pa.Column(int),
         "SPSPEC": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=255)),
+        "SPABBR": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+        "SPTHEME": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100)),
+        "SPDIV": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100)),
+        "SPASP": pa.Column(bool, coerce=True, checks=pa.Check.isin(allowed_values=[0, 1])),
+        "SPROTv1": pa.Column(str, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=100)),
+        "SPROTv2": pa.Column(str, coerce=True, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=100)),
+        "SPEXPROT": pa.Column(int, nullable=True, coerce=True),
+        "SPEXPSPEC": pa.Column(int, nullable=True, coerce=True),
+        "SPCURCODE": pa.Column(str, coerce=True, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=100)),
     }),
     # RecruitmentMethod
     "tlkpEntryType": pa.DataFrameSchema({

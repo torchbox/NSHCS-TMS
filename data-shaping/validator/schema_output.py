@@ -107,10 +107,24 @@ VALIDATION_SCHEMA_OUTPUT = {
         "title": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=255)),
         "code": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
     }),
+    # tlkpHSSTCohort
+    "HsstCohort": pa.DataFrameSchema({
+        "id": pa.Column(int),
+        "title": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100)),
+    }),
     # tlkpSpecialism
     "Specialism": pa.DataFrameSchema({
         "id": pa.Column(int),
         "title": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=255)),
+        "abbreviation": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
+        "theme": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100)),
+        "division": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100)),
+        "specialty_within_asp": pa.Column(bool, coerce=True, checks=pa.Check.isin(allowed_values=[0, 1])),
+        "required_spec_rot_cur_v1": pa.Column(str, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=100)),
+        "required_spec_rot_cur_v2": pa.Column(str, coerce=True, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=100)),
+        "expected_rotation_modules": pa.Column(int, nullable=True),
+        "expected_specialist_modules": pa.Column(int, nullable=True),
+        "curriculum_library_code": pa.Column(str, coerce=True, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=100)),
     }),
     # tlkpEntryType
     "RecruitmentMethod": pa.DataFrameSchema({

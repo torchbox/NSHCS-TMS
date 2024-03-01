@@ -19,8 +19,8 @@ parser.add_argument('--show-all-indices', dest='show_all_indices', action='store
 parser.add_argument('--compare-reference-tables', dest='ref_tables_filename', action='store', default=None, help='Specify the name of the old reference tables file to compare with, including the extension. The file is expected to be in the data/old_model/ folder and if not present, an error will be thrown.')
 args = parser.parse_args()
 
-INPUT_DATA_TABLES_PATH = 'data/old_model/SampleData_DataTables.xlsx'
-INPUT_REFERENCE_TABLES_PATH = 'data/old_model/SampleData_ReferenceTables.xlsx'
+INPUT_DATA_TABLES_PATH = 'data/old_model/Data_Tables.xlsx'
+INPUT_REFERENCE_TABLES_PATH = 'data/old_model/Reference_Tables.xlsx'
 
 OUTPUT_DATABASE_PATH = './data/new_model/Database.xlsx'
 
@@ -49,7 +49,7 @@ if (not (shape_validation_success and fk_validation_success and comparison_succe
     print("Foreign keys validation: " + ("Passed ✅" if fk_validation_success else "Failed ❌"))
     if args.ref_tables_filename:
         print("Comparison: " + ("Passed ✅" if comparison_successful else "Failed ❌"))
-    
+
     exit()
 
 if os.path.exists(OUTPUT_DATABASE_PATH):
@@ -75,7 +75,7 @@ output_validation_success = validate_dfs(output_tables, VALIDATION_SCHEMA_OUTPUT
 
 print_separator("Foreign Key Validation")
 fk_validation_success = validate_foreign_keys(output_tables, FOREIGN_KEY_SCHEMA_OUTPUT, show_all_indices=args.show_all_indices)
-    
+
 print_separator("Output Validation " + ("Passed" if output_validation_success and fk_validation_success else "Failed"))
 print("Schema validation: " + ("Passed ✅" if shape_validation_success else "Failed ❌"))
 print("Foreign keys validation: " + ("Passed ✅" if fk_validation_success else "Failed ❌"))
