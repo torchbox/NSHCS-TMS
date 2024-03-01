@@ -170,7 +170,7 @@ FOREIGN_KEY_SCHEMA: dict[str, list[FkCheck]] = {
             {
                 'fk': "RGENTRY",
                 'origin_table': "tlkpEntryType",
-                'origin_column': "ENENTR"
+                'origin_column': "ENID"
             },
             {
                 'fk': "RGEXICSN",
