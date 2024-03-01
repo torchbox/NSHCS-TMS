@@ -97,11 +97,11 @@ def are_reference_table_values_same(new_tables: dict[str, pd.DataFrame], old_tab
 
             if len(added_ids) > 0:
                 are_same = False
-                print(f"\t❌ IDs added: \033[0;33m{added_ids}\u001b[37m")
+                print(f"\t❌ IDs removed: \033[0;33m{added_ids}\u001b[37m")
 
             if len(removed_ids) > 0:
                 are_same = False
-                print(f"\t❌ IDs removed: \033[0;33m{removed_ids}\u001b[37m")
+                print(f"\t❌ IDs added: \033[0;33m{removed_ids}\u001b[37m")
                 
         else:
             print("\t❌ Table not present in the old datasets.")
