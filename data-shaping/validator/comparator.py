@@ -56,6 +56,9 @@ def are_reference_table_values_same(new_tables: dict[str, pd.DataFrame], old_tab
     for table_name, _ in new_tables.items():
         print("\n🔍 Checking values in table: \033[0;36m" + table_name + "\u001b[37m")
         if table_name in old_tables and table_name in old_tables:
+            if not table_name.upper().startswith('TLKP'):
+                print("\t⛔ Column does not begin with tlkp. Skipping.")
+
             if new_tables[table_name].equals(old_tables[table_name]):
                 print(f'\t✅ Values match.')
                 continue
@@ -69,9 +72,16 @@ def are_reference_table_values_same(new_tables: dict[str, pd.DataFrame], old_tab
             common_columns = list(new_table_columns.intersection(old_table_columns))
             id_columns = [x for x in common_columns if x.upper().endswith("ID")]
             if len(id_columns) != 1:
-                print(f"\t❌ No single ID column identified among common columns {common_columns} - could not compare.")
+                # Overload for tables with more than one column ending with ID
+                if "CTID" in id_columns and table_name == "tlkpContacts":
+                    print("Hardcoding the id column name to CTID")
+                    id_column_name = "CTID"
+                else:
+                    print(f"\t❌ No single ID column identified among common columns {common_columns} - could not compare.")
+                    continue
+            else:
+                id_column_name = id_columns[0]
 
-            id_column_name = id_columns[0]
             overlapping_dataframe_new = new_tables[table_name][common_columns]
             overlapping_dataframe_old = old_tables[table_name][common_columns]
 
