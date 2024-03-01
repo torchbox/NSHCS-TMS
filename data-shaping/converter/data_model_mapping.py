@@ -14,11 +14,11 @@ SIMPLE_REFERENCE_MAPPING = {
     },
     "Salary": {
         "id": {"sheet": "tlkpSalary", "column": "SRID"},
-        "title": {"sheet": "tlkpSalary", "column": "SRSALARY"},
+        "value": {"sheet": "tlkpSalary", "column": "SRSALARY"},
     },
     "JobSector": {
         "id": {"sheet": "tlkpFirstJobType", "column": "FJID"},
-        "name": {"sheet": "tlkpFirstJobType", "column": "FJTYPE"},
+        "title": {"sheet": "tlkpFirstJobType", "column": "FJTYPE"},
     },
     "NHSBand": {
         "id": {"sheet": "tlkpAFCBand", "column": "BDID"},
@@ -68,6 +68,8 @@ SIMPLE_REFERENCE_MAPPING = {
         "id": {"sheet": "tlkpLETB", "column": "REID"},
         "title": {"sheet": "tlkpLETB", "column": "RELETB"},
         "abbreviation": {"sheet": "tlkpLETB", "column": "REABBR"},
+        "country": {"sheet": "tlkpLETB", "column": "RENTN"},
+        "is_legacy": {"sheet": "tlkpLETB", "column": "RELEG"},
     },
     "HEIAwardingInstitution": {
         "id": {"sheet": "tlkpHEI", "column": "HEID"},
@@ -82,9 +84,22 @@ SIMPLE_REFERENCE_MAPPING = {
         "title": {"sheet": "tlkpHSSTPathway", "column": "PTDESC"},
         "code": {"sheet": "tlkpHSSTPathway", "column": "PTCODE"},
     },
+    "HsstCohort": {
+        "id": {"sheet": "tlkpHSSTCohort", "column": "HCID"},
+        "title": {"sheet": "tlkpHSSTCohort", "column": "HCCOHORT"},
+    },
     "Specialism": {
         "id": {"sheet": "tlkpSpecialism", "column": "SPID"},
         "title": {"sheet": "tlkpSpecialism", "column": "SPSPEC"},
+        "abbreviation": {"sheet": "tlkpSpecialism", "column": "SPABBR"},
+        "theme": {"sheet": "tlkpSpecialism", "column": "SPTHEME"},
+        "division": {"sheet": "tlkpSpecialism", "column": "SPDIV"},
+        "specialty_within_asp": {"sheet": "tlkpSpecialism", "column": "SPASP"},
+        "required_spec_rot_cur_v1": {"sheet": "tlkpSpecialism", "column": "SPROTv1"},
+        "required_spec_rot_cur_v2": {"sheet": "tlkpSpecialism", "column": "SPROTv2"},
+        "expected_rotation_modules": {"sheet": "tlkpSpecialism", "column": "SPEXPROT"},
+        "expected_specialist_modules": {"sheet": "tlkpSpecialism", "column": "SPEXPSPEC"},
+        "curriculum_library_code": {"sheet": "tlkpSpecialism", "column": "SPCURCODE"},
     },
     "RecruitmentMethod": {
         "id": {"sheet": "tlkpEntryType", "column": "ENID"},
@@ -123,9 +138,22 @@ SIMPLE_REFERENCE_MAPPING = {
         "id": {"sheet": "tlkpTrusts", "column": "TSID"},
         "is_nhs": {"sheet": "tlkpTrusts", "column": "TSNHS"},
         "title": {"sheet": "tlkpTrusts", "column": "TSTRUST"},
+        "icb_id": {"sheet": "tlkpTrusts", "column": "TSICB"},
+    },
+    "EmployerLocation": {
+        "id": {"sheet": "tlkpHospital", "column": "HSID"},
+        "title": {"sheet": "tlkpHospital", "column": "HSNAME"},
+        "employer_id": {"sheet": "tlkpHospital", "column": "HSTRUST"},
+        "funding_provider_id": {"sheet": "tlkpHospital", "column": "HSLETB"},
+    },
+    "ICB": {
+        "id": {"sheet": "tlkpICB", "column": "ICID"},
+        "title": {"sheet": "tlkpICB", "column": "ICNAME"},
+        "funding_provider_id": {"sheet": "tlkpICB", "column": "ICLETB"},
     },
     "Season": {
         "id": {"sheet": "tlkpSeason", "column": "SNID"},
         "title": {"sheet": "tlkpSeason", "column": "SNSSN"},
     }
+
 }

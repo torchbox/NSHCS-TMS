@@ -1,7 +1,16 @@
 import pandas as pd
+import sys
 from typing import Dict
 from converter.data_model_mapping import SIMPLE_REFERENCE_MAPPING
+from datetime import datetime, date
 
+def clean_date(date_to_clean):
+    if isinstance(date_to_clean, datetime):
+        return date_to_clean.date()
+    elif isinstance(date_to_clean, date):
+        return date_to_clean
+    else:
+        return None
 
 def write_spreadsheet(path: str, data_frames: Dict[str, pd.DataFrame]):
     with pd.ExcelWriter(path,
@@ -22,6 +31,7 @@ def blank_database(path: str):
 
 def transfer_data(path: str, sheets: Dict[str, pd.DataFrame]):
     blank_database(path)
+    print('Transferring simple mappings')
 
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
@@ -29,6 +39,8 @@ def transfer_data(path: str, sheets: Dict[str, pd.DataFrame]):
                       datetime_format='YYYY-MM-DD'
     ) as writer:
         for new_sheet_name, column_mappings in SIMPLE_REFERENCE_MAPPING.items():
+            print(f'Transferring {column_mappings["id"]["sheet"]} -> {new_sheet_name}')
+
             data = pd.DataFrame(columns=column_mappings)
 
             for column_name, mapping in column_mappings.items():
@@ -41,7 +53,10 @@ def transfer_data(path: str, sheets: Dict[str, pd.DataFrame]):
 
 def transfer_leave_of_absence_record(path, sheets):
     SHEET_NAME = "LeaveOfAbsenceRecord"
-    SICK_LEAVE_SHEEt_NAME = "tblSickLeave"
+    SICK_LEAVE_SHEET_NAME = "tblSickLeave"
+
+    print(f'Transferring {SICK_LEAVE_SHEET_NAME} -> {SHEET_NAME}')
+
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
                       date_format='YYYY-MM-DD',
@@ -59,7 +74,7 @@ def transfer_leave_of_absence_record(path, sheets):
             ]
         )
 
-        df: pd.DataFrame = sheets[SICK_LEAVE_SHEEt_NAME]
+        df: pd.DataFrame = sheets[SICK_LEAVE_SHEET_NAME]
 
         for i, row in df.iterrows():
             id = row["SLID"]
@@ -90,6 +105,9 @@ def transfer_leave_of_absence_record(path, sheets):
 def transfer_support_record(path, sheets):
     SHEET_NAME = "SupportRecord"
     OLD_SUPPORT_SHEET_NAME = 'tblSupport'
+
+    print(f'Transferring {OLD_SUPPORT_SHEET_NAME} -> {SHEET_NAME}')
+
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
                       date_format='YYYY-MM-DD',
@@ -116,6 +134,9 @@ def transfer_support_record(path, sheets):
 def transfer_trainee_contact(path, sheets):
     SHEET_NAME = "TraineeContact"
     OLD_TRAINEE_CONTACT_SHEET_NAME = "tblTraineeContacts"
+
+    print(f'Transferring {OLD_TRAINEE_CONTACT_SHEET_NAME} -> {SHEET_NAME}')
+
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
                       date_format='YYYY-MM-DD',
@@ -157,6 +178,9 @@ def transfer_trainee_contact(path, sheets):
 def transfer_annual_review_progression(path, sheets):
     SHEET_NAME = "AnnualReviewProgression"
     OLD_ARP_SHEET_NAME = "tblARP"
+
+    print(f'Transferring {OLD_ARP_SHEET_NAME} -> {SHEET_NAME}')
+
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
                       date_format='YYYY-MM-DD',
@@ -195,6 +219,9 @@ def transfer_annual_review_progression(path, sheets):
 def transfer_mid_review_progression(path, sheets):
     SHEET_NAME = "MidReviewProgression"
     OLD_ARP_SHEET_NAME = "tblMRP"
+
+    print(f'Transferring {OLD_ARP_SHEET_NAME} -> {SHEET_NAME}')
+
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
                       date_format='YYYY-MM-DD',
@@ -233,6 +260,9 @@ def transfer_mid_review_progression(path, sheets):
 def transfer_employment_record(path, sheets):
     SHEET_NAME = "EmploymentRecord"
     OLD_EMPLOYMENT_RECORDS_SHEET = "tblEmployers"
+
+    print(f'Transferring {OLD_EMPLOYMENT_RECORDS_SHEET} -> {SHEET_NAME}')
+
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
                       date_format='YYYY-MM-DD',
@@ -273,6 +303,9 @@ def transfer_employment_record(path, sheets):
 def transfer_exit_assessment_record(path, sheets):
     SHEET_NAME = "ExitAssessmentRecord"
     OLD_ASSESSMENT_RECORDS_SHEETS = 'tblOSFA'
+
+    print(f'Transferring {OLD_ASSESSMENT_RECORDS_SHEETS} -> {SHEET_NAME}')
+
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
                       date_format='YYYY-MM-DD',
@@ -299,38 +332,19 @@ def transfer_exit_assessment_record(path, sheets):
         )
         ears.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
-def transfer_post_training(path, id, job_sector, description, job, non_nhs_employer, nhs_band, salary, other_educational_pursuits, contract_type, start_date, comments):
-    SHEET_NAME = "PostTraining"
-
-    pts = pd.DataFrame(
-        data= {
-            "id": [id],
-            "job_sector_id": [job_sector],
-            "description": [description],
-            "employer_id": [job],
-            "non_nhs_employer": [non_nhs_employer],
-            "nhs_band_id": [nhs_band],
-            "non_nhs_salary_id": [salary],
-            "other_educational_pursuits": [other_educational_pursuits],
-            "contract_type_id": [contract_type],
-            "start_date": [start_date],
-            "comments": [comments],
-            }
-        )
-
-    with pd.ExcelWriter(
-        path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
-                      date_format='YYYY-MM-DD',
-                      datetime_format='YYYY-MM-DD'
-    ) as writer:
-        pts.to_excel(writer, sheet_name=SHEET_NAME, index=False, startrow=0 if id == None or id == 1 else id, header=id==1)
-
-
-
-
-def transfer_trainees(path, sheets):
+def transfer_trainees(path, sheets, rows = None):
     SHEET_NAME = "Trainee"
+    SHEET_NAME_POST_TRAINING = "PostTraining"
+    SHEET_NAME_TRAINING_RECORD = "TrainingRecord"
+    SHEET_NAME_TRAINEE_STATUSES = "TraineeStatuses"
     OLD_REGISTRATION_SHEET_NAME = "tblRegistration"
+
+
+    print(f'Transferring {OLD_REGISTRATION_SHEET_NAME} -> {SHEET_NAME}')
+
+    post_training_df = pd.DataFrame()
+    training_record_df = pd.DataFrame()
+    trainee_status_df = pd.DataFrame()
 
     ids = []
     training_records = []
@@ -339,6 +353,7 @@ def transfer_trainees(path, sheets):
     surnames = []
     forenames = []
     date_of_births = []
+    pronouns = []
     ethnicities = []
     ethnicity_others = []
     disability_statuses = []
@@ -346,7 +361,9 @@ def transfer_trainees(path, sheets):
     disability_details = []
     genders = []
     sexual_orientations = []
+    sexual_orientation_others = []
     religions = []
+    religion_others = []
     nationalities = []
     marital_statuses = []
     address_line_1s = []
@@ -380,13 +397,19 @@ def transfer_trainees(path, sheets):
     next_trainee_statuses_id = 1
     next_trainee_statuses_cnt = 1
 
-    for i, row in  sheets[OLD_REGISTRATION_SHEET_NAME].iterrows():
+    nr_of_rows = sheets[OLD_REGISTRATION_SHEET_NAME].shape[0]
+    nr_of_rows_to_process = rows or nr_of_rows
+
+    for i, row in sheets[OLD_REGISTRATION_SHEET_NAME].iterrows():
+        if i > nr_of_rows_to_process:
+            continue
         ids.append(row['RGID'])
         nshc_trainee_ids.append(row['RGSCID'])
         titles.append(row['RGTITLE'])
         surnames.append(row['RGSNAME'])
         forenames.append(row['RGFNAME'])
-        date_of_births.append(row['RGDOB'])
+        date_of_births.append(clean_date(row['RGDOB']))
+        pronouns.append(None)
         ethnicities.append(row['RGETH'])
         ethnicity_others.append(row['RGETHO'])
         disability_statuses.append(row['RGDISABL'])
@@ -394,7 +417,9 @@ def transfer_trainees(path, sheets):
         disability_details.append(row['RGDSDET'])
         genders.append(row['RGGEN'])
         sexual_orientations.append(row['RGSEOR'])
+        sexual_orientation_others.append(row['RGSEORO'])
         religions.append(row['RGREL'])
+        religion_others.append(row['RGRELO'])
         nationalities.append(row['RGNAT'])
         marital_statuses.append(row['RGMAR'])
         address_line_1s.append(row['RGADD1'])
@@ -419,21 +444,23 @@ def transfer_trainees(path, sheets):
         deferreds.append(row['RGDEF'])
         deferral_comments.append(row['RGDEFCM'])
 
-        print(f'Processing registration: {i}')
+        # print(f'Processing registration: {i}')
+        sys.stdout.write('\r')
+        sys.stdout.write(f'Processing registration: {i} / {nr_of_rows_to_process}')
+        sys.stdout.flush()
 
-        if pd.notna(row['RGFJTP']) or \
-            pd.notna(row['RGFRJB']) or \
+        if pd.notna(row['RGFJTP']) and \
+            (pd.notna(row['RGFRJB']) or \
             pd.notna(row['RGFJTRST']) or \
             pd.notna(row['RGFREM']) or \
             pd.notna(row['RGFJBAND']) or \
             pd.notna(row['RGFJSAL']) or \
             pd.notna(row['RGFRCNT']) or \
             pd.notna(row['RGFRSTDT']) or \
-            pd.notna(row['RGFRCMT']):
+            pd.notna(row['RGFRCMT'])):
 
             next_post_training_id = next_post_training_cnt
-            transfer_post_training(
-                path=path,
+            df = transfer_post_training(
                 id=next_post_training_id,
                 job_sector=row['RGFJTP'],
                 description=row['RGFRJB'],
@@ -443,9 +470,12 @@ def transfer_trainees(path, sheets):
                 salary=row['RGFJSAL'],
                 other_educational_pursuits=row['RGFJOED'],
                 contract_type=row['RGFRCNT'],
-                start_date=row['RGFRSTDT'],
+                start_date=clean_date(row['RGFRSTDT']),
                 comments=row['RGFRCMT']
             )
+
+            new_df = pd.concat([post_training_df, df])
+            post_training_df = new_df
             next_post_training_cnt = next_post_training_cnt + 1
         else:
             next_post_training_id = None
@@ -504,8 +534,7 @@ def transfer_trainees(path, sheets):
             pd.notna(row['RGEXICYR']):
 
             next_training_record_id = next_training_record_cnt
-            transfer_training_record_separate(
-                path=path,
+            df = transfer_training_record_separate(
                 id=next_training_record_id,
                 hei_qualification_completed=row['RGMScCMP'],
                 hei_qualification_date=row['RGMScDT'],
@@ -547,13 +576,13 @@ def transfer_trainees(path, sheets):
                 hpcp_registration_date=row['RGHCPCDT'],
                 hsst_start_month=row['RGHCMTH'],
                 hsst_start_year=row['RGHCYR'],
-                hsst_expected_completion_month=row['RGHEMTH'],
-                hsst_expected_completion_year=row['RGHEYR'],
+                hsst_expected_exit_month=row['RGHEMTH'],
+                hsst_expected_exit_year=row['RGHEYR'],
                 stp_start_month=row['RGSSMTH'],
                 stp_start_year=row['RGCHRT'],
                 stp_expected_completion_month=row['RGSEMTH'],
                 stp_expected_completion_year=row['RGANEX'],
-                hsst_expected_exit=row['RGHEXCM'],
+                hsst_expected_comp=row['RGHEXCM'],
                 specalism=row['RGSPEC'],
                 recruitment_method=row['RGENTRY'],
                 hei_awards=row['RGHEI'],
@@ -569,18 +598,22 @@ def transfer_trainees(path, sheets):
                 next_exit_assessment_season_id=row['RGEXICSN'],
                 )
 
+            new_df = pd.concat([training_record_df, df])
+            training_record_df = new_df
+
             next_training_record_cnt = next_training_record_cnt + 1
         else:
             next_training_record_id = None
 
         if pd.notna(row['RGSTAT']):
             next_trainee_statuses_id = next_trainee_statuses_cnt
-            transfer_trainee_statuses(
-                path=path,
+            df = transfer_trainee_statuses(
                 id=next_trainee_statuses_id,
                 trainee_id=[row['RGID']],
                 status_id=[row['RGSTAT']]
             )
+            new_df = pd.concat([trainee_status_df, df])
+            trainee_status_df = new_df
             next_trainee_statuses_cnt = next_trainee_statuses_cnt + 1
         else:
             next_trainee_statuses_id = None
@@ -597,6 +630,7 @@ def transfer_trainees(path, sheets):
             "surname": surnames,
             "forename": forenames,
             "date_of_birth": date_of_births,
+            "pronouns": pronouns,
             "ethnicity_id": ethnicities,
             "ethnicity_other": ethnicity_others,
             "disability_status_id": disability_statuses,
@@ -604,7 +638,9 @@ def transfer_trainees(path, sheets):
             "disability_details": disability_details,
             "gender_id": genders,
             "sexual_orientation_id": sexual_orientations,
+            "sexual_orientation_other": sexual_orientation_others,
             "religion_id": religions,
+            "religion_other": religion_others,
             "nationality_id": nationalities,
             "marital_status_id": marital_statuses,
             "address_line_1": address_line_1s,
@@ -637,12 +673,18 @@ def transfer_trainees(path, sheets):
                       date_format='YYYY-MM-DD',
                       datetime_format='YYYY-MM-DD'
     ) as writer:
+        print(f'\nWriting out {SHEET_NAME}')
         ts.to_excel(writer, sheet_name=SHEET_NAME, index=False)
+        print(f'Writing out {SHEET_NAME_POST_TRAINING}')
+        post_training_df.to_excel(writer, sheet_name=SHEET_NAME_POST_TRAINING, index=False)
+        print(f'Writing out {SHEET_NAME_TRAINING_RECORD}')
+        training_record_df.to_excel(writer, sheet_name=SHEET_NAME_TRAINING_RECORD, index=False)
+        print(f'Writing out {SHEET_NAME_TRAINEE_STATUSES}')
+        trainee_status_df.to_excel(writer, sheet_name=SHEET_NAME_TRAINEE_STATUSES, index=False)
 
 
-def transfer_training_record_separate(path, id, hei_qualification_completed, hei_qualification_date, hei_qualification_outcome, hei_extension, hei_extension_date, hei_extension_comments, program_certification, program_certification_date, hsst_pathway, hsst_portfolio_completed, hsst_portfolio_completion_date, hsst_arp_completed, hsst_arp_completion_date, hsst_d_clin_part_a_completed, hsst_d_clin_part_a_completion_date, hsst_d_clin_part_b_completed, hsst_d_clin_part_b_completion_date, hsst_d_clin_part_c1_completed, hsst_d_clin_part_c1_completion_date, hsst_d_clin_part_c2_completed, hsst_d_clin_part_c2_completion_date, hsst_fcrpath_completed, hsst_fcrpath_completion_date, hsst_iaps_completed, hsst_iaps_completion_date, hsst_phd_completed, hsst_phd_completion_date, hsst_ceng_completed, hsst_ceng_completion_date, hsst_portfolio_signed, hsst_portfolio_signed_date, program_leaving_date, program_leaving_reason, program_leaving_comments, reasonable_adjustments, reasonable_adjustments_comments, hpcp_registration, hpcp_registration_date, hsst_expected_exit, specalism, recruitment_method, hei_awards, portfolio_expected_completion_date, portfolio_actual_completion_date, hcpc_signoff_required, hcpc_counter_signoff_required, hcpc_signoff_name, hcpc_signoff_number, ahcs_registration, portfolio_extended, hsst_start_month, hsst_start_year, hsst_expected_completion_month, hsst_expected_completion_year, stp_start_month, stp_start_year, stp_expected_completion_month, stp_expected_completion_year, next_exit_assessment_year, next_exit_assessment_season_id):
-    SHEET_NAME = "TrainingRecord"
-    pts = pd.DataFrame(
+def transfer_training_record_separate(id, hei_qualification_completed, hei_qualification_date, hei_qualification_outcome, hei_extension, hei_extension_date, hei_extension_comments, program_certification, program_certification_date, hsst_pathway, hsst_portfolio_completed, hsst_portfolio_completion_date, hsst_arp_completed, hsst_arp_completion_date, hsst_d_clin_part_a_completed, hsst_d_clin_part_a_completion_date, hsst_d_clin_part_b_completed, hsst_d_clin_part_b_completion_date, hsst_d_clin_part_c1_completed, hsst_d_clin_part_c1_completion_date, hsst_d_clin_part_c2_completed, hsst_d_clin_part_c2_completion_date, hsst_fcrpath_completed, hsst_fcrpath_completion_date, hsst_iaps_completed, hsst_iaps_completion_date, hsst_phd_completed, hsst_phd_completion_date, hsst_ceng_completed, hsst_ceng_completion_date, hsst_portfolio_signed, hsst_portfolio_signed_date, program_leaving_date, program_leaving_reason, program_leaving_comments, reasonable_adjustments, reasonable_adjustments_comments, hpcp_registration, hpcp_registration_date, hsst_expected_comp, specalism, recruitment_method, hei_awards, portfolio_expected_completion_date, portfolio_actual_completion_date, hcpc_signoff_required, hcpc_counter_signoff_required, hcpc_signoff_name, hcpc_signoff_number, ahcs_registration, portfolio_extended, hsst_start_month, hsst_start_year, hsst_expected_exit_month, hsst_expected_exit_year, stp_start_month, stp_start_year, stp_expected_completion_month, stp_expected_completion_year, next_exit_assessment_year, next_exit_assessment_season_id):
+    return pd.DataFrame(
         data= {
                 "id": id,
                 "hei_qualification_comp": hei_qualification_completed,
@@ -660,7 +702,7 @@ def transfer_training_record_separate(path, id, hei_qualification_completed, hei
                 "hsst_pathway_id": hsst_pathway,
                 "hsst_portfolio_comp": hsst_portfolio_completed,
                 "hsst_portfolio_comp_date": hsst_portfolio_completion_date,
-                "hsst_expected_exit_date": hsst_expected_exit,
+                "hsst_expected_comp_date": hsst_expected_comp,
                 "hsst_arp_comp": hsst_arp_completed,
                 "hsst_arp_comp_date": hsst_arp_completion_date,
                 "hsst_dclin_part_a_comp": hsst_d_clin_part_a_completed,
@@ -683,8 +725,8 @@ def transfer_training_record_separate(path, id, hei_qualification_completed, hei
                 "hsst_portfolio_signed_date": hsst_portfolio_signed_date,
                 "hsst_start_month": [hsst_start_month],
                 "hsst_start_year": [hsst_start_year],
-                "hsst_expected_comp_month": [hsst_expected_completion_month],
-                "hsst_expected_comp_year": [hsst_expected_completion_year],
+                "hsst_expected_exit_month": [hsst_expected_exit_month],
+                "hsst_expected_exit_year": [hsst_expected_exit_year],
                 "reasonable_adjustments": reasonable_adjustments,
                 "reasonable_adj_comments": reasonable_adjustments_comments,
                 "stp_start_month": [stp_start_month],
@@ -708,17 +750,29 @@ def transfer_training_record_separate(path, id, hei_qualification_completed, hei
             }
         )
 
-    with pd.ExcelWriter(
-        path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
-                      date_format='YYYY-MM-DD',
-                      datetime_format='YYYY-MM-DD'
-    ) as writer:
-        pts.to_excel(writer, sheet_name=SHEET_NAME, index=False, startrow=0 if id == None or id == 1 else id, header=id==1)
+
+def transfer_post_training(id, job_sector, description, job, non_nhs_employer, nhs_band, salary, other_educational_pursuits, contract_type, start_date, comments):
+
+    return pd.DataFrame(
+        data= {
+            "id": [id],
+            "job_sector_id": [job_sector],
+            "description": [description],
+            "employer_id": [job],
+            "non_nhs_employer": [non_nhs_employer],
+            "nhs_band_id": [nhs_band],
+            "non_nhs_salary_id": [salary],
+            "other_educational_pursuits": [other_educational_pursuits],
+            "contract_type_id": [contract_type],
+            "start_date": [start_date],
+            "comments": [comments],
+            }
+    )
 
 
-def transfer_trainee_statuses(path, id, trainee_id, status_id):
-    SHEET_NAME = "TraineeStatuses"
-    pts = pd.DataFrame(
+
+def transfer_trainee_statuses(id, trainee_id, status_id):
+    return pd.DataFrame(
         data= {
                 "id": id,
                 "trainee_id": trainee_id,
@@ -726,18 +780,13 @@ def transfer_trainee_statuses(path, id, trainee_id, status_id):
             }
         )
 
-    with pd.ExcelWriter(
-        path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
-                      date_format='YYYY-MM-DD',
-                      datetime_format='YYYY-MM-DD'
-    ) as writer:
-        pts.to_excel(writer, sheet_name=SHEET_NAME, index=False, startrow=0 if id == None or id == 1 else id, header=id==1)
-
 
 def transfer_locations(path, sheets):
     LOCATION_SHEET_NAME = "EmployerLocation"
     LOCATION_OLD_ASSESSMENT_RECORDS_SHEETS = 'tlkpHospital'
     LOOKUP_SHEET_NAME = "EmployerLocations"
+
+    print(f'Transferring {LOCATION_OLD_ASSESSMENT_RECORDS_SHEETS} -> {LOCATION_SHEET_NAME} and {LOOKUP_SHEET_NAME}')
 
     with pd.ExcelWriter(
         path, mode="a", engine="openpyxl", if_sheet_exists="overlay",

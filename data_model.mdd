@@ -129,7 +129,7 @@
     }
     PostTraining {
         int id PK
-        int job_sector_id FK "First Job Sector after training"
+        int job_sector_id FK "First Job Sector after training, Null: True"
         string(255) description "First Job description (title), Null: True"
         int employer_id FK "First Job after Training, Null: True"
         string(100) non_nhs_employer "First Job after training Employer name (if not NHS), Null: True"
@@ -196,6 +196,8 @@
         int id PK "Funding Provider ID"
         string title "Static Entity"
         string(50) abbreviation
+        string(50) country "Null: True"
+        bool is_legacy
     }
     TrainingRecord {
         int id PK
@@ -216,7 +218,7 @@
         int hsst_pathway_id FK "HSST Pathway, Null: True"
         bool hsst_portfolio_comp "HSST Portfolio Complete (Y/N), Null: True"
         date hsst_portfolio_comp_date "HSST Portfolio Completion Date, Null: True"
-        date hsst_expected_exit_date "HSST Expected EXIT Date, Null: True"
+        date hsst_expected_comp_date "HSST Expected completion Date, Null: True"
         bool hsst_arp_comp "HSST ARP Complete (Y/N), Null: True"
         date hsst_arp_comp_date "HSST ARP Completion Date, Null: True"
         bool hsst_dclin_part_a_comp "HSST DClinSci Part A Complete (Y/N), Null: True"
@@ -239,8 +241,8 @@
         date hsst_portfolio_signed_date "HSST Supervisor Portfolio Signoff Date, Null: True"
         int hsst_start_month "Null: True"
         int hsst_start_year "Null: True"
-        int hsst_expected_comp_month "HSST Expected Completion Month, Null: True"
-        int hsst_expected_comp_year "HSST Expected Completion Year, Null: True"
+        int hsst_expected_exit_month "HSST Expected exit Month, Null: True"
+        int hsst_expected_exit_year "HSST Expected exit Year, Null: True"
 
         bool reasonable_adjustments "Reasonable adjustments for final assessments (Y/N), Null: True"
         string(MAX) reasonable_adj_comments "Reasonable adjustments for final assessments detail, Null: True"
@@ -332,8 +334,8 @@
         int id PK
         int program_id FK "Training program"
         int outcome_code "Outcome Code (backend)"
-        string(10) outcome_code_display "Outcome Code Displayed on Screen"
-        string(255) short_description "Outcome Short Description"
+        string(10) outcome_code_display "Outcome Code Displayed on Screen, Null: True"
+        string(255) short_description "Outcome Short Description, Null: True"
         string(MAX) long_description "Outcome Long Description"
     }
     ExitAssessmentOutcome {
@@ -345,7 +347,7 @@
         int trainee_id FK
         int employer_id FK "Employer/Trust"
         int specific_site_id FK "Specific Site, Null: True"
-        date start_date "Start Date"
+        date start_date "Start Date, Null: True"
         date finish_date "Finish Date, Null: True"
         string(MAX) comments "Comments, Null: True"
     }
@@ -353,10 +355,18 @@
         int id PK
         bool is_nhs "Defines private vs NHS employer"
         string(255) title "Static Entity"
+        int icb_id FK "Null: True"
     }
     EmployerLocation {
         int id PK
         string(255) title "Static Entity"
+        int employer_id FK "Null: True"
+        funding_provider_id FK "Null: True"
+    }
+    ICB {
+        int id PK
+        string(255) title "Static Entity"
+        funding_provider_id FK
     }
     ExitAssessmentRecord {
         int id
