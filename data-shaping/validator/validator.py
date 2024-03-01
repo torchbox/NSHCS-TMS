@@ -25,7 +25,7 @@ def validate_dfs(dataframes: dict[str, pd.DataFrame], schema: dict[str, pa.DataF
                 # print(err.data)  # dataframe of schema errors
                 print("")
         else:
-            print(f"⚠️ \u001b[33m {k}\u001b[0m not checked as it is not present in the validation schema")
+            print(f"⛔ \u001b[33m {k}\u001b[0m not checked as it is not present in the validation schema")
 
     for k, v in schema.items():
         if k not in dataframes and check_all_tables_in_dataframes:
