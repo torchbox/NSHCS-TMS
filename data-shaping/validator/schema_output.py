@@ -140,6 +140,12 @@ VALIDATION_SCHEMA_OUTPUT = {
         "phone": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True, coerce=True),
         "onefile_username": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True),
         "onefile_id": pa.Column("Int64", nullable=True, coerce=True),
+        "stp_accredited_officer": pa.Column(bool, coerce=True, nullable=True, checks=pa.Check.isin(allowed_values=[0, 1])),
+        "next_stp_accreditation_date": pa.Column(date, nullable=True),
+        "hsst_accredited_officer": pa.Column(bool, coerce=True, nullable=True, checks=pa.Check.isin(allowed_values=[0, 1])),
+        "next_hsst_accreditation_date": pa.Column(date, nullable=True),
+        "etp_accredited_officer": pa.Column(bool, coerce=True, nullable=True, checks=pa.Check.isin(allowed_values=[0, 1])),
+        "next_etp_accreditation_date": pa.Column(date, nullable=True),
     }),
     # tlkpContactType
     "ContactType": pa.DataFrameSchema({

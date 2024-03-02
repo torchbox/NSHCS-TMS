@@ -113,6 +113,12 @@ SIMPLE_REFERENCE_MAPPING = {
         "phone": {"sheet": "tlkpContacts", "column": "CTPHONE"},
         "onefile_username": {"sheet": "tlkpContacts", "column": "CTOFUN"},
         "onefile_id": {"sheet": "tlkpContacts", "column": "CTOFUID"},
+        "stp_accredited_officer": {"sheet": "tlkpContacts", "column": "CTSTPAC"},
+        "next_stp_accreditation_date": {"sheet": "tlkpContacts", "column": "CTSTPDT"},
+        "hsst_accredited_officer": {"sheet": "tlkpContacts", "column": "CTHSTAC"},
+        "next_hsst_accreditation_date": {"sheet": "tlkpContacts", "column": "CTHSTDT"},
+        "etp_accredited_officer": {"sheet": "tlkpContacts", "column": "CTETPAC"},
+        "next_etp_accreditation_date": {"sheet": "tlkpContacts", "column": "CTETPDT"},
     },
     "ContactType": {
         "id": {"sheet": "tlkpContactType", "column": "NTID"},
