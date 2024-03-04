@@ -160,6 +160,18 @@ SIMPLE_REFERENCE_MAPPING = {
     "Season": {
         "id": {"sheet": "tlkpSeason", "column": "SNID"},
         "title": {"sheet": "tlkpSeason", "column": "SNSSN"},
+    },
+    "OneFileModule": {
+        "ModCode": {"sheet": "oflModules", "column": "ModCode"},
+        "ModTitle": {"sheet": "oflModules", "column": "ModTitle"},
+        "Theme": {"sheet": "oflModules", "column": "Theme"},
+        "ActiveYears": {"sheet": "oflModules", "column": "ActiveYears"},
+        "DOPS_OCE": {"sheet": "oflModules", "column": "DOPS_OCE"},
+        "CBD": {"sheet": "oflModules", "column": "CBD"},
+        "Comp": {"sheet": "oflModules", "column": "Comp"},
+        "UnitRuleText": {"sheet": "oflModules", "column": "UnitRuleText"},
+        "OneFileUnitID": {"sheet": "oflModules", "column": "OneFileUnitID"},
+        "CurriculumVersion": {"sheet": "oflModules", "column": "CurriculumVersion"},
     }
 
 }

@@ -147,6 +147,20 @@ VALIDATION_SCHEMA_OUTPUT = {
         "etp_accredited_officer": pa.Column(bool, coerce=True, nullable=True, checks=pa.Check.isin(allowed_values=[0, 1])),
         "next_etp_accreditation_date": pa.Column(date, nullable=True),
     }),
+    # oflModules
+    "OneFileModule": pa.DataFrameSchema({
+        # Since coerce=True, the validator will first look to convert the column from 1 and zero to bool
+        "ModCode": pa.Column(str, nullable=False, checks=pa.Check.str_length(min_value=0, max_value=50)),
+        "ModTitle": pa.Column(str, nullable=False, checks=pa.Check.str_length(min_value=0, max_value=500)),
+        "Theme": pa.Column(str, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=100)),
+        "ActiveYears": pa.Column(str, nullable=False, checks=pa.Check.str_length(min_value=0, max_value=50)),
+        "DOPS_OCE": pa.Column("Int64", nullable=True, coerce=True),
+        "CBD": pa.Column("Int64", nullable=True, coerce=True),
+        "Comp": pa.Column("Int64", nullable=True, coerce=True),
+        "UnitRuleText": pa.Column(str, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=500)),
+        "OneFileUnitID": pa.Column(str, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=100)),
+        "CurriculumVersion": pa.Column("Int64", nullable=True, coerce=True),
+    }),
     # tlkpContactType
     "ContactType": pa.DataFrameSchema({
         "id": pa.Column(int),

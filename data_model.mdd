@@ -294,6 +294,19 @@
         int id PK
         string(255) title "Static entity"
     }
+    OneFileModule {
+        int id PK
+        string(50) ModCode
+        string(500) ModTitle
+        string(100) Theme "Null: True"
+        string(50) ActiveYears
+        int DOPS_OCE "Null: True"
+        int CBD "Null: True"
+        int Comp "Null: True"
+        string(500) UnitRuleText  "Null: True"
+        string(100) OneFileUnitID  "Null: True"
+        int CurriculumVersion "Null: True"
+    }
     Contact {
         int id PK
         string(50) forename "Null: True"

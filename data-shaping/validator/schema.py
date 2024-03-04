@@ -187,6 +187,20 @@ VALIDATION_SCHEMA = {
         "ICNAME": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=255)),
         "ICLETB": pa.Column("Int64", nullable=False, coerce=True),
     }),
+    # OneFileModule
+    "oflModules": pa.DataFrameSchema({
+        # Since coerce=True, the validator will first look to convert the column from 1 and zero to bool
+        "ModCode": pa.Column(str, nullable=False, checks=pa.Check.str_length(min_value=0, max_value=50)),
+        "ModTitle": pa.Column(str, nullable=False, checks=pa.Check.str_length(min_value=0, max_value=500)),
+        "Theme": pa.Column(str, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=100)),
+        "ActiveYears": pa.Column(str, nullable=False, checks=pa.Check.str_length(min_value=0, max_value=50)),
+        "DOPS_OCE": pa.Column("Int64", nullable=True, coerce=True),
+        "CBD": pa.Column("Int64", nullable=True, coerce=True),
+        "Comp": pa.Column("Int64", nullable=True, coerce=True),
+        "UnitRuleText": pa.Column(str, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=500)),
+        "OneFileUnitID": pa.Column(str, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=100)),
+        "CurriculumVersion": pa.Column("Int64", nullable=True, coerce=True),
+    }),
     # Season
     "tlkpSeason": pa.DataFrameSchema({
         "SNID": pa.Column(int),
