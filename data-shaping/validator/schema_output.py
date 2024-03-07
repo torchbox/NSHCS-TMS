@@ -184,12 +184,28 @@ VALIDATION_SCHEMA_OUTPUT = {
         "title": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
     }),
     # tblSickLeave
-    "LeaveOfAbsenceRecord": pa.DataFrameSchema({
+    "SickLeave": pa.DataFrameSchema({
         "id": pa.Column(int),
         "trainee_id": pa.Column(int),
         "start_date": pa.Column(date, coerce=True, nullable=True),
         "end_date": pa.Column(date, nullable=True, coerce=True),
         "reason": pa.Column(str, nullable=True),
+        "comments": pa.Column(str, nullable=True),
+    }),
+    # tblCareerBreak
+    "CareerBreak": pa.DataFrameSchema({
+        "id": pa.Column(int),
+        "trainee_id": pa.Column(int),
+        "start_date": pa.Column(date, coerce=True, nullable=True),
+        "end_date": pa.Column(date, nullable=True, coerce=True),
+        "comments": pa.Column(str, nullable=True),
+    }),
+    # tblMatPatLeave
+    "MatPatLeave": pa.DataFrameSchema({
+        "id": pa.Column(int),
+        "trainee_id": pa.Column(int),
+        "start_date": pa.Column(date, coerce=True, nullable=True),
+        "end_date": pa.Column(date, nullable=True, coerce=True),
         "comments": pa.Column(str, nullable=True),
     }),
     # tblSupport

@@ -2,8 +2,8 @@ import os
 from argparse import ArgumentParser
 
 from ingest.ingest import read_spreadsheet
-from output.output import transfer_data, transfer_leave_of_absence_record, transfer_support_record, transfer_trainee_contact, transfer_annual_review_progression, \
-    transfer_employment_record, transfer_exit_assessment_record, transfer_trainees, transfer_mid_review_progression
+from output.output import transfer_data, transfer_sick_leaves, transfer_support_record, transfer_trainee_contact, transfer_annual_review_progression, \
+    transfer_employment_record, transfer_exit_assessment_record, transfer_trainees, transfer_mid_review_progression, transfer_career_breaks, transfer_mat_pat_leaves
 from validator.schema import VALIDATION_SCHEMA
 from validator.schema_output import VALIDATION_SCHEMA_OUTPUT
 from validator.foreign_key_schema_output import FOREIGN_KEY_SCHEMA as FOREIGN_KEY_SCHEMA_OUTPUT
@@ -58,7 +58,10 @@ if os.path.exists(OUTPUT_DATABASE_PATH):
 print_separator("Transferring Data")
 sheets = {**reference_tables, **data_tables}
 transfer_data(path=OUTPUT_DATABASE_PATH, sheets=sheets)
-transfer_leave_of_absence_record(path=OUTPUT_DATABASE_PATH, sheets=sheets)
+transfer_sick_leaves(path=OUTPUT_DATABASE_PATH, sheets=sheets)
+transfer_career_breaks(path=OUTPUT_DATABASE_PATH, sheets=sheets)
+transfer_mat_pat_leaves(path=OUTPUT_DATABASE_PATH, sheets=sheets)
+transfer_sick_leaves(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_support_record(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_trainee_contact(path=OUTPUT_DATABASE_PATH, sheets=sheets)
 transfer_annual_review_progression(path=OUTPUT_DATABASE_PATH, sheets=sheets)

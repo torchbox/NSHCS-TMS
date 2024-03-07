@@ -51,8 +51,8 @@ def transfer_data(path: str, sheets: Dict[str, pd.DataFrame]):
             data.to_excel(writer, sheet_name=new_sheet_name, index=False)
 
 
-def transfer_leave_of_absence_record(path, sheets):
-    SHEET_NAME = "LeaveOfAbsenceRecord"
+def transfer_sick_leaves(path, sheets):
+    SHEET_NAME = "SickLeave"
     SICK_LEAVE_SHEET_NAME = "tblSickLeave"
 
     print(f'Transferring {SICK_LEAVE_SHEET_NAME} -> {SHEET_NAME}')
@@ -62,7 +62,7 @@ def transfer_leave_of_absence_record(path, sheets):
                       date_format='YYYY-MM-DD',
                       datetime_format='YYYY-MM-DD'
     ) as writer:
-        loas = pd.DataFrame(
+        sickLeaves = pd.DataFrame(
             columns=[
                 "id",
                 "trainee_id",
@@ -95,11 +95,93 @@ def transfer_leave_of_absence_record(path, sheets):
                 "enable_notification": [enable_notification],
             })
 
-            loas = pd.concat([loas, loa])
+            sickLeaves = pd.concat([sickLeaves, loa])
 
-        loas.to_excel(writer, sheet_name=SHEET_NAME, index=False)
+        sickLeaves.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
-        # TODO: Other records
+def transfer_career_breaks(path, sheets):
+    SHEET_NAME = "CareerBreak"
+    CAREER_BREAK_SHEET_NAME = "tblCareerBreak"
+
+    print(f'Transferring {CAREER_BREAK_SHEET_NAME} -> {SHEET_NAME}')
+
+    with pd.ExcelWriter(
+        path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
+                      date_format='YYYY-MM-DD',
+                      datetime_format='YYYY-MM-DD'
+    ) as writer:
+        career_breaks = pd.DataFrame(
+            columns=[
+                "id",
+                "trainee_id",
+                "start_date",
+                "end_date",
+                "comments",
+            ]
+        )
+
+        df: pd.DataFrame = sheets[CAREER_BREAK_SHEET_NAME]
+
+        for i, row in df.iterrows():
+            id = row["CBID"]
+            trainee_id = row["RGID"]
+            start_date = row["CBSTDT"]
+            end_date = row["CBRTDT"]
+            comments = row["CBCMNT"]
+
+            loa = pd.DataFrame({
+                "id": [id],
+                "trainee_id": [trainee_id],
+                "start_date": [start_date],
+                "end_date": [end_date],
+                "comments": [comments],
+            })
+
+            career_breaks = pd.concat([career_breaks, loa])
+
+        career_breaks.to_excel(writer, sheet_name=SHEET_NAME, index=False)
+
+def transfer_mat_pat_leaves(path, sheets):
+    SHEET_NAME = "MatPatLeave"
+    MAT_PAT_LEAVE_SHEET_NAME = "tblMatPatLeave"
+
+    print(f'Transferring {MAT_PAT_LEAVE_SHEET_NAME} -> {SHEET_NAME}')
+
+    with pd.ExcelWriter(
+        path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
+                      date_format='YYYY-MM-DD',
+                      datetime_format='YYYY-MM-DD'
+    ) as writer:
+        mat_pat_leaves = pd.DataFrame(
+            columns=[
+                "id",
+                "trainee_id",
+                "start_date",
+                "end_date",
+                "comments",
+            ]
+        )
+
+        df: pd.DataFrame = sheets[MAT_PAT_LEAVE_SHEET_NAME]
+
+        for i, row in df.iterrows():
+            id = row["MLID"]
+            trainee_id = row["RGID"]
+            start_date = row["MLSTDT"]
+            end_date = row["MLRTDT"]
+            comments = row["MLCMNTS"]
+
+            loa = pd.DataFrame({
+                "id": [id],
+                "trainee_id": [trainee_id],
+                "start_date": [start_date],
+                "end_date": [end_date],
+                "comments": [comments],
+            })
+
+            mat_pat_leaves = pd.concat([mat_pat_leaves, loa])
+
+        mat_pat_leaves.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
 
 def transfer_support_record(path, sheets):
@@ -621,8 +703,8 @@ def transfer_trainees(path, sheets, rows = None):
         training_records.append(next_training_record_id)
         post_trainings.append(next_post_training_id)
 
-    ts =  pd.DataFrame(
-        data= {
+    ts = pd.DataFrame(
+        data = {
             "id": ids,
             "training_record_id": training_records,
             "nshc_trainee_id": nshc_trainee_ids,
@@ -770,7 +852,6 @@ def transfer_post_training(id, job_sector, description, job, non_nhs_employer, n
     )
 
 
-
 def transfer_trainee_statuses(id, trainee_id, status_id):
     return pd.DataFrame(
         data= {
@@ -779,50 +860,3 @@ def transfer_trainee_statuses(id, trainee_id, status_id):
                 "trainee_status_id": status_id,
             }
         )
-
-
-def transfer_locations(path, sheets):
-    LOCATION_SHEET_NAME = "EmployerLocation"
-    LOCATION_OLD_ASSESSMENT_RECORDS_SHEETS = 'tlkpHospital'
-    LOOKUP_SHEET_NAME = "EmployerLocations"
-
-    print(f'Transferring {LOCATION_OLD_ASSESSMENT_RECORDS_SHEETS} -> {LOCATION_SHEET_NAME} and {LOOKUP_SHEET_NAME}')
-
-    with pd.ExcelWriter(
-        path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
-                      date_format='YYYY-MM-DD',
-                      datetime_format='YYYY-MM-DD'
-    ) as writer:
-
-        ids = []
-        titles = []
-
-        lookup_ids = []
-        location_ids = []
-        employer_ids = []
-        next_lookup_cnt = 1
-        next_lookup_id = 1
-
-        for _, row in sheets[LOCATION_OLD_ASSESSMENT_RECORDS_SHEETS].iterrows():
-            ids.append(row['HSID'])
-            titles.append(row['HSNAME'])
-
-
-            if pd.notna(row['HSTRUST']):
-                next_lookup_id = next_lookup_cnt
-                lookup_ids.append(next_lookup_id)
-                location_ids.append(row['HSID'])
-                employer_ids.append(row['HSTRUST'])
-                next_lookup_cnt = next_lookup_cnt + 1
-            else:
-                next_lookup_id = None
-
-
-        employer_locations = pd.DataFrame(
-            data={"id": ids, "title": titles}
-        )
-        employer_locations_lookup = pd.DataFrame(
-            data={"id": lookup_ids, "location_id": location_ids, "employer_id": employer_ids}
-        )
-        employer_locations.to_excel(writer, sheet_name=LOCATION_SHEET_NAME, index=False)
-        employer_locations_lookup.to_excel(writer, sheet_name=LOOKUP_SHEET_NAME, index=False)
