@@ -168,6 +168,11 @@ FOREIGN_KEY_SCHEMA: dict[str, list[FkCheck]] = {
                 'origin_column': "PTID"
             },
             {
+                'fk': "RGHCHRT",
+                'origin_table': "tlkpHSSTCohort",
+                'origin_column': "HCID"
+            },
+            {
                 'fk': "RGSPEC",
                 'origin_table': "tlkpSpecialism",
                 'origin_column': "SPID"
