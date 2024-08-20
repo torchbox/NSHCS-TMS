@@ -676,6 +676,11 @@ def transfer_trainees(path, sheets, rows = None):
         print(f'\nWriting out {SHEET_NAME}')
         ts.to_excel(writer, sheet_name=SHEET_NAME, index=False)
         print(f'Writing out {SHEET_NAME_POST_TRAINING}')
+        # when the import did not have any PostTraining data, the table was blank, no headers and all - which caused errors.
+        # this is simply to ensure headers are added
+        if post_training_df.empty:
+            df = transfer_post_training(None, None, None, None, None, None, None, None, None, None, None)
+            post_training_df = pd.concat([post_training_df, df])
         post_training_df.to_excel(writer, sheet_name=SHEET_NAME_POST_TRAINING, index=False)
         print(f'Writing out {SHEET_NAME_TRAINING_RECORD}')
         training_record_df.to_excel(writer, sheet_name=SHEET_NAME_TRAINING_RECORD, index=False)
