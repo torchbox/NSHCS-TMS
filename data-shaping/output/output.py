@@ -51,8 +51,8 @@ def transfer_data(path: str, sheets: Dict[str, pd.DataFrame]):
             data.to_excel(writer, sheet_name=new_sheet_name, index=False)
 
 
-def transfer_leave_of_absence_record(path, sheets):
-    SHEET_NAME = "LeaveOfAbsenceRecord"
+def transfer_sick_leaves(path, sheets):
+    SHEET_NAME = "SickLeave"
     SICK_LEAVE_SHEET_NAME = "tblSickLeave"
 
     print(f'Transferring {SICK_LEAVE_SHEET_NAME} -> {SHEET_NAME}')
@@ -62,7 +62,7 @@ def transfer_leave_of_absence_record(path, sheets):
                       date_format='YYYY-MM-DD',
                       datetime_format='YYYY-MM-DD'
     ) as writer:
-        loas = pd.DataFrame(
+        sickLeaves = pd.DataFrame(
             columns=[
                 "id",
                 "trainee_id",
@@ -95,11 +95,93 @@ def transfer_leave_of_absence_record(path, sheets):
                 "enable_notification": [enable_notification],
             })
 
-            loas = pd.concat([loas, loa])
+            sickLeaves = pd.concat([sickLeaves, loa])
 
-        loas.to_excel(writer, sheet_name=SHEET_NAME, index=False)
+        sickLeaves.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
-        # TODO: Other records
+def transfer_career_breaks(path, sheets):
+    SHEET_NAME = "CareerBreak"
+    CAREER_BREAK_SHEET_NAME = "tblCareerBreak"
+
+    print(f'Transferring {CAREER_BREAK_SHEET_NAME} -> {SHEET_NAME}')
+
+    with pd.ExcelWriter(
+        path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
+                      date_format='YYYY-MM-DD',
+                      datetime_format='YYYY-MM-DD'
+    ) as writer:
+        career_breaks = pd.DataFrame(
+            columns=[
+                "id",
+                "trainee_id",
+                "start_date",
+                "end_date",
+                "comments",
+            ]
+        )
+
+        df: pd.DataFrame = sheets[CAREER_BREAK_SHEET_NAME]
+
+        for i, row in df.iterrows():
+            id = row["CBID"]
+            trainee_id = row["RGID"]
+            start_date = row["CBSTDT"]
+            end_date = row["CBRTDT"]
+            comments = row["CBCMNT"]
+
+            loa = pd.DataFrame({
+                "id": [id],
+                "trainee_id": [trainee_id],
+                "start_date": [start_date],
+                "end_date": [end_date],
+                "comments": [comments],
+            })
+
+            career_breaks = pd.concat([career_breaks, loa])
+
+        career_breaks.to_excel(writer, sheet_name=SHEET_NAME, index=False)
+
+def transfer_mat_pat_leaves(path, sheets):
+    SHEET_NAME = "MatPatLeave"
+    MAT_PAT_LEAVE_SHEET_NAME = "tblMatPatLeave"
+
+    print(f'Transferring {MAT_PAT_LEAVE_SHEET_NAME} -> {SHEET_NAME}')
+
+    with pd.ExcelWriter(
+        path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
+                      date_format='YYYY-MM-DD',
+                      datetime_format='YYYY-MM-DD'
+    ) as writer:
+        mat_pat_leaves = pd.DataFrame(
+            columns=[
+                "id",
+                "trainee_id",
+                "start_date",
+                "end_date",
+                "comments",
+            ]
+        )
+
+        df: pd.DataFrame = sheets[MAT_PAT_LEAVE_SHEET_NAME]
+
+        for i, row in df.iterrows():
+            id = row["MLID"]
+            trainee_id = row["RGID"]
+            start_date = row["MLSTDT"]
+            end_date = row["MLRTDT"]
+            comments = row["MLCMNTS"]
+
+            loa = pd.DataFrame({
+                "id": [id],
+                "trainee_id": [trainee_id],
+                "start_date": [start_date],
+                "end_date": [end_date],
+                "comments": [comments],
+            })
+
+            mat_pat_leaves = pd.concat([mat_pat_leaves, loa])
+
+        mat_pat_leaves.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
 
 def transfer_support_record(path, sheets):
@@ -488,6 +570,7 @@ def transfer_trainees(path, sheets, rows = None):
             pd.notna(row['RGMSCEXDTL']) or \
             pd.notna(row['RGCERTIS']) or \
             pd.notna(row['RGCERTDT']) or \
+            pd.notna(row['RGHCHRT']) or \
             pd.notna(row['RGHCPATH']) or \
             pd.notna(row['RGHCPORT']) or \
             pd.notna(row['RGHCPORTDT']) or \
@@ -544,6 +627,7 @@ def transfer_trainees(path, sheets, rows = None):
                 hei_extension_comments=row['RGMSCEXDTL'],
                 program_certification=row['RGCERTIS'],
                 program_certification_date=row['RGCERTDT'],
+                hsst_cohort=row['RGHCHRT'],
                 hsst_pathway=row['RGHCPATH'],
                 hsst_portfolio_completed=row['RGHCPORT'],
                 hsst_portfolio_completion_date=row['RGHCPORTDT'],
@@ -621,8 +705,8 @@ def transfer_trainees(path, sheets, rows = None):
         training_records.append(next_training_record_id)
         post_trainings.append(next_post_training_id)
 
-    ts =  pd.DataFrame(
-        data= {
+    ts = pd.DataFrame(
+        data = {
             "id": ids,
             "training_record_id": training_records,
             "nshc_trainee_id": nshc_trainee_ids,
@@ -688,7 +772,7 @@ def transfer_trainees(path, sheets, rows = None):
         trainee_status_df.to_excel(writer, sheet_name=SHEET_NAME_TRAINEE_STATUSES, index=False)
 
 
-def transfer_training_record_separate(id, hei_qualification_completed, hei_qualification_date, hei_qualification_outcome, hei_extension, hei_extension_date, hei_extension_comments, program_certification, program_certification_date, hsst_pathway, hsst_portfolio_completed, hsst_portfolio_completion_date, hsst_arp_completed, hsst_arp_completion_date, hsst_d_clin_part_a_completed, hsst_d_clin_part_a_completion_date, hsst_d_clin_part_b_completed, hsst_d_clin_part_b_completion_date, hsst_d_clin_part_c1_completed, hsst_d_clin_part_c1_completion_date, hsst_d_clin_part_c2_completed, hsst_d_clin_part_c2_completion_date, hsst_fcrpath_completed, hsst_fcrpath_completion_date, hsst_iaps_completed, hsst_iaps_completion_date, hsst_phd_completed, hsst_phd_completion_date, hsst_ceng_completed, hsst_ceng_completion_date, hsst_portfolio_signed, hsst_portfolio_signed_date, program_leaving_date, program_leaving_reason, program_leaving_comments, reasonable_adjustments, reasonable_adjustments_comments, hpcp_registration, hpcp_registration_date, hsst_expected_comp, specalism, recruitment_method, hei_awards, portfolio_expected_completion_date, portfolio_actual_completion_date, hcpc_signoff_required, hcpc_counter_signoff_required, hcpc_signoff_name, hcpc_signoff_number, ahcs_registration, portfolio_extended, hsst_start_month, hsst_start_year, hsst_expected_exit_month, hsst_expected_exit_year, stp_start_month, stp_start_year, stp_expected_completion_month, stp_expected_completion_year, next_exit_assessment_year, next_exit_assessment_season_id):
+def transfer_training_record_separate(id, hei_qualification_completed, hei_qualification_date, hei_qualification_outcome, hei_extension, hei_extension_date, hei_extension_comments, program_certification, program_certification_date,  hsst_cohort, hsst_pathway, hsst_portfolio_completed, hsst_portfolio_completion_date, hsst_arp_completed, hsst_arp_completion_date, hsst_d_clin_part_a_completed, hsst_d_clin_part_a_completion_date, hsst_d_clin_part_b_completed, hsst_d_clin_part_b_completion_date, hsst_d_clin_part_c1_completed, hsst_d_clin_part_c1_completion_date, hsst_d_clin_part_c2_completed, hsst_d_clin_part_c2_completion_date, hsst_fcrpath_completed, hsst_fcrpath_completion_date, hsst_iaps_completed, hsst_iaps_completion_date, hsst_phd_completed, hsst_phd_completion_date, hsst_ceng_completed, hsst_ceng_completion_date, hsst_portfolio_signed, hsst_portfolio_signed_date, program_leaving_date, program_leaving_reason, program_leaving_comments, reasonable_adjustments, reasonable_adjustments_comments, hpcp_registration, hpcp_registration_date, hsst_expected_comp, specalism, recruitment_method, hei_awards, portfolio_expected_completion_date, portfolio_actual_completion_date, hcpc_signoff_required, hcpc_counter_signoff_required, hcpc_signoff_name, hcpc_signoff_number, ahcs_registration, portfolio_extended, hsst_start_month, hsst_start_year, hsst_expected_exit_month, hsst_expected_exit_year, stp_start_month, stp_start_year, stp_expected_completion_month, stp_expected_completion_year, next_exit_assessment_year, next_exit_assessment_season_id):
     return pd.DataFrame(
         data= {
                 "id": id,
@@ -705,6 +789,7 @@ def transfer_training_record_separate(id, hei_qualification_completed, hei_quali
                 "program_leaving_reason": program_leaving_reason,
                 "program_leaving_comments": program_leaving_comments,
                 "hsst_pathway_id": hsst_pathway,
+                "hsst_cohort_id": hsst_cohort,
                 "hsst_portfolio_comp": hsst_portfolio_completed,
                 "hsst_portfolio_comp_date": hsst_portfolio_completion_date,
                 "hsst_expected_comp_date": hsst_expected_comp,
@@ -775,7 +860,6 @@ def transfer_post_training(id, job_sector, description, job, non_nhs_employer, n
     )
 
 
-
 def transfer_trainee_statuses(id, trainee_id, status_id):
     return pd.DataFrame(
         data= {
@@ -784,50 +868,3 @@ def transfer_trainee_statuses(id, trainee_id, status_id):
                 "trainee_status_id": status_id,
             }
         )
-
-
-def transfer_locations(path, sheets):
-    LOCATION_SHEET_NAME = "EmployerLocation"
-    LOCATION_OLD_ASSESSMENT_RECORDS_SHEETS = 'tlkpHospital'
-    LOOKUP_SHEET_NAME = "EmployerLocations"
-
-    print(f'Transferring {LOCATION_OLD_ASSESSMENT_RECORDS_SHEETS} -> {LOCATION_SHEET_NAME} and {LOOKUP_SHEET_NAME}')
-
-    with pd.ExcelWriter(
-        path, mode="a", engine="openpyxl", if_sheet_exists="overlay",
-                      date_format='YYYY-MM-DD',
-                      datetime_format='YYYY-MM-DD'
-    ) as writer:
-
-        ids = []
-        titles = []
-
-        lookup_ids = []
-        location_ids = []
-        employer_ids = []
-        next_lookup_cnt = 1
-        next_lookup_id = 1
-
-        for _, row in sheets[LOCATION_OLD_ASSESSMENT_RECORDS_SHEETS].iterrows():
-            ids.append(row['HSID'])
-            titles.append(row['HSNAME'])
-
-
-            if pd.notna(row['HSTRUST']):
-                next_lookup_id = next_lookup_cnt
-                lookup_ids.append(next_lookup_id)
-                location_ids.append(row['HSID'])
-                employer_ids.append(row['HSTRUST'])
-                next_lookup_cnt = next_lookup_cnt + 1
-            else:
-                next_lookup_id = None
-
-
-        employer_locations = pd.DataFrame(
-            data={"id": ids, "title": titles}
-        )
-        employer_locations_lookup = pd.DataFrame(
-            data={"id": lookup_ids, "location_id": location_ids, "employer_id": employer_ids}
-        )
-        employer_locations.to_excel(writer, sheet_name=LOCATION_SHEET_NAME, index=False)
-        employer_locations_lookup.to_excel(writer, sheet_name=LOOKUP_SHEET_NAME, index=False)

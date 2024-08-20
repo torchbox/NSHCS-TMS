@@ -167,6 +167,11 @@ FOREIGN_KEY_SCHEMA: dict[str, list[FkCheck]] = {
                 'origin_column': "id"
             },
             {
+                'fk': "hsst_cohort_id",
+                'origin_table': "HsstCohort",
+                'origin_column': "id"
+            },
+            {
                 'fk': "specialism_id",
                 'origin_table': "Specialism",
                 'origin_column': "id"

@@ -184,12 +184,28 @@ VALIDATION_SCHEMA_OUTPUT = {
         "title": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
     }),
     # tblSickLeave
-    "LeaveOfAbsenceRecord": pa.DataFrameSchema({
+    "SickLeave": pa.DataFrameSchema({
         "id": pa.Column(int),
         "trainee_id": pa.Column(int),
         "start_date": pa.Column(date, coerce=True, nullable=True),
         "end_date": pa.Column(date, nullable=True, coerce=True),
         "reason": pa.Column(str, nullable=True),
+        "comments": pa.Column(str, nullable=True),
+    }),
+    # tblCareerBreak
+    "CareerBreak": pa.DataFrameSchema({
+        "id": pa.Column(int),
+        "trainee_id": pa.Column(int),
+        "start_date": pa.Column(date, coerce=True, nullable=True),
+        "end_date": pa.Column(date, nullable=True, coerce=True),
+        "comments": pa.Column(str, nullable=True),
+    }),
+    # tblMatPatLeave
+    "MatPatLeave": pa.DataFrameSchema({
+        "id": pa.Column(int),
+        "trainee_id": pa.Column(int),
+        "start_date": pa.Column(date, coerce=True, nullable=True),
+        "end_date": pa.Column(date, nullable=True, coerce=True),
         "comments": pa.Column(str, nullable=True),
     }),
     # tblSupport
@@ -318,6 +334,7 @@ VALIDATION_SCHEMA_OUTPUT = {
         "hei_extension_comments": pa.Column(str, coerce=True, nullable=True),
         "program_certification": pa.Column(bool, coerce=True, nullable=True),
         "program_certification_date": pa.Column(date, coerce=True, nullable=True),
+        "hsst_cohort_id": pa.Column("Int64", coerce=True, nullable=True),
         "hsst_pathway_id": pa.Column("Int64", coerce=True, nullable=True),
         "hsst_portfolio_comp": pa.Column(bool, coerce=True, nullable=True),
         "hsst_portfolio_comp_date": pa.Column(date, coerce=True, nullable=True),
@@ -367,7 +384,7 @@ VALIDATION_SCHEMA_OUTPUT = {
         "hcpc_counter_signoff_require": pa.Column(bool, coerce=True, nullable=True),
         "hcpc_signoff_name": pa.Column(str, coerce=True, checks=pa.Check.str_length(min_value=0, max_value=200), nullable=True),
         "hcpc_signoff_number": pa.Column(str, coerce=True, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True),
-        "portfolio_extended": pa.Column(bool, coerce=True, nullable=True),
+        "portfolio_extended": pa.Column(str, coerce=True, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=2000)),
         "next_exit_assess_year": pa.Column("Int64", coerce=True, nullable=True),
         "next_exit_assess_season_id": pa.Column("Int64", coerce=True, nullable=True),
         "ahcs_registration": pa.Column("Int64", coerce=True, nullable=True),

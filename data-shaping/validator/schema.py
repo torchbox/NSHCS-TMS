@@ -192,7 +192,7 @@ VALIDATION_SCHEMA = {
         "SNID": pa.Column(int),
         "SNSSN": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50)),
     }),
-    # LeaveOfAbsenceRecord
+    # SickLeave
     "tblSickLeave": pa.DataFrameSchema({
         "SLID": pa.Column(int),
         "RGID": pa.Column(int),
@@ -200,6 +200,22 @@ VALIDATION_SCHEMA = {
         "SLRTDT": pa.Column(date, nullable=True, coerce=True),
         "SLRSN": pa.Column(str, nullable=True),
         "SLCMNTS": pa.Column(str, nullable=True),
+    }),
+    # CareerBreak
+    "tblCareerBreak": pa.DataFrameSchema({
+        "CBID": pa.Column(int),
+        "RGID": pa.Column(int),
+        "CBSTDT": pa.Column(date, coerce=True, nullable=True),
+        "CBRTDT": pa.Column(date, nullable=True, coerce=True),
+        "CBCMNT": pa.Column(str, nullable=True),
+    }),
+    # MatPatLeave
+    "tblMatPatLeave": pa.DataFrameSchema({
+        "MLID": pa.Column(int),
+        "RGID": pa.Column(int),
+        "MLSTDT": pa.Column(date, coerce=True, nullable=True),
+        "MLRTDT": pa.Column(date, nullable=True, coerce=True),
+        "MLCMNTS": pa.Column(str, nullable=True),
     }),
     # SupportRecord
     "tblSupport": pa.DataFrameSchema({
@@ -296,7 +312,6 @@ VALIDATION_SCHEMA = {
         "RGOLDLETB": pa.Column("Int64", coerce=True, nullable=True),
         "RGFUND": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=100), nullable=True),
         "RGPRGM": pa.Column("Int64", coerce=True, nullable=True),
-        "RGHCHRT": pa.Column("Int64", coerce=True, nullable=True),
         "RGSTAT": pa.Column("Int64", coerce=True, nullable=True),
         "RGWTE": pa.Column(float, nullable=True),
         "RGOFID": pa.Column("Int64", coerce=True, nullable=True),
@@ -314,6 +329,7 @@ VALIDATION_SCHEMA = {
         "RGCERTIS": pa.Column(bool, coerce=True, nullable=True, checks=pa.Check.isin(allowed_values=[0, 1])),
         "RGCERTDT": pa.Column(date, coerce=True, nullable=True),
         "RGHCPATH": pa.Column("Int64", coerce=True, nullable=True),
+        "RGHCHRT": pa.Column("Int64", coerce=True, nullable=True),
         "RGHCPORT": pa.Column(bool, coerce=True, nullable=True, checks=pa.Check.isin(allowed_values=[0, 1])),
         "RGHCPORTDT": pa.Column(date, coerce=True, nullable=True),
         "RGHCARP": pa.Column(bool, coerce=True, nullable=True, checks=pa.Check.isin(allowed_values=[0, 1])),
@@ -362,7 +378,7 @@ VALIDATION_SCHEMA = {
         "RGHCSREQ": pa.Column(bool, coerce=True, nullable=True, checks=pa.Check.isin(allowed_values=[0, 1])),
         "RGHCNM": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=200), nullable=True),
         "RGHCNUM": pa.Column(str, checks=pa.Check.str_length(min_value=0, max_value=50), nullable=True),
-        "RGOLEXT": pa.Column(bool, coerce=True, nullable=True, checks=pa.Check.isin(allowed_values=[0, 1])),
+        "RGOLEXT": pa.Column(str, nullable=True, checks=pa.Check.str_length(min_value=0, max_value=2000)),
         "RGEXICYR": pa.Column("Int64", coerce=True, nullable=True),
         "RGEXICSN": pa.Column("Int64", coerce=True, nullable=True),
 
